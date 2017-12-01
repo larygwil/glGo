@@ -1,0 +1,37 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Requirements</title><meta name="generator" content="DocBook XSL Stylesheets V1.60.1"><link rel="home" href="index.html" title="glGo manual"><link rel="up" href="index.html" title="glGo manual"><link rel="previous" href="index.html" title="glGo manual"><link rel="next" href="ar01s03.html" title="Installation"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Requirements</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="index.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ar01s03.html">Next</a></td></tr></table><hr></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="requirements"></a>Requirements</h2></div></div><div></div></div><div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Caution]" src="images/caution.jpg"></td><th align="left">Caution</th></tr><tr><td colspan="2" align="left" valign="top"><p>If you use the OpenGL board you will not have much fun
+without a proper 3D hardware driver !</p></td></tr></table></div><p>The goban display is available in two modes: 3D based on OpenGL and 2D
+based on SDL. The SDL 2D board is pretty much looking the same as the gGo/Java
+board. Some users might not have a graphic card with OpenGL support (but those
+must be very old, any consumer card sold after 1998 supports OpenGL) or prefer
+the classic 2D view, so the 2D mode might be an alternative.</p><p>The default is the 2D board (since version 0.0.5.4) as obviously a lot
+of people have trouble with their OpenGL drivers and are unable to find the
+documentation explaining the existance of an additional 2D board.</p><div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Tip"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Tip]" src="images/tip.jpg"></td><th align="left">Tip</th></tr><tr><td colspan="2" align="left" valign="top"><p>You can switch between 3D and 2D board display in the preferences
+dialog.</p></td></tr></table></div><p>If you have a proper 3D graphic card, make sure you have some recent
+driver from your hardware manufacturer installed. The default drivers that come
+with Windows do <span class="emphasis"><em>NOT</em></span> work well.</p><p>The most common consumer cards should be from NVidia or ATI, all of
+them will work properly with glGo if you have a NVidia or ATI driver installed.
+Be careful with NVidia, there will be two drivers available for "NVidia Riva
+TNT" card in the Windows driver selection: One from Microsoft and one from
+NVidia. Use the NVidia one, the Microsoft driver is useless.</p><p>If you run Linux and don't have a hardware driver installed, the Mesa
+libraries might work, but will be inferior to a real driver. There are both
+NVidia and ATI drivers for Linux available (my old NVidia TNT 1 card works fine
+with the latest NVidia/Linux driver).</p><p>The OpenGL mode won't work well without a hardware driver installed.
+It will be slow and ugly. I am aware this is a serious limitation to the
+program. Most gamers have those drivers up to date, but the average IGS user is
+no computer gamer and certainly will have the default Microsoft Windows drivers
+installed, which won't work with glGo.</p><p>The glGo sound system is based on the OpenAL or SDL mixer libraries.
+Both are available and can be selected from the preferences dialog. OpenAL is
+the default system and basically superior. Both OpenAL and SDL_mixer runtime
+support are provided with the glGo Windows installer. On Linux you need to
+install OpenAL and/or SDL mixer from your distribution, it is not included in
+the glGo installer.</p><p>The SDL board requires the SDL, SDL_image, SDL_ttf and SDL_gfx
+libraries. They are all included in the Windows installer, on Windows you don't
+need anything additional. On Linux you require libsdl, libsdl_ttf and
+libsdl_image, which skip with all major Linux distributions. It does not make
+sense to include the SDL runtime libraries on Linux as they are all available
+with your distribution already. There is "sdltest" program which will open the
+SDL board only using the SDL libraries. If this works, it should work within
+glGo, too. Hit the Space key to toggle through 19x19, 13x13 and 9x9 boards, 'c'
+to toggle coordinates, 'f' to toggle fixed and scaled fonts.</p><p>glGo requires the Python 2.3 runtime library which is included in the
+Windows installer. Linux users please install Python from their
+distribution.</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="index.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ar01s03.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">glGo manual </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Installation</td></tr></table></div></body></html>

@@ -1,0 +1,25 @@
+TODO
+====
+
+IGS Client
+----------
+* Notify messagebox and sound
+* Catch ";" etc shortcut in inputfields
+* Xgospel-style literate command shortcut
+* Save chat/channel sessions
+* Fix ". foo bar" -> Foo problem
+
+SGF Editor
+----------
+* Port ASCII import/export from C++ version
+* Implement export-image
+* Autoplay menuitem and Ctrl-A shortcut
+
+SGF Parser
+----------
+* Implement XML writer
+
+All
+---
+* Write proper manual - In progress
+

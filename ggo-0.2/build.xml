@@ -1,0 +1,97 @@
+<!-- gGo ant build file
+    Copyright (c) 2002, Peter Strempel
+
+    To create the manual you need saxon installed. Uncomment and adjust the
+    manual section in this file. This is by default disabled to prevent people
+    having no saxon installed get an invalid build file. -->
+
+<project name="gGo" default="dist" basedir=".">
+
+  <property name="src" value="src"/>
+  <property name="build" value="build"/>
+  <property name="dist" value="dist"/>
+  <property name="apidocs" value="docs/api"/>
+  <property name="resources" value="resources"/>
+  <property name="manual" value="docs/manual"/>
+  <property name="help" value="help"/>
+
+  <target name="init">
+    <tstamp/>
+    <mkdir dir="${build}"/>
+  </target>
+
+  <target name="compile" depends="init">
+    <javac debug="off" optimize="on" srcdir="${src}" destdir="${build}">
+      <classpath>
+        <pathelement location="${basedir}/lib/jh.jar"/>
+        <pathelement location="${basedir}/lib/skinlf.jar"/>
+      </classpath>
+    </javac>
+  </target>
+
+  <target name="dist" depends="compile">
+    <mkdir dir="${dist}"/>
+    <jar jarfile="${dist}/gGo.jar" manifest="Manifest">
+      <fileset dir="${build}"/>
+      <fileset dir="${resources}"/>
+    </jar>
+  </target>
+
+  <target name="clean">
+    <delete dir="${build}"/>
+    <delete dir="${dist}"/>
+  </target>
+
+  <target name="helpclean">
+    <delete file="${basedir}/lib/ggohelp.jar"/>
+    <delete dir="${help}/JavaHelpSearch"/>
+    <delete>
+      <fileset dir="${help}/" includes="*.html"/>
+      <fileset dir="${help}/" includes="jhelp*"/>
+    </delete>
+  </target>
+
+  <target name="dist-clean" depends="clean, helpclean">
+    <delete dir="${apidocs}"/>
+    <delete dir="${manual}/"/>
+  </target>
+
+  <target name="apidocs" depends="init">
+    <javadoc packagenames="ggo.*"
+        sourcepath="${src}"
+        classpath="${basedir}/lib/jh.jar"
+        destdir="${apidocs}"
+        Package="true"
+        author="true"
+        version="true"/>
+  </target>
+
+  <!-- Uncomment these lines to build the manual. I disabled it by default as it depends on the Saxon
+       installation of your system.
+   <target name="manual" depends="init, helpclean">
+    <java classname="com.icl.saxon.StyleSheet" dir="${help}" fork="true">
+      <arg value="help.xml"/>
+      <arg value="help.xsl"/>
+      <classpath location="/usr/share/java/saxon.jar"/>
+    </java>
+    <copy todir="${manual}">
+      <fileset dir="${help}/" includes="*.html"/>
+    </copy>
+    <copy todir="${manual}/images">
+      <fileset dir="${help}/images"/>
+    </copy>
+  </target>
+
+  <target name="javahelp" depends="init, helpclean">
+    <java classname="com.icl.saxon.StyleSheet" dir="${help}" fork="true">
+      <arg value="help.xml"/>
+      <arg value="javahelp.xsl"/>
+      <classpath location="/usr/share/java/saxon.jar"/>
+    </java>
+    <exec dir="${help}" executable="buildindex.sh" vmlauncher="false"/>
+    <jar destfile="${basedir}/lib/ggohelp.jar" basedir="${help}"
+         excludes="help.xml, *.xsl, *.sh"/>
+  </target>
+  -->
+
+</project>

@@ -1,0 +1,47 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Usage</title><meta name="generator" content="DocBook XSL Stylesheets V1.60.1"><link rel="home" href="index.html" title="glGo manual"><link rel="up" href="index.html" title="glGo manual"><link rel="previous" href="ar01s03.html" title="Installation"><link rel="next" href="ar01s05.html" title="Playing with GNU Go"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Usage</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ar01s03.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ar01s05.html">Next</a></td></tr></table><hr></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="usage"></a>Usage</h2></div></div><div></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2867336"></a>Mouse control</h3></div></div><div></div></div><p>This is straight-forward. If you are in the SGF editor, things work
+like in gGo or any other SGF editor. Left-click will play stones in alternating
+colors. You can switch into &#8220;<span class="quote">Edit mode</span>&#8221; by selecting one of the SGF
+marker icons in the Sidebar. Depending on which mark you have selected, a
+left-click will place a mark and a right-click remove an existing mark. If you
+select stone editing mode, left-click will add a black and right-click a white
+stone. To remove a stone, simple click on a placed stone and it will be gone. To
+return to &#8220;<span class="quote">Play mode</span>&#8221; again select either the white or black stone
+icon. You can also switch the turn with this icon, if you need to add for
+example two white moves.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.jpg"></td><th align="left">Note</th></tr><tr><td colspan="2" align="left" valign="top"><p>Mousewheel support is currently not yet available but
+planned.</p></td></tr></table></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2867375"></a>Keyboard control</h3></div></div><div></div></div><p>The keyboard is used to rotate, shift and zoom the 3D board and to
+navigate through the game. Navigation currently only supports moving forward and
+backward, variations are not yet supported.</p><p>The following table explains all supported key combinations.</p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><tbody><tr><td><b class="keycap">Cursor right</b></td><td>Next move</td></tr><tr><td><b class="keycap">Cursor left</b></td><td>Previous move</td></tr><tr><td><b class="keycap">Cursor up</b></td><td>Next variation</td></tr><tr><td><b class="keycap">Cursor down</b></td><td>Previous variation</td></tr><tr><td><b class="keycap">Home</b></td><td>First move</td></tr><tr><td><b class="keycap">End</b></td><td>Last move</td></tr><tr><td><b class="keycap">Control</b>+<b class="keycap">cursor
+right/left</b></td><td>Rotate the board on x axis</td></tr><tr><td><b class="keycap">Control</b>+<b class="keycap">cursor
+up/down</b></td><td>Rotate the board on z axis</td></tr><tr><td><b class="keycap">Alt</b>+<b class="keycap">cursor
+right/left</b></td><td>Rotate board on y axis</td></tr><tr><td><b class="keycap">Shift</b>+<b class="keycap">cursor
+right/left/up/down</b></td><td>Move board right/left/up/down </td></tr><tr><td><b class="keycap">Numpad plus/minus</b></td><td>Zoom board in/out</td></tr><tr><td><b class="keycap">Plus/Minus</b></td><td>Change fovy angle</td></tr><tr><td><b class="keycap">Backspace</b></td><td>Reset view</td></tr></tbody></table></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.jpg"></td><th align="left">Note</th></tr><tr><td colspan="2" align="left" valign="top"><p>This table contains all keys for the OpenGL 3D board. The 2D
+boards have the same keys for navigation, but of course lack the rotating and
+zooming functions.</p></td></tr></table></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2813488"></a>How to use own images and sounds</h3></div></div><div></div></div><p>You find the sounds in the share directory within the glGo
+installation. On Linux this is <tt class="filename">/opt/glGo/share</tt>, on Windows <tt class="filename">C:\Program Files\glGo\share</tt> (or whereever you
+installed glGo).</p><p>In this directory you find the sound files and a file data.dat which
+contains the default images to get rid of the cluttered share directory.</p><p>Using own sound files is pretty easy, just replace the existing
+sound files with your own. You need to use exactly the filenames. To replace the
+stone sound, you need to replace "stone.ogg", etc. The current sounds were taken
+from CGoban2 with the permission of the author. If you have a cool sound, please
+send it to me if you want to share it!</p><p>To use own images, you need to create a directory <tt class="filename">data/</tt> within the share directory and drop the
+images there. glGo will first search real existing files, and if they are not
+found use the defaults in data.dat. The images must have a certain name, format
+and size:</p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><tbody><tr><td>The goban kaya
+background</td><td>kaya.jpg</td><td>512x512</td></tr><tr><td>The 3D white stone
+texture</td><td>white_tex.jpg</td><td>64x64</td></tr><tr><td>The white last-move
+marker</td><td>mark_white.jpg</td><td>64x64</td></tr><tr><td>The black last-move
+marker</td><td>mark_black.jpg</td><td>64x64</td></tr><tr><td>The SDL white stone</td><td>hyuga1.png -
+hyuga8.png</td><td>49x49</td></tr><tr><td>The SDL black
+stone</td><td>blk.png</td><td>49x49</td></tr><tr><td>The SDL table
+background</td><td>table.jpg</td><td>100x100</td></tr></tbody></table></div><p>Example: To replace the kaya goban background, copy an image file
+kaya.jpg of size 512x512 pixels into the following location:
+</p><div class="itemizedlist"><ul type="disc"><li><p>Windows: <tt class="filename">C:\Program
+Files\glGo\share\data\kaya.jpg</tt></p></li><li><p>Linux:
+<tt class="filename">/opt/glGo/share/data/kaya.jpg</tt></p></li></ul></div><p>If you use another image format or another size, it might work or
+not. Probably not. The OpenGL images *must* have a size of a power of two (SDL
+doesn't care).</p><p>You can also use an own font file for OpenGL board coordinates and
+text markers by replacing the coords_font.txf file in the <tt class="filename">share</tt> directory. If you want to create those font
+files yourself, have a look at the gentexfont program within the GLUT
+distribution which allows to convert a X-server font to a .txf file. I have no
+idea if there is a way to create these font files on Windows. You can find them
+on the net, the PLIB example code has a couple of those font files.</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ar01s03.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ar01s05.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Installation </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Playing with GNU Go</td></tr></table></div></body></html>

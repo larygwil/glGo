@@ -1,0 +1,623 @@
+<?xml version="1.0" ?>
+<resource version="2.3.0.1" xmlns="http://www.wxwindows.org/wxxrc">
+  <object class="wxPanel" name="playerdb_panel">
+    <object class="wxFlexGridSizer">
+      <cols>1</cols>
+      <rows>2</rows>
+      <object class="sizeritem">
+        <object class="wxNotebook">
+          <object class="notebookpage">
+            <label>Players</label>
+            <object class="wxPanel">
+              <object class="wxFlexGridSizer">
+                <cols>1</cols>
+                <rows>2</rows>
+                <object class="sizeritem">
+                  <object class="wxListCtrl" name="all_list">
+                    <style platform="win">wxLC_LIST|wxLC_SMALL_ICON|wxLC_SINGLE_SEL|wxSUNKEN_BORDER</style>
+                    <style platform="unix">wxLC_LIST|wxLC_SINGLE_SEL|wxSUNKEN_BORDER</style>
+                  </object>
+                  <flag>wxALL|wxEXPAND</flag>
+                  <border>5</border>
+                </object>
+                <object class="sizeritem">
+                  <object class="wxFlexGridSizer">
+                    <object class="sizeritem">
+                      <object class="wxButton" name="all_add">
+                        <label>Add</label>
+                      </object>
+                      <flag>wxBOTTOM|wxLEFT|wxALIGN_CENTRE_VERTICAL</flag>
+                      <border>5</border>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxButton" name="all_remove">
+                        <label>Remove</label>
+                      </object>
+                      <flag>wxBOTTOM|wxLEFT|wxALIGN_CENTRE_VERTICAL</flag>
+                      <border>5</border>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxButton" name="all_edit">
+                        <label>Edit</label>
+                      </object>
+                      <flag>wxBOTTOM|wxLEFT|wxALIGN_CENTRE_VERTICAL</flag>
+                      <border>5</border>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxChoice" name="filter_flag">
+                        <content/>
+                      </object>
+                      <flag>wxBOTTOM|wxLEFT|wxEXPAND|wxALIGN_CENTRE_VERTICAL</flag>
+                      <border>5</border>
+                    </object>
+                    <cols>4</cols>
+                    <rows>1</rows>
+                    <growablecols>3</growablecols>
+                  </object>
+                  <flag>wxEXPAND</flag>
+                </object>
+                <growablerows>0</growablerows>
+                <growablecols>0</growablecols>
+              </object>
+            </object>
+          </object>
+          <object class="notebookpage">
+            <label>Friends / Bozos</label>
+            <object class="wxPanel">
+              <object class="wxGridSizer">
+                <object class="sizeritem">
+                  <object class="wxBoxSizer">
+                    <orient>wxHORIZONTAL</orient>
+                    <object class="sizeritem">
+                      <object class="wxStaticBoxSizer">
+                        <label>Friends</label>
+                        <orient>wxVERTICAL</orient>
+                        <object class="sizeritem">
+                          <object class="wxBoxSizer">
+                            <orient>wxVERTICAL</orient>
+                            <object class="sizeritem">
+                              <object class="wxListBox" name="friends_list">
+                                <content/>
+                                <size>100,200</size>
+                                <style>wxLB_SINGLE</style>
+                              </object>
+                              <flag>wxALL|wxEXPAND</flag>
+                              <border>3</border>
+                            </object>
+                            <object class="sizeritem">
+                              <object class="wxBoxSizer">
+                                <orient>wxHORIZONTAL</orient>
+                                <object class="sizeritem">
+                                  <object class="wxButton" name="add_friend">
+                                    <label>Add</label>
+                                  </object>
+                                  <flag>wxALL</flag>
+                                  <border>3</border>
+                                </object>
+                                <object class="sizeritem">
+                                  <object class="wxButton" name="remove_friend">
+                                    <label>Remove</label>
+                                  </object>
+                                  <flag>wxALL</flag>
+                                  <border>3</border>
+                                </object>
+                              </object>
+                            </object>
+                          </object>
+                        </object>
+                      </object>
+                      <flag>wxALL</flag>
+                      <border>5</border>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxStaticBoxSizer">
+                        <label>Bozos</label>
+                        <orient>wxVERTICAL</orient>
+                        <object class="sizeritem">
+                          <object class="wxBoxSizer">
+                            <orient>wxVERTICAL</orient>
+                            <object class="sizeritem">
+                              <object class="wxListBox" name="bozo_list">
+                                <content/>
+                                <size>100,200</size>
+                                <style>wxLB_SINGLE</style>
+                              </object>
+                              <flag>wxALL|wxEXPAND</flag>
+                              <border>3</border>
+                            </object>
+                            <object class="sizeritem">
+                              <object class="wxBoxSizer">
+                                <orient>wxHORIZONTAL</orient>
+                                <object class="sizeritem">
+                                  <object class="wxButton" name="add_bozo">
+                                    <label>Add</label>
+                                  </object>
+                                  <flag>wxALL</flag>
+                                  <border>3</border>
+                                </object>
+                                <object class="sizeritem">
+                                  <object class="wxButton" name="remove_bozo">
+                                    <label>Remove</label>
+                                  </object>
+                                  <flag>wxALL</flag>
+                                  <border>3</border>
+                                </object>
+                              </object>
+                            </object>
+                          </object>
+                        </object>
+                      </object>
+                      <flag>wxALL</flag>
+                      <border>5</border>
+                    </object>
+                  </object>
+                  <flag>wxALIGN_CENTRE</flag>
+                </object>
+                <cols>1</cols>
+                <rows>1</rows>
+              </object>
+            </object>
+          </object>
+          <usenotebooksizer>1</usenotebooksizer>
+        </object>
+        <flag>wxEXPAND</flag>
+      </object>
+      <object class="sizeritem">
+        <object class="wxPanel">
+          <object class="wxBoxSizer">
+            <orient>wxHORIZONTAL</orient>
+            <object class="sizeritem">
+              <object class="wxButton" name="reload">
+                <label>Reload</label>
+              </object>
+              <flag>wxBOTTOM|wxRIGHT</flag>
+              <border>5</border>
+            </object>
+            <object class="sizeritem">
+              <object class="wxButton" name="wxID_EXIT">
+                <label>Close</label>
+              </object>
+              <flag>wxBOTTOM|wxLEFT|wxRIGHT</flag>
+              <border>5</border>
+            </object>
+          </object>
+        </object>
+        <flag>wxALIGN_RIGHT</flag>
+      </object>
+      <growablerows>0</growablerows>
+      <vgap>8</vgap>
+      <growablecols>0</growablecols>
+    </object>
+  </object>
+  <object class="wxDialog" name="playerdb_player_dlg">
+    <title></title>
+    <object class="wxFlexGridSizer">
+      <object class="sizeritem">
+        <object class="wxNotebook">
+          <object class="notebookpage">
+            <label>Info</label>
+            <object class="wxPanel">
+              <object class="wxBoxSizer">
+                <orient>wxHORIZONTAL</orient>
+                <object class="sizeritem">
+                  <object class="wxStaticBoxSizer">
+                    <label>Notes</label>
+                    <orient>wxVERTICAL</orient>
+                    <object class="sizeritem">
+                      <object class="wxGridSizer">
+                        <cols>1</cols>
+                        <object class="sizeritem">
+                          <object class="wxTextCtrl" name="note_edit">
+                            <style>wxTE_MULTILINE</style>
+                          </object>
+                          <flag>wxALL|wxEXPAND</flag>
+                          <border>1</border>
+                        </object>
+                      </object>
+                      <option>1</option>
+                      <flag>wxTOP|wxEXPAND</flag>
+                      <border>5</border>
+                    </object>
+                  </object>
+                  <option>1</option>
+                  <flag>wxEXPAND</flag>
+                </object>
+                <object class="sizeritem">
+                  <object class="wxBoxSizer">
+                    <orient>wxVERTICAL</orient>
+                    <object class="sizeritem">
+                      <object class="wxRadioBox" name="status">
+                        <label>Status</label>
+                        <content>
+                          <item>Friend</item>
+                          <item>Neutral</item>
+                          <item>Bozo</item>
+                        </content>
+                        <selection>1</selection>
+                        <dimension>1</dimension>
+                        <style>wxRA_SPECIFY_COLS</style>
+                      </object>
+                      <flag>wxBOTTOM|wxLEFT|wxRIGHT|wxEXPAND</flag>
+                      <border>5</border>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxPanel" name="custom_flags_panel">
+                        <size>100,140</size>
+                      </object>
+                      <flag>wxLEFT|wxRIGHT</flag>
+                      <border>5</border>
+                      <minsize>100,140</minsize>
+                    </object>
+                  </object>
+                </object>
+              </object>
+            </object>
+          </object>
+          <usenotebooksizer>1</usenotebooksizer>
+          <object class="notebookpage">
+            <label>Games</label>
+            <object class="wxPanel">
+              <object class="wxGridSizer">
+                <object class="sizeritem">
+                  <object class="unknown" name="games_grid"/>
+                  <flag>wxEXPAND</flag>
+                </object>
+                <cols>1</cols>
+                <rows>1</rows>
+              </object>
+            </object>
+          </object>
+          <object class="notebookpage">
+            <label>Graph</label>
+            <object class="wxPanel">
+              <object class="wxFlexGridSizer">
+                <cols>2</cols>
+                <rows>1</rows>
+                <object class="sizeritem">
+                  <object class="unknown" name="plot_canvas"/>
+                  <flag>wxEXPAND</flag>
+                  <minsize>200,200</minsize>
+                </object>
+                <object class="sizeritem">
+                  <object class="wxBoxSizer">
+                    <orient>wxVERTICAL</orient>
+                    <object class="sizeritem">
+                      <object class="wxStaticBoxSizer">
+                        <orient>wxVERTICAL</orient>
+                        <object class="sizeritem">
+                          <object class="wxCheckBox" name="games_all">
+                            <label>All games</label>
+                            <checked>1</checked>
+                          </object>
+                          <flag>wxTOP|wxBOTTOM</flag>
+                          <border>5</border>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxCheckBox" name="games_white">
+                            <label>Games as white</label>
+                          </object>
+                          <flag>wxTOP|wxBOTTOM</flag>
+                          <border>5</border>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxCheckBox" name="games_black">
+                            <label>Games as Black</label>
+                          </object>
+                          <flag>wxTOP|wxBOTTOM</flag>
+                          <border>5</border>
+                        </object>
+                        <label>Games</label>
+                      </object>
+                      <flag>wxLEFT|wxRIGHT|wxEXPAND</flag>
+                      <border>5</border>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxStaticBoxSizer">
+                        <label>Results</label>
+                        <orient>wxVERTICAL</orient>
+                        <object class="sizeritem">
+                          <object class="wxFlexGridSizer">
+                            <cols>2</cols>
+                            <object class="sizeritem">
+                              <object class="wxStaticText">
+                                <label>Wins</label>
+                              </object>
+                            </object>
+                            <object class="sizeritem">
+                              <object class="wxStaticText" name="wins">
+                                <label>     0</label>
+                                <style>wxALIGN_RIGHT</style>
+                              </object>
+                            </object>
+                            <object class="sizeritem">
+                              <object class="wxStaticText">
+                                <label>Losses</label>
+                              </object>
+                            </object>
+                            <object class="sizeritem">
+                              <object class="wxStaticText" name="losses">
+                                <label>     0</label>
+                                <style>wxALIGN_RIGHT|wxST_NO_AUTORESIZE</style>
+                              </object>
+                            </object>
+                            <object class="sizeritem">
+                              <object class="wxStaticText">
+                                <label>Wins/White</label>
+                              </object>
+                            </object>
+                            <object class="sizeritem">
+                              <object class="wxStaticText" name="wins_white">
+                                <label>     0</label>
+                                <style>wxALIGN_RIGHT|wxST_NO_AUTORESIZE</style>
+                              </object>
+                            </object>
+                            <object class="sizeritem">
+                              <object class="wxStaticText">
+                                <label>Losses/White</label>
+                              </object>
+                            </object>
+                            <object class="sizeritem">
+                              <object class="wxStaticText" name="losses_white">
+                                <label>     0</label>
+                                <style>wxALIGN_RIGHT|wxST_NO_AUTORESIZE</style>
+                              </object>
+                            </object>
+                            <object class="sizeritem">
+                              <object class="wxStaticText">
+                                <label>Wins/Black</label>
+                              </object>
+                            </object>
+                            <object class="sizeritem">
+                              <object class="wxStaticText" name="wins_black">
+                                <label>     0</label>
+                                <style>wxALIGN_RIGHT|wxST_NO_AUTORESIZE</style>
+                              </object>
+                            </object>
+                            <object class="sizeritem">
+                              <object class="wxStaticText">
+                                <label>Losses/Black</label>
+                              </object>
+                            </object>
+                            <object class="sizeritem">
+                              <object class="wxStaticText" name="losses_black">
+                                <label>     0</label>
+                                <style>wxALIGN_RIGHT|wxST_NO_AUTORESIZE</style>
+                              </object>
+                            </object>
+                            <vgap>4</vgap>
+                            <hgap>10</hgap>
+                          </object>
+                        </object>
+                      </object>
+                      <flag>wxTOP|wxLEFT|wxRIGHT|wxEXPAND</flag>
+                      <border>5</border>
+                    </object>
+                  </object>
+                </object>
+                <growablerows>0</growablerows>
+                <growablecols>0</growablecols>
+              </object>
+            </object>
+            <object class="wxPanel"/>
+          </object>
+        </object>
+        <flag>wxEXPAND</flag>
+      </object>
+      <object class="sizeritem">
+        <object class="wxPanel">
+          <object class="wxBoxSizer">
+            <orient>wxHORIZONTAL</orient>
+            <object class="sizeritem">
+              <object class="wxButton" name="wxID_OK">
+                <label>Ok</label>
+              </object>
+              <flag>wxALL</flag>
+              <border>3</border>
+            </object>
+            <object class="sizeritem">
+              <object class="wxButton" name="wxID_CANCEL">
+                <label>Cancel</label>
+              </object>
+              <flag>wxALL</flag>
+              <border>3</border>
+            </object>
+          </object>
+        </object>
+        <flag>wxALL|wxALIGN_RIGHT</flag>
+        <border>3</border>
+      </object>
+      <cols>1</cols>
+      <rows>1</rows>
+      <growablerows>0</growablerows>
+      <growablecols>0</growablecols>
+    </object>
+    <centered>1</centered>
+    <style>wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxRESIZE_BOX</style>
+  </object>
+  <object class="wxMenuBar" name="playerdb_menu">
+    <object class="wxMenu">
+      <label>_File</label>
+      <object class="wxMenuItem" name="reload">
+        <label>_Reload</label>
+        <accel>Ctrl-R</accel>
+      </object>
+      <object class="wxMenuItem" name="cleanup">
+        <label>_Cleanup</label>
+      </object>
+      <object class="separator"/>
+      <object class="wxMenuItem" name="wxID_EXIT">
+        <label>E_xit</label>
+        <accel>Ctrl-Q</accel>
+      </object>
+    </object>
+    <object class="wxMenu">
+      <label>_Games</label>
+      <object class="wxMenuItem" name="scan_games">
+        <label>_Scan directory</label>
+      </object>
+      <object class="wxMenuItem" name="list_games">
+        <label>_List games</label>
+      </object>
+      <object class="wxMenuItem" name="cleanup_games">
+        <label>_Cleanup games</label>
+      </object>
+      <object class="wxMenuItem" name="show_graph_of">
+        <label>Show _graph of</label>
+      </object>
+    </object>
+    <object class="wxMenu">
+      <label>_Settings</label>
+      <object class="wxMenuItem" name="edit_flags">
+        <label>_Edit flags</label>
+      </object>
+    </object>
+    <object class="wxMenu">
+      <label>_Help</label>
+      <object class="wxMenuItem" name="wxID_ABOUT">
+        <label>_About</label>
+      </object>
+    </object>
+  </object>
+  <object class="wxDialog" name="playerdb_flags_dlg">
+    <title>Edit flags</title>
+    <object class="wxBoxSizer">
+      <orient>wxVERTICAL</orient>
+      <object class="sizeritem">
+        <object class="wxPanel">
+          <style>wxRAISED_BORDER</style>
+          <object class="wxBoxSizer">
+            <orient>wxVERTICAL</orient>
+            <object class="sizeritem">
+              <object class="wxBoxSizer">
+                <orient>wxVERTICAL</orient>
+                <object class="sizeritem">
+                  <object class="wxBoxSizer">
+                    <orient>wxHORIZONTAL</orient>
+                    <object class="sizeritem">
+                      <object class="wxCheckBox" name="flag_1_cb">
+                        <label></label>
+                      </object>
+                      <flag>wxALIGN_CENTRE_VERTICAL</flag>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxTextCtrl" name="flag_1_edit"/>
+                      <flag>wxLEFT|wxALIGN_CENTRE_VERTICAL</flag>
+                      <border>12</border>
+                      <minsize>120,24</minsize>
+                    </object>
+                  </object>
+                  <flag>wxALL</flag>
+                  <border>5</border>
+                </object>
+                <object class="sizeritem">
+                  <object class="wxBoxSizer">
+                    <orient>wxHORIZONTAL</orient>
+                    <object class="sizeritem">
+                      <object class="wxCheckBox" name="flag_2_cb">
+                        <label></label>
+                      </object>
+                      <flag>wxALIGN_CENTRE_VERTICAL</flag>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxTextCtrl" name="flag_2_edit"/>
+                      <flag>wxLEFT|wxALIGN_CENTRE_VERTICAL</flag>
+                      <border>12</border>
+                      <minsize>120,24</minsize>
+                    </object>
+                  </object>
+                  <flag>wxALL</flag>
+                  <border>5</border>
+                </object>
+                <object class="sizeritem">
+                  <object class="wxBoxSizer">
+                    <orient>wxHORIZONTAL</orient>
+                    <object class="sizeritem">
+                      <object class="wxCheckBox" name="flag_3_cb">
+                        <label></label>
+                      </object>
+                      <flag>wxALIGN_CENTRE_VERTICAL</flag>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxTextCtrl" name="flag_3_edit"/>
+                      <flag>wxLEFT|wxALIGN_CENTRE_VERTICAL</flag>
+                      <border>12</border>
+                      <minsize>120,24</minsize>
+                    </object>
+                  </object>
+                  <flag>wxALL</flag>
+                  <border>5</border>
+                </object>
+                <object class="sizeritem">
+                  <object class="wxBoxSizer">
+                    <orient>wxHORIZONTAL</orient>
+                    <object class="sizeritem">
+                      <object class="wxCheckBox" name="flag_4_cb">
+                        <label></label>
+                      </object>
+                      <flag>wxALIGN_CENTRE_VERTICAL</flag>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxTextCtrl" name="flag_4_edit"/>
+                      <flag>wxLEFT|wxALIGN_CENTRE_VERTICAL</flag>
+                      <border>12</border>
+                      <minsize>120,24</minsize>
+                    </object>
+                  </object>
+                  <flag>wxALL</flag>
+                  <border>5</border>
+                </object>
+                <object class="sizeritem">
+                  <object class="wxBoxSizer">
+                    <orient>wxHORIZONTAL</orient>
+                    <object class="sizeritem">
+                      <object class="wxCheckBox" name="flag_5_cb">
+                        <label></label>
+                      </object>
+                      <flag>wxALIGN_CENTRE_VERTICAL</flag>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxTextCtrl" name="flag_5_edit"/>
+                      <flag>wxLEFT|wxALIGN_CENTRE_VERTICAL</flag>
+                      <border>12</border>
+                      <minsize>120,24</minsize>
+                    </object>
+                  </object>
+                  <flag>wxALL</flag>
+                  <border>5</border>
+                </object>
+              </object>
+              <flag>wxALL|wxALIGN_CENTRE</flag>
+              <border>5</border>
+            </object>
+          </object>
+        </object>
+        <flag>wxALL|wxEXPAND</flag>
+        <border>5</border>
+      </object>
+      <object class="sizeritem">
+        <object class="wxPanel">
+          <object class="wxBoxSizer">
+            <orient>wxHORIZONTAL</orient>
+            <object class="sizeritem">
+              <object class="wxButton" name="wxID_OK">
+                <label>Ok</label>
+              </object>
+              <flag>wxALL</flag>
+              <border>3</border>
+            </object>
+            <object class="sizeritem">
+              <object class="wxButton" name="wxID_CANCEL">
+                <label>Cancel</label>
+              </object>
+              <flag>wxALL</flag>
+              <border>3</border>
+            </object>
+          </object>
+        </object>
+        <flag>wxLEFT|wxRIGHT|wxALIGN_RIGHT</flag>
+        <border>5</border>
+      </object>
+    </object>
+    <centered>1</centered>
+  </object>
+</resource>

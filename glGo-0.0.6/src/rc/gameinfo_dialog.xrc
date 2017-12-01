@@ -1,0 +1,238 @@
+<?xml version="1.0" ?>
+<resource version="2.3.0.1" xmlns="http://www.wxwindows.org/wxxrc">
+  <object class="wxDialog" name="gameinfo_dialog">
+    <title>Game info</title>
+    <object class="wxBoxSizer">
+      <orient>wxVERTICAL</orient>
+      <object class="sizeritem">
+        <object class="wxPanel">
+          <object class="wxGridSizer">
+            <cols>1</cols>
+            <object class="sizeritem">
+              <object class="wxPanel">
+                <object class="wxFlexGridSizer">
+                  <cols>4</cols>
+                  <object class="sizeritem">
+                    <object class="wxStaticText">
+                      <label>White</label>
+                    </object>
+                    <flag>wxALL|wxALIGN_RIGHT|wxALIGN_CENTRE_VERTICAL</flag>
+                    <border>3</border>
+                  </object>
+                  <object class="sizeritem">
+                    <object class="wxTextCtrl" name="white">
+                      <value>White</value>
+                      <tooltip>Name of white player</tooltip>
+                    </object>
+                    <flag>wxALL</flag>
+                    <border>3</border>
+                  </object>
+                  <object class="sizeritem">
+                    <object class="wxStaticText">
+                      <label>White rank</label>
+                    </object>
+                    <flag>wxALL|wxALIGN_RIGHT|wxALIGN_CENTRE_VERTICAL</flag>
+                    <border>3</border>
+                  </object>
+                  <object class="sizeritem">
+                    <object class="wxTextCtrl" name="white_rank">
+                      <tooltip>Rank of white player</tooltip>
+                    </object>
+                    <flag>wxALL</flag>
+                    <border>3</border>
+                  </object>
+                  <object class="sizeritem">
+                    <object class="wxStaticText">
+                      <label>Black</label>
+                    </object>
+                    <flag>wxALL|wxALIGN_RIGHT|wxALIGN_CENTRE_VERTICAL</flag>
+                    <border>3</border>
+                  </object>
+                  <object class="sizeritem">
+                    <object class="wxTextCtrl" name="black">
+                      <value>Black</value>
+                      <tooltip>Name of black player</tooltip>
+                    </object>
+                    <flag>wxALL</flag>
+                    <border>3</border>
+                  </object>
+                  <object class="sizeritem">
+                    <object class="wxStaticText">
+                      <label>Black rank</label>
+                    </object>
+                    <flag>wxALL|wxALIGN_RIGHT|wxALIGN_CENTRE_VERTICAL</flag>
+                    <border>3</border>
+                  </object>
+                  <object class="sizeritem">
+                    <object class="wxTextCtrl" name="black_rank">
+                      <tooltip>Rank of black player</tooltip>
+                    </object>
+                    <flag>wxALL</flag>
+                    <border>3</border>
+                  </object>
+                  <object class="spacer">
+                    <size>0,5</size>
+                  </object>
+                  <object class="spacer">
+                    <size>0,0</size>
+                  </object>
+                  <object class="spacer">
+                    <size>0,0</size>
+                  </object>
+                  <object class="spacer">
+                    <size>0,0</size>
+                  </object>
+                  <object class="sizeritem">
+                    <object class="wxStaticText">
+                      <label>Handicap</label>
+                    </object>
+                    <flag>wxALL|wxALIGN_RIGHT|wxALIGN_CENTRE_VERTICAL</flag>
+                    <border>3</border>
+                  </object>
+                  <object class="sizeritem">
+                    <object class="wxTextCtrl" name="handicap">
+                      <tooltip>Handicap, a value between 0 and 9</tooltip>
+                    </object>
+                    <flag>wxALL</flag>
+                    <border>3</border>
+                  </object>
+                  <object class="sizeritem">
+                    <object class="wxStaticText">
+                      <label>Komi</label>
+                    </object>
+                    <flag>wxALL|wxALIGN_RIGHT|wxALIGN_CENTRE_VERTICAL</flag>
+                    <border>3</border>
+                  </object>
+                  <vgap>6</vgap>
+                  <hgap>6</hgap>
+                  <object class="sizeritem">
+                    <object class="wxTextCtrl" name="komi">
+                      <tooltip>Komi</tooltip>
+                    </object>
+                    <flag>wxALL</flag>
+                    <border>3</border>
+                  </object>
+                  <object class="sizeritem">
+                    <object class="wxStaticText">
+                      <label>Result</label>
+                    </object>
+                    <flag>wxALL|wxALIGN_RIGHT|wxALIGN_CENTRE_VERTICAL</flag>
+                    <border>3</border>
+                  </object>
+                  <object class="sizeritem">
+                    <object class="wxTextCtrl" name="result">
+                      <tooltip>The game result</tooltip>
+                    </object>
+                    <flag>wxALL</flag>
+                    <border>3</border>
+                  </object>
+                  <object class="sizeritem">
+                    <object class="wxStaticText">
+                      <label>Time</label>
+                    </object>
+                    <flag>wxALL|wxALIGN_RIGHT|wxALIGN_CENTRE_VERTICAL</flag>
+                    <border>3</border>
+                  </object>
+                  <object class="sizeritem">
+                    <object class="wxTextCtrl" name="time">
+                      <tooltip>Time settings</tooltip>
+                    </object>
+                    <flag>wxALL</flag>
+                    <border>3</border>
+                  </object>
+                  <object class="sizeritem">
+                    <object class="wxStaticText">
+                      <label>Game name</label>
+                    </object>
+                    <flag>wxALL|wxALIGN_RIGHT|wxALIGN_CENTRE_VERTICAL</flag>
+                    <border>3</border>
+                  </object>
+                  <object class="sizeritem">
+                    <object class="wxTextCtrl" name="game_name">
+                      <tooltip>A name for the game, can be chosen freely</tooltip>
+                    </object>
+                    <flag>wxALL</flag>
+                    <border>3</border>
+                  </object>
+                  <object class="sizeritem">
+                    <object class="wxStaticText">
+                      <label>Date</label>
+                    </object>
+                    <flag>wxALL|wxALIGN_RIGHT|wxALIGN_CENTRE_VERTICAL</flag>
+                    <border>3</border>
+                  </object>
+                  <object class="sizeritem">
+                    <object class="wxTextCtrl" name="date">
+                      <tooltip>Date when the game was played</tooltip>
+                    </object>
+                    <flag>wxALL</flag>
+                    <border>3</border>
+                  </object>
+                  <object class="sizeritem">
+                    <object class="wxStaticText">
+                      <label>Played at</label>
+                    </object>
+                    <flag>wxALL|wxALIGN_RIGHT|wxALIGN_CENTRE_VERTICAL</flag>
+                    <border>3</border>
+                  </object>
+                  <object class="sizeritem">
+                    <object class="wxTextCtrl" name="place">
+                      <tooltip>Place where the game was played</tooltip>
+                    </object>
+                    <flag>wxALL</flag>
+                    <border>3</border>
+                  </object>
+                  <object class="sizeritem">
+                    <object class="wxStaticText">
+                      <label>Copyright</label>
+                    </object>
+                    <flag>wxALL|wxALIGN_RIGHT|wxALIGN_CENTRE_VERTICAL</flag>
+                    <border>3</border>
+                  </object>
+                  <object class="sizeritem">
+                    <object class="wxTextCtrl" name="copyright">
+                      <tooltip>Copyright information about this game</tooltip>
+                    </object>
+                    <flag>wxALL</flag>
+                    <border>3</border>
+                  </object>
+                </object>
+              </object>
+              <flag>wxALL|wxEXPAND|wxALIGN_CENTRE</flag>
+              <border>10</border>
+            </object>
+          </object>
+          <style>wxRAISED_BORDER</style>
+        </object>
+        <flag>wxALL</flag>
+        <border>5</border>
+      </object>
+      <object class="sizeritem">
+        <object class="wxPanel">
+          <object class="wxBoxSizer">
+            <orient>wxHORIZONTAL</orient>
+            <object class="sizeritem">
+              <object class="wxButton" name="wxID_OK">
+                <label>_Ok</label>
+                <default>1</default>
+                <focused>1</focused>
+              </object>
+              <flag>wxALL</flag>
+              <border>3</border>
+            </object>
+            <object class="sizeritem">
+              <object class="wxButton" name="wxID_CANCEL">
+                <label>_Cancel</label>
+              </object>
+              <flag>wxALL</flag>
+              <border>3</border>
+            </object>
+          </object>
+        </object>
+        <flag>wxALL|wxALIGN_RIGHT</flag>
+        <border>5</border>
+      </object>
+    </object>
+    <centered>1</centered>
+  </object>
+</resource>

@@ -1,0 +1,108 @@
+                               glGo Installation
+                               -----------------
+
+Windows
+-------
+
+This should be simple. For Windows there is a common installer. Double-click on
+the downloaded glGo-xxx.exe file and follow the instructions.
+
+The Windows build is statically linked to wxWindows, so you don't need to bother
+about this.
+
+You need OpenGL libraries installed, they are included in the standard
+installation of Windows 98 and newer (not recommended) or come with your
+hardware driver. See section Requirements in the Readme file or the manual for
+details. Summarized, install a suitable driver for your graphiccard which is
+distributed by the cards vendor. Do not use the Microsoft driver.
+
+The glGo installer includes the redistributable OpenAL library published by
+Creative (http://developer.creative.com/).
+
+The installer includes the required SDL and Python runtime libaries.
+
+If you chose to install GNU Go together with glGo, you find the gnugo.exe
+file in the installation folder, and some GNU Go related documentation in
+the docs folder.
+
+
+Linux
+-----
+
+The selfextracting installer is used with "sh glGo-xxx.sh". You need to be
+root or use the sudo utility to run it. (I am investigating if this is possible
+to change as it is not really required to install glGo with root permissions.)
+
+The installer takes the following commandline parameters:
+sh glGo-xxx.sh -gui        -  Install glGo via GUI (default)
+sh glGo-xxx.sh -remove     -  Remove glGo via GUI
+sh glGo-xxx.sh -install    -  Install glGo via commandline interface
+sh glGo-xxx.sh -uninstall  -  Uninstall glGo via commandline interface
+
+It does not matter if you use the GUI or the commandline interface, just a
+matter of taste. But I like the idea of Linux GUI installers.
+
+The target directory is /opt/glGo and it will create a symlink to
+/usr/local/bin/glGo. Uninstall scripts are located in the target directory. The
+user configuration is found in $HOME/.glGo/. Please remove this directory
+manually after uninstalling.
+
+In any case you require OpenGL libraries installed, but they are installed
+together with your hardware driver. In worst case, install the Mesa libraries
+for software-only rendering, but this is not recommended
+
+You need the following SDL libraries: libsdl, libsdl_ttf and libsdl_image. They
+are available with all major Linux distributions. If you don't have them already
+installed, get them from your distribution. In case try "ldd glGo" to check the
+dependencies.
+
+You need the Python 2.3 runtime library installed.
+
+For the sound system you need either the OpenAL or the SDL_mixer runtime
+libraries installed. They should be included in every Linux distribution. Unlike
+Windows, OpenAL is not included in the Linux glGo installer, as it is to be
+preferred to use your Linux distribution version.
+If neither libopenal nor libSDL_mixer are available, glGo should still run, but
+without sound output.
+
+Here are the most importantant dependencies. Nothing special, but you might
+need to install some library from your distribution.
+
+* libgtk 1.2
+* libjpeg
+* libpng 1.2
+* libz
+* libGL
+* libGLU
+* libSDL 1.2
+* libSDL_image 1.2
+* libSDL_ttf 2.0
+* libfreetype
+* libpython 2.3
+
+Optional for sound output:
+
+* libopenal
+* libSDL_mixer
+
+GNU Go is not included in the Linux installer. Please install it from your
+distribution, it is included in almost any, or compile it yourself. Make sure
+the gnugo binary is found in your PATH environment, so glGo will find it.
+Common locations are /usr/local/bin, /usr/bin or /usr/games/bin.
+
+If you installed glGo in an unusual directory, you can use the "-s" commandline
+option to point to the shared data directory.
+Example: glGo -s /home/foobar/myprogs/coolapps/glGo/share.
+Another possibility is to set the environment variable GLGO_SHARED_PATH, for
+example in bash: export GLGO_SHARED_PATH=/home/foobar/myprogs/coolapps/glGo/share
+The "-s" option has higher priority than the environment variable. If neither is
+given glGo will search for the shared directory in the folder the binary is
+located, /usr, /usr/local, /opt, $HOME and $HOME/glGo. If no shared directory is
+found, glGo will fail to start. If you keep the default directories in the
+installation and don't move files around later, you do not need to worry about
+this.
+
+The sound libraries (libalsound.so and libsdlsound.so) are located in
+/opt/glGo/lib. If you really need to move this directory around, you need to
+tell glGo the location of these libraries, else sound won't work. You can do
+this by setting the environment LD_LIBRARY_PATH to the new directory.

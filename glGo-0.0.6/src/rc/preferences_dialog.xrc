@@ -1,0 +1,329 @@
+<?xml version="1.0" ?>
+<resource version="2.3.0.1" xmlns="http://www.wxwindows.org/wxxrc">
+  <object class="wxDialog" name="preferences_dialog">
+    <title>Preferences</title>
+    <centered>1</centered>
+    <object class="wxBoxSizer">
+      <orient>wxVERTICAL</orient>
+      <object class="sizeritem">
+        <object class="wxNotebook">
+          <usenotebooksizer>1</usenotebooksizer>
+          <style>wxRAISED_BORDER</style>
+          <object class="notebookpage">
+            <label>Global settings</label>
+            <object class="wxPanel">
+              <object class="wxBoxSizer">
+                <object class="sizeritem">
+                  <object class="wxGridSizer">
+                    <cols>2</cols>
+                    <rows>1</rows>
+                    <object class="sizeritem">
+                      <object class="wxStaticBoxSizer">
+                        <label>Language</label>
+                        <orient>wxVERTICAL</orient>
+                        <object class="sizeritem">
+                          <object class="wxChoice" name="language">
+                            <content>
+                              <item>English</item>
+                              <item>German</item>
+                              <item>Dutch</item>
+                            </content>
+                            <selection>0</selection>
+                            <style></style>
+                            <tooltip>Select the language.\nYou should restart glGo afterwards to update all texts properly.</tooltip>
+                          </object>
+                          <flag>wxALL|wxALIGN_CENTRE</flag>
+                          <border>5</border>
+                        </object>
+                      </object>
+                      <flag>wxALL|wxEXPAND</flag>
+                      <border>3</border>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxStaticBoxSizer">
+                        <label>Board type</label>
+                        <orient>wxVERTICAL</orient>
+                        <object class="sizeritem">
+                          <object class="wxChoice" name="board_type">
+                            <content>
+                              <item>SDL (2D)</item>
+                              <item>OpenGL (3D)</item>
+                            </content>
+                            <selection>0</selection>
+                            <tooltip>Select the board display type.\nOpenGL requires a hardware accelerated 3D driver installed.</tooltip>
+                          </object>
+                          <flag>wxALL|wxALIGN_CENTRE</flag>
+                          <border>5</border>
+                        </object>
+                      </object>
+                      <flag>wxALL|wxEXPAND</flag>
+                      <border>3</border>
+                    </object>
+                  </object>
+                  <flag>wxALL|wxEXPAND</flag>
+                  <border>5</border>
+                </object>
+                <object class="sizeritem">
+                  <object class="wxStaticBoxSizer">
+                    <label>Misc</label>
+                    <orient>wxVERTICAL</orient>
+                    <object class="sizeritem">
+                      <object class="wxCheckBox" name="autohide_startscreen">
+                        <label>Autohide start screen</label>
+                        <tooltip>Automatically hide the start screen when opening a board or connecting to IGS</tooltip>
+                      </object>
+                      <flag>wxALL</flag>
+                      <border>3</border>
+                    </object>
+                    <object class="sizeritem" platform="win">
+                      <object class="wxCheckBox" name="minimize_to_tray" platform="win">
+                        <label>Minimize start screen to tray</label>
+                        <tooltip>Minimize the start screen to the system tray when clicking the Close button of the start window</tooltip>
+                      </object>
+                      <flag>wxALL</flag>
+                      <border>3</border>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxCheckBox" name="enable_tooltips">
+                        <label>Enable tooltips</label>
+                        <tooltip>Uncheck this if you are annoyed by the tooltips</tooltip>
+                      </object>
+                      <flag>wxALL</flag>
+                      <border>3</border>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxCheckBox" name="localserver">
+                        <label>Reuse instance to open SGF files</label>
+                        <tooltip>Run a socket on localhost used to open SGF files in an already running glGo</tooltip>
+                      </object>
+                    </object>
+                  </object>
+                  <flag>wxALL|wxEXPAND</flag>
+                  <border>5</border>
+                </object>
+                <orient>wxVERTICAL</orient>
+                <object class="sizeritem">
+                  <object class="wxStaticBoxSizer">
+                    <label>Sound</label>
+                    <orient>wxVERTICAL</orient>
+                    <object class="sizeritem">
+                      <object class="wxCheckBox" name="global_sound">
+                        <label>Enable sound</label>
+                        <tooltip>Enable or disable global sound output</tooltip>
+                      </object>
+                      <flag>wxALIGN_CENTRE</flag>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxChoice" name="sound_system">
+                        <content>
+                          <item>OpenAL</item>
+                          <item>SDL Mixer</item>
+                        </content>
+                        <tooltip>Select sound system to use</tooltip>
+                      </object>
+                      <flag>wxALL|wxALIGN_CENTRE</flag>
+                      <border>6</border>
+                    </object>
+                  </object>
+                  <flag>wxALL|wxEXPAND</flag>
+                  <border>5</border>
+                </object>
+              </object>
+            </object>
+            <selected>1</selected>
+          </object>
+          <object class="notebookpage">
+            <label>IGS</label>
+            <object class="wxPanel">
+              <object class="wxGridSizer">
+                <object class="sizeritem">
+                  <object class="wxFlexGridSizer">
+                    <cols>1</cols>
+                    <object class="sizeritem">
+                      <object class="wxFlexGridSizer">
+                        <cols>2</cols>
+                        <object class="sizeritem">
+                          <object class="wxCheckBox" name="shouts_in_terminal">
+                            <label>Show shouts in terminal</label>
+                            <tooltip>If enabled, shouts are displayed in both the shout window and the terminal.\nIf disabled, only in the shouts window.</tooltip>
+                          </object>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxCheckBox" name="ayt_timer">
+                            <label>Ayt timer</label>
+                            <tooltip>If enabled, glGo will prevent early disconnections from IGS by sending the ayt command in intervals</tooltip>
+                          </object>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxCheckBox" name="skip_guests">
+                            <label>Skip guests in player list</label>
+                            <tooltip>Do not show guest accounts in the player list</tooltip>
+                          </object>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxCheckBox" name="chat_sound">
+                            <label>Sound for chats</label>
+                            <tooltip>Play a sound when a chat is incoming.\nYou can still enable or disable sound for individual chats in the chat dialog.</tooltip>
+                          </object>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxCheckBox" name="show_obs_msgbox">
+                            <label>Display info dialogs</label>
+                            <tooltip>Display game information dialogs for observed games</tooltip>
+                          </object>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxCheckBox" name="match_sound">
+                            <label>Sound for match</label>
+                            <tooltip>Play a sound when you receive a match request.</tooltip>
+                          </object>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxCheckBox" name="all_friends">
+                            <label>Ignore rank limit for friends</label>
+                            <tooltip>When enabled, the friends filter will reread the complete player list. When disabled, it will only show friends within the current rank selection.</tooltip>
+                          </object>
+                        </object>
+                        <rows>4</rows>
+                        <vgap>6</vgap>
+                      </object>
+                    </object>
+                    <vgap>6</vgap>
+                    <object class="sizeritem">
+                      <object class="wxStaticBoxSizer">
+                        <label>Time warning</label>
+                        <orient>wxHORIZONTAL</orient>
+                        <object class="sizeritem">
+                          <object class="wxCheckBox" name="timewarn_sound">
+                            <label>Warning sound</label>
+                            <tooltip>Play a sound when the time runs below the threshold</tooltip>
+                          </object>
+                          <flag>wxALL</flag>
+                          <border>3</border>
+                        </object>
+                        <object class="spacer">
+                          <size>30,0</size>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxBoxSizer">
+                            <orient>wxHORIZONTAL</orient>
+                            <object class="sizeritem">
+                              <object class="wxStaticText">
+                                <label>Threshold</label>
+                              </object>
+                              <flag>wxRIGHT|wxALIGN_CENTRE_VERTICAL</flag>
+                              <border>12</border>
+                            </object>
+                            <object class="sizeritem">
+                              <object class="wxSpinCtrl" name="timewarn_threshold">
+                                <value>30</value>
+                                <min>0</min>
+                                <max>60</max>
+                                <size>60,20</size>
+                                <style></style>
+                                <tooltip>Warn about low time when your clock is at this amount of seconds</tooltip>
+                              </object>
+                            </object>
+                          </object>
+                          <flag>wxALL|wxALIGN_CENTRE_VERTICAL</flag>
+                          <border>3</border>
+                        </object>
+                      </object>
+                      <flag>wxEXPAND</flag>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxStaticBoxSizer">
+                        <object class="sizeritem">
+                          <object class="wxFlexGridSizer">
+                            <object class="sizeritem">
+                              <object class="wxCheckBox" name="autosave_own">
+                                <label>Autosave own games</label>
+                                <tooltip>If enabled, all own games will be automatically saved when the game finishes</tooltip>
+                              </object>
+                              <flag>wxALL</flag>
+                              <border>3</border>
+                            </object>
+                            <object class="sizeritem">
+                              <object class="wxButton" name="select_autosave_own">
+                                <label>Directory</label>
+                                <tooltip>Select directory to save own games to</tooltip>
+                              </object>
+                              <flag>wxALL</flag>
+                              <border>3</border>
+                            </object>
+                            <cols>2</cols>
+                            <rows>2</rows>
+                            <object class="sizeritem">
+                              <object class="wxCheckBox" name="autosave_observed">
+                                <label>Autosave observed games</label>
+                                <tooltip>If enabled, all observed games will be automatically saved when the game finishes</tooltip>
+                              </object>
+                              <flag>wxALL</flag>
+                              <border>3</border>
+                            </object>
+                            <object class="sizeritem">
+                              <object class="wxButton" name="select_autosave_observed">
+                                <label>Directory</label>
+                                <tooltip>Select directory to save observed games to</tooltip>
+                              </object>
+                              <flag>wxALL</flag>
+                              <border>3</border>
+                            </object>
+                            <growablecols>0</growablecols>
+                          </object>
+                          <flag>wxEXPAND</flag>
+                        </object>
+                        <label>Autosave</label>
+                        <orient>wxVERTICAL</orient>
+                      </object>
+                      <flag>wxEXPAND</flag>
+                    </object>
+                  </object>
+                  <flag>wxALIGN_CENTRE</flag>
+                </object>
+                <cols>1</cols>
+              </object>
+            </object>
+          </object>
+        </object>
+        <flag>wxALL|wxEXPAND|wxALIGN_CENTRE</flag>
+        <border>5</border>
+      </object>
+      <object class="sizeritem">
+        <object class="wxPanel">
+          <object class="wxFlexGridSizer">
+            <cols>3</cols>
+            <rows>1</rows>
+            <object class="sizeritem">
+              <object class="wxBitmapButton" name="wxID_HELP">
+                <bitmap stock_id="wxART_HELP_BOOK"></bitmap>
+                <tooltip>Show help</tooltip>
+              </object>
+              <flag>wxALL</flag>
+              <border>3</border>
+            </object>
+            <object class="sizeritem">
+              <object class="wxButton" name="wxID_OK">
+                <label>_Ok</label>
+                <default>1</default>
+              </object>
+              <flag>wxALL</flag>
+              <border>3</border>
+            </object>
+            <object class="sizeritem">
+              <object class="wxButton" name="wxID_CANCEL">
+                <label>_Cancel</label>
+              </object>
+              <flag>wxALL</flag>
+              <border>3</border>
+            </object>
+            <hgap>3</hgap>
+            <growablecols>0</growablecols>
+          </object>
+        </object>
+        <flag>wxALL|wxEXPAND</flag>
+        <border>5</border>
+      </object>
+    </object>
+  </object>
+</resource>

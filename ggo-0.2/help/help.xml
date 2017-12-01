@@ -1,0 +1,302 @@
+<?xml version='1.0'?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.1//EN"
+                      "/usr/share/sgml/docbook/dtd/xml/4.1.2/docbookx.dtd">
+
+<book>
+
+  <bookinfo>
+    <title>gGo</title>
+    <authorgroup>
+      <author><firstname>Peter</firstname><surname>Strempel</surname></author>
+    </authorgroup>
+    <copyright><year>2002</year><holder>Peter
+	Strempel</holder></copyright>
+  </bookinfo>
+
+  <!-- Preface -->
+
+  <preface>
+    <title>Introduction</title>
+    <para>gGo is a Go board, <link linkend="sgf">SGF</link> editor and
+      client for internet Go servers written in Java. Go is an ancient
+      boardgame, very common in Japan, China and Korea.</para>
+    <para>This manual describes the basic usage of gGo.</para>
+    <note>
+      <para>It is currently in progress and anything from finished.
+	Please be patient.</para>
+    </note>
+  </preface>
+
+  <!-- Chapter: File formats -->
+
+  <chapter>
+    <title>File formats</title>
+
+    <!-- Section: SGF -->
+
+    <section>
+      <title>SGF</title>
+      <anchor id="sgf"/>
+      <para>SGF (Smart Game Format) files are a simple and effective
+	way to store records of two-player board games. File
+	information is saved as plain text, which makes the files very
+	small and easy to handle or store. Game information is stored
+	in a tree-based format - in other words, there is one main
+	linear sequence of moves, with any alternatives that have been
+	entered into the record branching away from that main
+	sequence. These branches may have their own branches and so
+	on.</para>
+      <para>Because an SGF can contain much information - including
+	but not limited to board setup, markings, variations, and
+	extensive comments - programs such as gGo have been created.
+	gGo provides a powerful, easy-to-use interface for creating,
+	editing and viewing SGF files.</para>
+      <para>
+        But there are some very old games out on the web in an older
+	format. gGo is able to convert this format to SGF
+	automatically when loading those files.
+      </para>
+      <!--
+    <para>
+      Loading and saving SGF files supports <link
+      linkend="encoding">text encoding</link> for asian languages.</para>
+      -->
+    </section>
+
+    <!-- Section: XML
+
+  <section>
+  <title>XML</title>
+  <anchor id="xml"/>
+  <para>XML is a modern file format and not yet much used in the
+    Go world.</para>
+  <para>Jago is able to load and save Go games in XML format.
+    Unlike SGF, which is a standardized format, such a standard
+        does not exist for XML yet. The author of Jago created an own
+    XML specification.</para>
+  <para>gGo is using Jagos XML definitions and currently able to
+        load XML games saved with Jago. gGo is not yet able to save
+    games in XML format, this but this feature will be implemented
+    somewhen in the future.</para>
+  </section>
+    -->
+
+  </chapter>
+
+
+  <!-- Chapter: Usage-->
+
+  <chapter>
+    <title>Usage</title>
+
+    <!-- Section Window focus -->
+
+    <section>
+      <title>Window focus</title>
+      <para>Once the comment editor has the window focus, and you want
+	to continue using the <keycap>cursor</keycap> and
+	<keycap>Home</keycap>/<keycap>End</keycap> keys for game
+	navigation, just move the mouse over the board to return the
+	focus to the board again.</para>
+      <tip>
+	<para>If you have a wheelmouse, move the mouse over the board
+	  and use the wheel for fast navigation.</para>
+      </tip>
+    </section>
+
+    <!-- Section Menus -->
+
+    <section>
+      <title>Menus</title>
+
+      <!-- Section: File menu -->
+
+      <section>
+        <title>File</title>
+        <section>
+          <title>New</title>
+          <para>This lets you create a new SGF. You will be prompted
+	    for some basic game information (white player, black
+	    player, board size, komi, and handicap).</para>
+        </section>
+        <section>
+          <title>Open</title>
+          <para>This will open a stored SGF file into the current
+	    window. gGo will remember which directory you store your
+	    SGFs in and return there next time you perform the Open,
+	    Save, or Save As functions during the same session. The
+	    file does not have to have an .sgf extension as long as it
+	    is in the SGF format (sometimes downloaded files are saved
+	    without the extension).</para>
+        </section>
+        <section>
+          <title>Save</title>
+          <para>This will save the SGF you are currently editing. If
+	    the SGF has not yet been saved to a file, you will be
+	    prompted for a filename. If you want to save an existing
+	    file under another name or in another location, use the
+	    Save As option.</para>
+        </section>
+        <section>
+          <title>Save As</title>
+          <para>This will let you define which location and name the
+	    SGF file will be saved under. Use this to save edited, or
+	    alternate copies of SGFs without overwriting the
+	    original.</para>
+        </section>
+        <section>
+          <title>Exit</title>
+          <para>This lets you exit the program.</para>
+        </section>
+      </section>
+
+      <!-- Section: Edit menu -->
+
+      <section>
+        <title>Edit</title>
+        <para>To be written.</para>
+      </section>
+
+      <!-- Section: Navigation menu -->
+
+      <section>
+        <title>Navigation</title>
+        <para>To be written.</para>
+      </section>
+
+      <!-- Section: Settings menu -->
+
+      <section>
+        <title>Settings</title>
+        <section>
+          <title>Preferences</title>
+          <para>To be written.</para>
+        </section>
+        <section>
+          <title>Game Info</title>
+          <para>To be written.</para>
+        </section>
+      </section>
+
+      <!-- Section: View menu -->
+
+      <section>
+        <title>View</title>
+        <para>To be written.</para>
+      </section>
+
+      <!-- Section: Help menu -->
+
+      <section>
+        <title>Help</title>
+        <para>To be written.</para>
+      </section>
+
+    </section>
+
+    <!-- Section Preferences -->
+
+    <section>
+      <title>Preferences</title>
+      <para>To be written.</para>
+    </section>
+
+    <!-- Section Mouse control -->
+
+    <section>
+      <title>Mouse control</title>
+
+      <para>
+        gGo offers advanced navigation features by using the mouse
+	only, to provide a comfortable interface to the user. Mouse
+	gestures are implemented as button and wheel gestures.
+      </para>
+      <para>
+        These navigation gestures are an additional feature, they
+	offer basically the same as the toolbar or keyboard control,
+	but are meant to make a convinient way of navigation through a
+	game available.
+      </para>
+
+      <section>
+        <title>Mousewheel navigation</title>
+        <itemizedlist>
+          <listitem>
+            <para>Mousewheel forward -> Previous move</para>
+          </listitem>
+          <listitem>
+            <para>Mousewheel backward -> Next move</para>
+          </listitem>
+          <listitem>
+            <para>Hold right + mousewheel forward -> Previous
+	      variation</para>
+          </listitem>
+          <listitem>
+            <para>Hold right + mousewheel backward -> Next
+	      variation</para>
+          </listitem>
+        </itemizedlist>
+
+      </section>
+
+    </section>
+
+    <!-- Section Keyboard control -->
+
+    <section>
+      <title>Keyboard control</title>
+
+      <para>
+        gGo offers easy keyboard control to navigate through a game
+	tree. Most menu items have a keyboard shortcut, as stated in
+	the menu.</para>
+
+      <para>The cursor keys offer the basic navigation through moves
+	and navigation.</para>
+
+    </section>
+
+      <!-- Section Searching -->
+
+    <section>
+      <title>Searching</title>
+
+      <para>
+	gGo offers easy searching for moves in the current game or
+	variation branch:
+      </para>
+
+      <itemizedlist>
+	<listitem>
+	  <para>When in normal mode, holding down the
+	    <emphasis>shift</emphasis> key and
+	    <emphasis>left</emphasis> clicking moves to the
+	    <emphasis>first</emphasis> position of the <emphasis>main
+	      variation branch</emphasis> where the stone at this spot
+	    was played.</para>
+	</listitem>
+	<listitem>
+	  <para>When in normal mode, holding down the
+	    <emphasis>shift</emphasis> key and
+	    <emphasis>right</emphasis> clicking moves to the
+	    <emphasis>next</emphasis> position within the
+	    <emphasis>current branch</emphasis> where the stone at
+	    this spot was played.</para>
+	</listitem>
+      <!--
+    <listitem>
+    <para>In edit mode, when editing letter marks,
+      shift-click allows to customize the mark
+      text.</para>
+    </listitem>
+    <listitem>
+    <para>In edit mode, when editing letter marks,
+      shift-click allows to customize the mark
+      text.</para>
+    </listitem>
+      -->
+      </itemizedlist>
+    </section>
+
+  </chapter>
+</book>

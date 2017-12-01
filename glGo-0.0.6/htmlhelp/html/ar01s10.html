@@ -1,0 +1,59 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>The player database</title><meta name="generator" content="DocBook XSL Stylesheets V1.60.1"><link rel="home" href="index.html" title="glGo manual"><link rel="up" href="index.html" title="glGo manual"><link rel="previous" href="ar01s09.html" title="OpenAL Sound System"><link rel="next" href="ar01s11.html" title="Translations"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">The player database</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ar01s09.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ar01s11.html">Next</a></td></tr></table><hr></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="playerdatabase"></a>The player database</h2></div></div><div></div></div><p>With glGo 0.0.5.5 comes a new player database which is implemented in
+Python and used as a sort of "plugin" (embedded python, to be exact) within
+glGo. Right now it offers the friends/bozo list known from the Java gGo, the
+possibility to edit and assign custom flags and write a comments about a player.
+Additionally directories can be scanned for SGF files and all games of a certain
+player be looked up in the playermanager.</p><p>Why as Python plugin, you ask? Such stuff like database access is much
+easier to do in Python than in C++, and the possibility to access Python code
+from within a C/C++ program makes integration into glGo painless. The idea of a
+player database has been around and suggested for the gGo Java development since
+a year ago, but I never implemented it because it seemed a quite complex task.
+With Python such things are easier and faster to write. The only disadvantage I
+can see is, on Linux you need Python 2.3 runtime installed. But Python ships
+with all Linux distributions, so it should not be a big deal. Type "apt-get
+install python" or whatever your distribution offers and you are set. Windows
+users don't need to bother, the glGo Windows installer comes with all required
+libraries.</p><p>There are several ways to access and edit the player database. From
+within glGo you can assign friend or bozo status to a player from a dialog, the
+playertable popup or the playerinfo dialog - just like in the Java gGo client. I
+do not plan to add much more to glGo itself. Instead there is a seperate
+application which will allow to edit and access the database in more detail,
+which is written in Python. Both glGo and the standalone GUI access the same
+database, you can edit it with the GUI while running glGo without problem as
+glGo will automatically detect if the database has been changed. There is also a
+simple Python commandline interface for the database, which might be useful for
+the terminal fans out there.</p><p>The GUI allows you to define customized flags, like "Escaper" or "Cool
+dude", and then assign these flags to a player both in glGo and the
+playermanager. Go to <span class="guimenuitem">"Edit flags"</span> in the
+playermanager to define up to 5 flags. You will then see checkboxes for each
+custom flag in the playerinfo dialogs of glGo and Playermanager. Please note a
+flag is stored as its number (1-5) in a player, so if you for example assign
+flag #1 as "Escaper" and set flag #1 in a player, then change flag #1 to "Cool
+dude", all players formerly flagged as "Escaper" are now "Cool dudes". You can
+use the filter choicebox in the first playermanager tab to get all players with
+certain flags set listed if you want to do some cleanups.</p><p>You can write a short comment about each player, this feature can be
+accessed from both glGo and Playermanager.</p><p>You can cleanup the player database, which will remove all players
+which are not friend or bozo, have no flags and no comment set.</p><p>If you use the autosave feature in glGo (or have a game collection on
+your disk from whatever source), you can create an index of SGF games within a
+directory with the <span class="guimenuitem">"Scan directory"</span> menuitem in the
+playermanager. The SGF game headers are parsed and the information written in to
+an index file. When you open the player info dialog in playermanager, you get a
+list of games with this player. Double-clicking on a table row opens the SGF in
+glGo if the glGo localserver mechanism is enabled.</p><p>The <span class="guimenuitem">Cleanup games</span> menuitem will remove all
+game entries from the index where no SGF file was found. This is useful if you
+manually deleted SGF files from a previously scanned directory.</p><p>The SGF index is in no way as sophisticated as Kombilo. The idea is
+simply to find all games a certain player has played. For more extensive
+studying I strongly recommand the usage of <a href="http://www.u-go.net/kombilo/" target="_top">Kombilo</a>, excellent program.</p><p>Both the Python GUI and commandline applications are bundled in the
+glGo installation, see the "pm" directory in the glGo installation directory,
+but (!) these require Python and wxPython installed (wxPython for the GUI,
+commandline runs without wxPython). I am aware most users won't have wxPython
+available. Most Linux users will have Python (you need it anyways to run glGo),
+but probably not wxPython. Windows users will in most cases have neither. There
+are standalone installers for both Windows and Linux available for download with
+the GUI and commandline tools which bundle Python and wxPython. See it as an
+add-on for glGo. I made it an extra download because it is quite large and I
+don't want to bloat your system if you might already have the require Python
+installed, and this way I can release glGo or the database GUI seperately when I
+change things. The Python scripts which are already included in glGo are small
+files and exactly the same as the standalone installer, so if you have wxPython
+installed, use those and you don't need the extra installer.</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ar01s09.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ar01s11.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">OpenAL Sound System </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Translations</td></tr></table></div></body></html>

@@ -1,0 +1,27 @@
+Peter Strempel <pstrempel@t-online.de>
+
+Copyright information:
+* The sourcecode, except the following files, is published under the terms of the
+  GPL, Copyright (c) 2002 Peter Strempel. See License.txt for further informations.
+  Excluded from the GPL are:
+  - The SmartClip.java file,  Copyright (c) by William Shubert
+  - The SwingWorker.java file, Copyright (c) by Sun Microsystems
+  - The go.dtd file, Copyright (c) by Rene Grothmann
+* The kaya board and stone images are copyrighted by Tweet <tweet@panda-igs.joyjoy.net>
+  Those images may not be redistributed without permission.
+
+gGo uses third-party software:
+
+* JavaHelp(tm), Copyright (c) Sun Microsystems (http://java.sun.com/products/javahelp/)
+* Skin Look And Feel , Copyright (c) L2FProd.com (http://www.l2fprod.com/)
+* Metouia Look And Feel , Copyright (c) Taoufik Romdhane (http://mlf.sourceforge.net/index.php)
+* Kunststoff Look And Feel, Copyright  (c) Incors (http://www.incors.org/)
+
+These packages are not included into the GPL license of gGo. Copyright holders are the
+mentioned companies or people. JavaHelp (tm) is distributable royalty free, the look and
+feel packages are published under the GPL, LGPL or similar. Please check the products'
+websites for further information.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the GNU General Public License for more details.

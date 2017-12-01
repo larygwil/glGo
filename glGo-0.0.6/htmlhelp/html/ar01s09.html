@@ -1,0 +1,33 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>OpenAL Sound System</title><meta name="generator" content="DocBook XSL Stylesheets V1.60.1"><link rel="home" href="index.html" title="glGo manual"><link rel="up" href="index.html" title="glGo manual"><link rel="previous" href="ar01s08.html" title="SDL Information"><link rel="next" href="ar01s10.html" title="The player database"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">OpenAL Sound System</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ar01s08.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ar01s10.html">Next</a></td></tr></table><hr></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="openalinfo"></a>OpenAL Sound System</h2></div></div><div></div></div><p><span class="inlinemediaobject"><img src="images/openal_logo.jpg" align="right" height="107"></span></p><p>glGo uses the <a href="http://www.openal.org" target="_top">OpenAL</a> sound
+library published by Creative and NVidia. I admit it appears somewhat wired to
+include a full fledged sound library just to play some simple sound files. But
+there are some good reasons to do so.</p><p>The standard sound playing mechanism on Windows is pretty bad. It is
+impossible to ensure a good sound quality if the computer is busy with something
+else, like a running GNU Go calculating the next move in the background. So
+using plain Win32 API functions to play a sound is not a solution.</p><p>The situation on Linux is similar. Without the usage of an additional
+library it is not possible to easily access the various Linux sound devices like
+Alsa, Esd, Artsd, OSS etc.</p><p>High quality sound is available on Windows via the DirectSound layer,
+which is a part of DirectX. However, directly accessing DirectSound would mean a
+Windows-only solution. High quality sound on Linux is available via the native
+OSS kernel modules or Alsa. OpenAL serves as platform independant intermediate
+layer to access the native sound devices. OpenAL will use DirectSound on Windows
+and whatever sound device can be found or configured on Linux. This is a good
+solution as the application itself does not need to bother about the platform
+dependant low level tasks, OpenAL will take care of that.</p><p>So the usage of OpenAL for playing some simple sound is certainly
+overkill but justified concerning the aim of crossplatform availability of
+glGo.</p><p>There is a small "soundtest" program which will play three sounds to
+test if OpenAL works on your system. Start it from a commandline (DOS console or
+xterm) and try <b class="userinput"><tt>soundtest 0</tt></b> to start the OpenAL test and
+<b class="userinput"><tt>soundtest 1</tt></b> for the SDL mixer test.</p><p>OpenAL is already included in the Windows glGo installer. On Linux you
+need to install OpenAL from your distribution, it is not included in the glGo
+Linux version installer. Please also see the chapters <a href="ar01s02.html" title="Requirements">Requirements</a> and <a href="ar01s03.html" title="Installation">Installation</a> of this manual.</p><p>There are commandline options to disable global sound (if you have
+trouble with esd or artsd on Linux) and to select the sound system (if you have
+trouble doing that in the preferences menu at runtime). Use <b class="userinput"><tt>glGo
+-n</tt></b> to disable sound, <b class="userinput"><tt>glGo --openal</tt></b> to select
+the OpenAL sound system and <b class="userinput"><tt>glGo --sdl</tt></b> to select the SDL
+Mixer sound system. These options will overwrite the saved configuration.</p><div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Tip"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Tip]" src="images/tip.jpg"></td><th align="left">Tip</th></tr><tr><td colspan="2" align="left" valign="top"><p>On Linux OpenAL will by default use the OSS kernel sound device.
+As alternative you can tell it to try alsa, artsd or esd by creating a file
+<tt class="filename">~/.openalrc</tt> with a line like for example: &#8220;<span class="quote">(define
+devices '(alsa esd native))</span>&#8221;. This will try alsa first, esd next and OSS
+last. Unlike gGo/Java I managed to get xmms and glGo sound at the same time
+using OpenAL on esd.</p></td></tr></table></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ar01s08.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ar01s10.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">SDL Information </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> The player database</td></tr></table></div></body></html>

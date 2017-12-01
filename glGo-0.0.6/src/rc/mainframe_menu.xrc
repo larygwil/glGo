@@ -1,0 +1,194 @@
+<?xml version="1.0" ?>
+<resource version="2.3.0.1" xmlns="http://www.wxwindows.org/wxxrc">
+  <object class="wxMenuBar" name="mainframe_menu">
+    <object class="wxMenu">
+      <label>_File</label>
+      <object class="wxMenuItem" name="wxID_NEW">
+        <label>_New game</label>
+        <accel>Ctrl-N</accel>
+        <help>Create a new game</help>
+      </object>
+      <object class="wxMenuItem" name="wxID_OPEN">
+        <label>_Open game</label>
+        <accel>Ctrl-O</accel>
+        <help>Load game from SGF file</help>
+      </object>
+      <object class="wxMenuItem" name="wxID_SAVE">
+        <label>_Save game</label>
+        <accel>Ctrl-S</accel>
+        <help>Save game to SGF file</help>
+      </object>
+      <object class="wxMenuItem" name="wxID_SAVEAS">
+        <label>Save _As</label>
+        <help>Save game to a SGF file with a new filename</help>
+      </object>
+      <object class="separator"/>
+      <object class="wxMenuItem" name="wxID_CLOSE">
+        <label>_Close</label>
+        <accel>Ctrl-W</accel>
+        <help>Close this window</help>
+      </object>
+    </object>
+    <object class="wxMenu">
+      <label>_Edit</label>
+      <object class="wxMenuItem" name="delete_move">
+        <label>_Delete move</label>
+        <accel>Ctrl-D</accel>
+        <help>Delete the current move and all children</help>
+      </object>
+      <object class="wxMenuItem" name="remove_marks">
+        <label>_Remove marks</label>
+        <help>Remove all marks of the current move</help>
+      </object>
+      <object class="separator"/>
+      <object class="wxMenuItem" name="number_moves">
+        <label>Show move _numbers</label>
+        <accel>F2</accel>
+        <help>Mark all stones with their move number</help>
+        <checkable>1</checkable>
+      </object>
+      <object class="wxMenuItem" name="mark_brothers">
+        <label>Show _variations</label>
+        <accel>F3</accel>
+        <help>Mark all brothers of the current move</help>
+        <checkable>1</checkable>
+      </object>
+      <object class="wxMenuItem" name="mark_sons">
+        <label>Show next _moves</label>
+        <accel>F4</accel>
+        <help>Mark all sons of the current move</help>
+        <checkable>1</checkable>
+      </object>
+    </object>
+    <object class="wxMenu">
+      <label>_Settings</label>
+      <object class="wxMenuItem" name="gameinfo">
+        <label>Game _Info</label>
+        <accel>Ctrl-I</accel>
+        <help>Display and edit information about this game</help>
+      </object>
+      <object class="wxMenuItem" name="preferences">
+        <label>_Preferences</label>
+        <accel>Alt-P</accel>
+        <help>Configure global application settings</help>
+      </object>
+      <object class="wxMenuItem" name="toggle_sound">
+        <label>Toggle _sound</label>
+        <help>Enable or disable sound for this board only</help>
+        <checkable>1</checkable>
+        <checked>1</checked>
+      </object>
+    </object>
+    <object class="wxMenu">
+      <label>_View</label>
+      <object class="wxMenuItem" name="display_options">
+        <label>Display _options</label>
+        <accel>Alt-O</accel>
+        <help>Configure the board display</help>
+      </object>
+      <object class="wxMenuItem" name="show_marks">
+        <label>Show _marks</label>
+        <accel>Ctrl-M</accel>
+        <help>Enable or disable displaying of marks</help>
+        <checkable>1</checkable>
+        <checked>1</checked>
+      </object>
+      <object class="wxMenuItem" name="show_coords">
+        <label>Show _coordinates</label>
+        <accel>Ctrl-C</accel>
+        <help>Enable or disable board coordinates</help>
+        <checkable>1</checkable>
+        <checked>1</checked>
+      </object>
+      <object class="wxMenuItem" name="show_cursor">
+        <label>Show c_ursor</label>
+        <accel>Ctrl-U</accel>
+        <help>Enable or disable the ghost cursor stone</help>
+        <checkable>1</checkable>
+        <checked>1</checked>
+      </object>
+      <object class="separator"/>
+      <object class="wxMenuItem" name="clear_output">
+        <label>C_lear comment text</label>
+        <help>Clear the comment and kibitz textarea</help>
+      </object>
+      <object class="wxMenuItem">
+        <label></label>
+      </object>
+      <object class="wxMenuItem" name="sidebar">
+        <label>_Sidebar</label>
+        <accel>F9</accel>
+        <help>Show or hide the sidebar</help>
+        <checkable>1</checkable>
+        <checked>1</checked>
+      </object>
+      <object class="wxMenuItem" name="swap_sidebar">
+        <label>S_wap sidebar</label>
+        <accel>Ctrl-F9</accel>
+        <help>Swap sidebar left or right</help>
+      </object>
+      <object class="wxMenuItem" name="toolbar">
+        <label>_Toolbar</label>
+        <accel>F10</accel>
+        <help>Show or hide the toolbar</help>
+        <checkable>1</checkable>
+        <checked>1</checked>
+      </object>
+      <object class="wxMenuItem" name="statusbar">
+        <label>S_tatusbar</label>
+        <accel>F11</accel>
+        <help>Show or hide the statusbar</help>
+        <checkable>1</checkable>
+        <checked>1</checked>
+      </object>
+      <object class="wxMenuItem" name="fullscreen">
+        <label>_Fullscreen</label>
+        <accel>F12</accel>
+        <help>Toggle fullscreen mode</help>
+        <checkable>1</checkable>
+      </object>
+    </object>
+    <object class="wxMenu" name="">
+      <label>_GTP</label>
+      <object class="wxMenuItem" name="gtp_connect">
+        <label>Connect _GTP</label>
+        <accel>Ctrl-G</accel>
+        <help>Connect with a GTP engine like GNU Go</help>
+      </object>
+      <object class="wxMenuItem" name="gtp_console">
+        <label>Open GTP c_onsole</label>
+        <accel>Alt-G</accel>
+        <help>Open a console for manual GTP control</help>
+      </object>
+      <object class="wxMenuItem" name="gtp_close">
+        <label>_Close GTP</label>
+        <help>End GTP session</help>
+      </object>
+      <object class="wxMenuItem" name="gtp_score">
+        <label>Guess _score</label>
+        <help>Score the game at the current move with GNU Go</help>
+      </object>
+    </object>
+    <style>wxMB_DOCKABLE</style>
+    <object class="wxMenu">
+      <label>_Help</label>
+      <object class="wxMenuItem" name="wxID_HELP">
+        <label>_Manual</label>
+        <accel>F1</accel>
+        <help>View the glGo manual</help>
+      </object>
+      <object class="wxMenuItem" name="wxID_ABOUT">
+        <label>_About</label>
+        <help>Information about this application</help>
+      </object>
+      <object class="wxMenuItem" name="open_webpage">
+        <label>glGo on the _Web</label>
+        <help>Open the glGo webpage in your browser</help>
+      </object>
+      <object class="wxMenuItem" name="check_update">
+        <label>Check for _update</label>
+        <help>Connect to the glGo webpage and check if there is a new version available</help>
+      </object>
+    </object>
+  </object>
+</resource>

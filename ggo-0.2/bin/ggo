@@ -1,0 +1,24 @@
+#! /bin/sh
+
+# Startscript for gGo
+# Peter Strempel, 2002
+
+# Check if java command is found.
+if which java > /dev/null; then
+    JAVA=java
+else
+    # If java was not found, check JAVA_HOME environment variable
+    if test -z $JAVA_HOME; then
+	echo Your JAVA_HOME environment variable is not set.
+	echo Either add the java command to your path, or set the JAVA_HOME
+	echo environment variable:
+	echo export JAVA_HOME=/path/to/java/installation
+	echo Best modify your .bashrc file to have this set permanently.
+	exit
+    else
+	JAVA=$JAVA_HOME/bin/java
+    fi
+fi
+
+echo Starting gGo...
+$JAVA -jar /usr/lib/ggo/gGo.jar $@

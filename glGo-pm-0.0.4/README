@@ -1,0 +1,125 @@
+                            glGo player manager 0.0.4
+                            -------------------------
+
+About
+-----
+
+This is a standalone add-on for the glGo client for editing the player database.
+
+This package is provided as a seperate installer which includes the Python and
+wxPython runtime libraries. There are versions for Linux and Windows. If you
+have wxPython installed, you do not need to install this standalone package, use
+the python startscripts within the glGo/pm directory instead which provides
+exactly the same (of course you still can use this standalone installer, but it
+makes little sense).
+
+There are two executables: players.exe and players_gui.exe for Windows, players
+and players_gui for Linux (with a link to /usr/local/bin for
+each). players(.exe) is the commandline interface, try the "--help" parameter
+too see how it works. players_gui(.exe) is the GUI.
+
+If you have an idea for cool a feature what the player database should do, please
+let me know! The Ambassador IGS client has some player database related features
+which are pretty interesting.
+
+The standalones are created using the McMillan Installer, see http://www.mcmillan-inc.com
+The Windows installer is created using NSIS, see http://nsis.sourceforge.net
+The Linux installer is created using EPM, see http://www.easysw.com/epm/
+
+The source code is available for download on the glGo webpage, http://ggo.sourceforge.net
+
+Please see the glGo documentation for details about this package. It makes
+absolutely no sense to install this software without the glGo client.
+
+
+Usage
+-----
+
+The player database can store players, assign them a status (Friend, Neutral, Bozo),
+a comment and up to 5 customized flags. There are several ways to add a player to the
+database. Most obvious, use the "Add" button in the playermanager. Additionally, if
+you set someone to friend/bozo status or assign a comment or flags from the glGo
+player dialog or the playertable popup menu, the player will automatically be added
+to the database. To remove a player, use the "Remove" button in the playermanager.
+
+The status "Friend" will show the player when you enable the "Friends" filter in the
+glGo player table. "Bozo" will block incoming tells, match requests, shouts and
+kibitzes of this player.
+
+The customized flags have no certain effect, you can assign whatever you want. For
+example to create a flag "Escaper", select "Edit flags" in the "Edit" menu of the
+playermanager, type "Escaper" in one of the 5 slots, and enable the checkbox near
+this flag. Close the dialog and double-click on one of the players, and you will
+see the new Escaper flag. You can set this flag for each player both in the player-
+manager and in the glGo playerinfo dialog. Sounds complex? Just try it, it should
+be fairly obvious.
+Please note a flag is stored not by the name of the flag, like "Escaper" but by
+the slot number. So for example if you name flag #1 "Escaper" and assign it to
+a couple of players, then later rename flag #1 to "Cool dude", the players formerly
+assigned as "Escaper" will now be "Cool dudes" because they have their flag #1 set.
+
+The comment has no special effect, you can write down whatever you want for a player
+or just leave it empty. It might be a good idea not to write several pages of text
+there. Some lines will work without problem.
+
+There is a "Cleanup" available in the playermanager. This will remove all entries
+which are not set to friend or bozo, have no comment and no custom flags assigned.
+In short, those entries contain no data. They could be created by assigning
+a flag or comment to a player and later removing it again, then the player itself
+will not automatically be removed from the database.
+
+glGo and the playermanager access the same database file. It is possible to edit the
+database in the playermanager while glGo is running. glGo will detect changes and
+automatically reload the database if necassary.
+The playermanager will not detect changes made in glGo, there is a "Reload" button
+available to check if the database needs to be reloaded.
+
+You can scan directories for SGF files. The SGF headers will be parsed and the
+information stored in an index file. When you open the dialog for a certain
+player you will get a table with all games found with this player. This feature
+is meant for interaction with autosave in glGo. Additionally (or instead) you could
+index your games with Kombilo, if you plan to do some serious studies.
+The game tables can be sorted, left/right click on the column headers.
+The "Cleanup games" menuitem will look for entries without SGF file and remove the
+entry. This is useful if you manually deleted some SGF files from previously scanned
+directories.
+When you add new SGF files to the previously scanned directories, Playermanager
+won't add them automatically to its index, so you need to manually rescan the directory.
+This might be improved if I get a good idea how to do that smoothly.
+Games can be opened in glGo by double-clicking on a row in the table. This requires
+the localserver meachnism in glGo enabled (and possibly some firewall tweaking on
+Windows). The localserver uses Unix domain sockets on Unix (secure) and Internet domain
+sockets on Windows (insecure). The Linux default socket tmpfile is /tmp/glGo_socket,
+the Windows default port is 9998. Possible reasons for failures are missing write
+permission to /tmp on Linux (should hardly happen, anyone can write to /tmp by default)
+and a firewall which blocks the port on Windows (allowing locahost-to-localhost
+connections is safe and good enough).
+
+As this program is alpha software and been quite untested so far, if you build a
+serious player database, it might be a good idea to make a backup now and then.
+The file is $HOME/.glGo/players.db (Linux) and $HOME\glGo\players.db (Windows).
+Not much can go wrong with the SGF file scanning, as the SGF files themselves are
+only opened in read-mode, never in write-mode. Make your SGFs read-only if you are
+suspicious.
+
+
+Copyright
+---------
+
+Written by Peter Strempel <pstrempel@gmx.de>.
+
+Copyright (c) 2003, Peter Strempel <pstrempel@gmx.de>
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA

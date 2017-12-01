@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: glGo-pm
+Version: 0.0.4
+Summary: glGo playermanager.
+Home-page: http://ggo.sourceforge.net
+Author: Peter Strempel
+Author-email: pstrempel@users.sourceforge.net
+License: GPL
+Description: A standalone GUI and commandline interface for the glGo player database.
+Platform: UNKNOWN

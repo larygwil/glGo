@@ -1,0 +1,126 @@
+<?xml version="1.0" ?>
+<resource version="2.3.0.1" xmlns="http://www.wxwindows.org/wxxrc">
+  <object class="wxPanel" name="playerdb_panel">
+    <object class="wxFlexGridSizer">
+      <cols>1</cols>
+      <rows>2</rows>
+      <object class="sizeritem">
+        <object class="wxPanel">
+          <object class="wxBoxSizer">
+            <orient>wxHORIZONTAL</orient>
+            <object class="sizeritem">
+              <object class="wxStaticBoxSizer">
+                <label>Friends</label>
+                <orient>wxVERTICAL</orient>
+                <object class="sizeritem">
+                  <object class="wxBoxSizer">
+                    <orient>wxVERTICAL</orient>
+                    <object class="sizeritem">
+                      <object class="wxListBox" name="friends_list">
+                        <content/>
+                        <size>0,200</size>
+                        <style>wxLB_SINGLE|wxLB_SORT</style>
+                      </object>
+                      <flag>wxALL|wxEXPAND</flag>
+                      <border>3</border>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxBoxSizer">
+                        <orient>wxHORIZONTAL</orient>
+                        <object class="sizeritem">
+                          <object class="wxButton" name="add_friend">
+                            <label>Add</label>
+                          </object>
+                          <flag>wxALL</flag>
+                          <border>3</border>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxButton" name="remove_friend">
+                            <label>Remove</label>
+                          </object>
+                          <flag>wxALL</flag>
+                          <border>3</border>
+                        </object>
+                      </object>
+                    </object>
+                  </object>
+                </object>
+              </object>
+              <flag>wxALL</flag>
+              <border>5</border>
+            </object>
+            <object class="sizeritem">
+              <object class="wxStaticBoxSizer">
+                <label>Bozos</label>
+                <orient>wxVERTICAL</orient>
+                <object class="sizeritem">
+                  <object class="wxBoxSizer">
+                    <orient>wxVERTICAL</orient>
+                    <object class="sizeritem">
+                      <object class="wxListBox" name="bozo_list">
+                        <content/>
+                        <size>0,200</size>
+                        <style>wxLB_SINGLE|wxLB_SORT</style>
+                      </object>
+                      <flag>wxALL|wxEXPAND</flag>
+                      <border>3</border>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxBoxSizer">
+                        <orient>wxHORIZONTAL</orient>
+                        <object class="sizeritem">
+                          <object class="wxButton" name="add_bozo">
+                            <label>Add</label>
+                          </object>
+                          <flag>wxALL</flag>
+                          <border>3</border>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxButton" name="remove_bozo">
+                            <label>Remove</label>
+                          </object>
+                          <flag>wxALL</flag>
+                          <border>3</border>
+                        </object>
+                      </object>
+                    </object>
+                  </object>
+                </object>
+              </object>
+              <flag>wxALL</flag>
+              <border>5</border>
+            </object>
+          </object>
+        </object>
+        <flag>wxALIGN_CENTRE</flag>
+      </object>
+      <object class="sizeritem">
+        <object class="wxPanel">
+          <object class="wxFlexGridSizer">
+            <object class="sizeritem">
+              <object class="wxBitmapButton" name="wxID_HELP">
+                <bitmap stock_id="wxART_HELP_BOOK"></bitmap>
+              </object>
+              <flag>wxLEFT</flag>
+              <border>3</border>
+            </object>
+            <object class="sizeritem">
+              <object class="wxButton" name="wxID_OK">
+                <label>Close</label>
+              </object>
+              <flag>wxRIGHT</flag>
+              <border>3</border>
+            </object>
+            <cols>2</cols>
+            <rows>1</rows>
+            <growablecols>0</growablecols>
+          </object>
+        </object>
+        <flag>wxBOTTOM|wxLEFT|wxRIGHT|wxEXPAND</flag>
+        <border>5</border>
+      </object>
+      <growablerows>0</growablerows>
+      <growablecols>0</growablecols>
+    </object>
+  </object>
+</resource>

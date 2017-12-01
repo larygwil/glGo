@@ -1,0 +1,595 @@
+glGo Changelog
+--------------
+2003-11-24 - Version 0.0.6
+    * Playerinfo dialogs shows the new customized flags from playermanager.
+    * Player comments can now be edited in the playerinfo dialog.
+    * Improved "user" parsing, playertable should load a bit faster now.
+    * Fixed board frame title, the "*" mark for modifications was missing if the game had
+      a title (Like "Kogos Joseki Dictionary" instead "White vs. Black").
+    * Bugfix: Territory marks for IGS games showed always white territory.
+    * Fixed Python playerdb module import on some Windows systems.
+    * Added an option "Ignore rank limit for friends" in the IGS preferences. If enabled,
+      the player list will show all your friends, even those outside the currently selected
+      rank limit (this is the gGo/Java behaviour). If disabled, the rank selection will also
+      limit the friends display (this is the old glGo behaviour). When disabled, it is much
+      faster as it doesn't need to reread the "user" list. Use what you prefer.
+      Default: Disabled
+    * Implemented autosave for own and observed IGS games. You can select a target directory
+      for each own and observed games in the preferences dialog. This feature is meant for
+      interaction with the playermanager, which can scan directories for SGF files to build
+      a simple game database (or use Kombilo instead/additionally). Default: Disabled
+    * Updated SDL_gfx library to latest release 2.0.9
+    * Implemented localserver mechanism like in gGo. A socket listening for incoming filenames
+      can be used to tell a running glGo instance to open a SGF file. This is used from Player-
+      manager to display its SGF files and from the open_sgf.py script. This script can be
+      configured as SGF default viewer in a webbrowser or filemanager so clicking on a SGF file
+      will not start a new glGo but reuse a running one (or start one if none is running).
+      On Linux use the open_sgf.py Python script; glGo requires Python anyways, so there is no
+      standalone. On Windows there is a standalone open_sgf.exe binary available.
+      A note on security: On Linux the localserver uses Unix domain sockets which is a secure
+      mechanism unless you messed up your umask (but then you got more serious problems anyways).
+      The target file is /tmp/glGo_socket (TODO: Somehow check if tmp is located elsewhere).
+      As the name suggest, Unix domain sockets are not available on Windows, so on Windows
+      an Internet domain socket is used, which is naturally insecure (ask Microsoft why they
+      cannot implement a secure local IPC mechanism in their great OS). The socket is running on
+      port 9998 (most likely unused, gGo uses 9999). If you have a firewall, you should be
+      secure against malicious attacks. If you run Windows without a firewall, then glGo can
+      indeed be a security risk (as is gGo), but then you have much more serious threats to
+      worry about than someone hacking your Go client, I suppose.
+      The localserver can be disabled in the preferences dialog (requires to restart glGo).
+    * Added a menuitem "Toggle sound" and a button to the board toolbar. This allows you to
+      disable sound for this board only, quite useful when observing multiple games on IGS.
+      Of course, if you disabled sound globally, this option does nothing.
+    * Added "Dutch" to the language selection, but the translation is not available yet (if you
+      select it you get english). But the dutch translator needs this to get going.
+    * Implemented Undo parsing in observed games. Did only work for own games until now.
+    * Implemented UGF parser. Seems to work, I tried it on a couple of UGF files. However, expect
+      problems and please send me those files which failed to load properly, I did not test this
+      overly much due to the lack of UGF files in my game collection. The parser is written in
+      Python and loaded as "plugin". Python rocks. :)
+      Oh, and Michael Redmonds grinning face is not available. I know you will miss it. :*)
+
+2003-11-12 - Version 0.0.5.5
+    * Implemented friends/bozo list and a player database plugin using Python. There is some
+      extensive information about this in the manual and the README, please have a look there.
+      The most important information is: If you use Linux, you need Python 2.3 runtime library
+      installed. The Python dll is already included in the Windows installer.
+      There is a new dialog in the IGS window to add/remove friends/bozos, and the popup menu
+      and radiobox in the players table and infodialog are now enabled. There is a Python
+      GUI and commandline tool to edit the playerdatabase, which is rather a prototype than
+      useful at the moment. You find it in the 'pm' directory in the glGo installation. If you
+      don't have Python and wxPython installed (what you probably do not have if you are on
+      Windows and not a Python programmer), get the standalone installer available as separate
+      download.
+    * Bugfix: Wrong clock started when observing. Doh.
+    * Bugfix: When observing and looking at earlier moves, captures in the recent move would
+      be displayed in the current move instead.
+    * Fixed automatch. Accepting an automatch would not open a board window previously.
+      Automatch is now supported, though it won't open the match dialog yet, you will only
+      see the request in the terminal (on TODO list). But if you accept an automatch request
+      using the terminal commandline, things should work.
+    * Fixed the bug when observed games with zero moves would not open a window (rare, but
+      happened when observing the just started Oza game).
+    * Fixed a bug when undo'ing the first move.
+
+2003-11-04 - Version 0.0.5.4
+    * Implemented scoring. The score process in the SGF editor is similar to gGo. To score,
+      switch to score mode by hitting the "Score" button in the sidebar, then mark stones
+      dead (left-click) or alive in seki (right-click). While marking stones the territory
+      is display. When finished with marking, hit "Done" in the sidebar to get the final
+      result and leave score mode.
+    * Implemented scoring for own and observed IGS games (well, not much to do when observing)
+      Scoring own games works like in gGo. After passing mark stones as dead by clicking on
+      the stone. While scoring is in progress, the current territory is displayed (this is
+      calculated with the built-in scorer and could be wrong). After the IGS "done" command
+      the score as given from IGS is displayed, so this version is definately correct (or
+      IGS made a mistake).
+    * Implemented reading and saving of SGF territory marks (TW, TB) and automatic display
+      of dead stones in a scored move.
+    * Transfer the result of IGS games to the game info dialog and save them to the SGF.
+    * Replaced the ugly scaled fonts in the SDL board with nice looking truetype fonts. This
+      requires a new library: SDL_ttf. It is included in the Windows installer, Windows users
+      don't need to bother. Linux users need to install SDL_ttf and FreeType (which is used
+      by SDL_ttf) from their distribution if it is not already installed.
+      The scaled font looks very nice, this should be the final state for the 2D fonts.
+      You can still switch between fixed and scaled fonts. Fixed fonts are much faster, but
+      of lower quality. Default: Scaled fonts
+      ==> Note: Fixed font was default in earlier versions, so if you upgrade you might want
+          to switch to scaled fonts in the SDL display options manually. <==
+    * Improved the cursor update speed on the SDL board.
+    * Bugfix: Couldn't play white against GNU Go. The color settings in the GTP setup dialog
+      were simply ignored and always the default (human black) used.
+    * Some cosmetics to the SDL board (better mark and stone alignment, smaller starpoints)
+    * Made the 2D SDL board the default. Too many users could not get the 3D board working
+      and never found the switch to select the 2D board instead ("What? There is a 2D board?").
+      <rant>Why do I write documentation?</rant>
+    * Updated Win32 OpenAL library to the latest release version. OpenAL is now not anymore
+      distributed as embedded own installer, I just added the two dll files (OpenAL32.dll and
+      wrap_oal.dll) to the glGo installer. Those are now placed into the glGo directory, while
+      the old OpenAL installer put them into WINNT\system32.
+      ==> You might want to uninstall the Creative OpenAL redistributable of former glGo
+          versions manually, use the usual Windows "Add/Remove Software" way. <==
+    * Added basic parsing of the "toggle-quiet-false" messages (or whatever they are called),
+      keeping track of all known players in a database. This does currently not do very much
+      (gGo/Java uses it for a lot of stuff) except providing the rank for shout, match and
+      tell displays. But this is the basic code for adding more features later.
+
+2003-10-23 - Version 0.0.5.3
+    * Fixed a bad memory leak in the new SDL code. Resizing did not free the images properly.
+    * Implemented the ghost cursor for both the 3D and 2D board, quite similar to Java version.
+      The cursor can be enabled or disabled in the board View menu. Default: Enabled
+    * Implemented ghost display for variations in the SDL board. OpenGL board already had this.
+    * Implemented scissor testing in the OpenGL board, this boosts performance greatly if only
+      one stone is played at the cost of display quality. This is optional and can be enabled
+      in the OpenGL settings dialog. Try it if you need it, on my old computer it helps. The
+      manual has some more details on this. Default: Disabled
+    * Made the player info dialog a real frame. Being a dialog results in annoying parent-window
+      and focus problems on Windows.
+    * Parse number of stored games and display it in the player info dialog.
+    * Implemented the "Available" button in the player list.
+    * Implemented undo for GTP games
+    * Implemented input textfields which remember the command history which can be scrolled
+      using the cursor-up/down keys, as known from gGo. Buffer size is 20 lines.
+    * Removed BFont library and use optionally wxWindows text drawing for scaled text in the
+      SDL board. However, the scaling is not very good. There is the possibility of using true
+      type fonts what would make the font very pretty, but there are patent issues with
+      true type rendering which I want to investigate carefully first.
+      The "Fixed font" option in the SDL dialog changed to "Scaled font". Default: Fixed font
+    * Added new "Country" line from stats (server-side change) to the player info dialog.
+    * Implemented match dialog for both incoming and outgoing match requests. Not yet supported
+      is automatch, a match "dispute" style like in gGo/Java and automatic color assignment
+      depending on rank (if you send a match request, you are always white at the moment).
+    * Enabled the "Play" button in the player table and added an "Info" button which does the
+      same as double-clicking on a row of the table. Enabled "Match" button in playerinfo dialog.
+    * Implemented popup menu in the player table. Right-click on a player opens the popup.
+      The "Status" submenu is not yet implemented.
+    * Fixed handicap in own IGS games.
+    * Show "Cannot find recipient." error message in the appropriate tell frame.
+    * Added "Info" and "Match" buttons to the tell frame.
+    * Added low-time warning. Clocks will blink and the tic-tac sound played. Configure this
+      in the preferences dialog, same behaviour as in gGo.
+    * More fixes to clocks in IGS games. I had much pain with this in gGo, too.
+    * Fixed crash on Windows when changing the sound system during glGo runtime.
+    * Added the green table background to the SDL board. Enable or disable in the SDL display
+      options. If disabled, you can configure the background color. If enabled, the background
+      color is ignored. Default: Enabled
+    * Replaced the mondrian with the gGo icon
+    * Added option to disable tooltips. They can get annoying.
+
+2003-10-16 - Version 0.0.5.2
+    * Fixed captures check. When loading SGF files sometimes captures would count double.
+      (Fixed this again after the 0.0.5.1a patch. Idiotic bug.)
+    * Fixed memory leak in captures check.
+    * Added a beep sound as replacement for the PC speaker or Windows beep for some effects.
+    * Fixed clocks, they did not start properly in own games.
+    * Implemented parsing for "undo" in own games and added an undo button to the sidebar.
+    * Bugfix: Don't crash when hitting "Connect" again while already trying to connect.
+    * Added observers column to the games table. No idea why I forgot that.
+    * Updated to wxWindows 2.4.2
+    * Added "Delete move" to the SGF editor. It deletes the current move and all children
+      of this move. - Same behavious as in gGo/Java.
+    * Added "Show move numbers", "Show brothers" and "Show sons" to the SGF editor, see "Edit"
+      menu. Quite different to gGo/Java, these are toggles instead of a one-time marking. Also
+      different to gGo, these marks will not be saved to the SGF file and when toggling the
+      feature off, the marks will be gone from the current game (sounds complex? - just try it)
+      Autonumbering 250 moves on the OpenGL board can result in a significant performance drop.
+    * Fixed the player list parsing, which could be interrupted by another intercepting IGS
+      command, after which the rest of the list would go into the terminal, not the table.
+    * Display player ranks in shouts if the player table knows them.
+    * Replaced the "Help" button with "Preferences" in the start window. Probably more useful.
+    * Don't remember the temp filename when opening a game with the "Edit" button from observed
+      IGS games (the IGS game is saved and then loaded, glGo "remembered" the filename then).
+    * Fixed the IGS teaching games title, it displayed in other games, too, once a teaching
+      game was observed.
+    * Fixed the IGS teaching games clocks. They should just stay at 0:00.
+    * Show IGS announcements in the shouts window.
+    * Added Playerinfo dialog. Double-click on a row in the playertable to open it. If you
+      type "stats" in the terminal, the dialog will not open (I suppose if one types it, then
+      one wants the output in the terminal, too). The playerinfo dialog is not yet fully
+      implemented, only the first page of the gGo dialog is so far done.
+    * Added "Clear text" menuitem to the board View menu to clear the comment/kibitz textarea.
+    * Added "My stats" and "User stats" menuitems to the IGS window - same behaviour as in gGo.
+    * Managed to overcome the One-SDL-Board only restriction. Removed the simple wx 2D board.
+      Possible board types are now OpenGL (3D) and SDL (2D), both can be opened without
+      limitation. Hooray! This is a big improvement. Thanks to the helpful guys on the SDL
+      developers mailing list.
+      On Windows the SDL board now uses DirectX instead of the previous Win GDI driver. This
+      probably means one should have a somewhat recent DirectX installed. I am not going to
+      reinstall my Windows to test this.
+    * Updated the SDL font. You can select a small fixed font or a larger font created from
+      an image file in the SDL options dialog. It is still not optimal, though, the underlaying
+      grid disturbs the font display. It looks good if there is a stone on the spot.
+    * Added a manual chapter about SDL. A couple of minor manual updates.
+    * Windows: Added new MinGW runtime library
+
+2003-10-08 - Version 0.0.5.1
+    * Implemented the first steps for playing own games on IGS. "match" must be used
+      from the terminal, there are no dialogs yet. The board opens and playing basically
+      works. Adjourn and reload is supported. Scoring the game is not yet implemented.
+      Basically playing works, but I cannot recommend using it for normal IGS operation
+      due to lack of scoring.
+    * Implemented support for clocks and time parsing on IGS. SGF time tags, when loading
+      files, is not yet supported (not so important, I think). Time in GNU Go games is
+      also not yet implemented (as well not too urgent).
+    * Added display and parsing of captures.
+    * Implemented "ayt" timer so IGS doesn't kick you off so soon. It won't grant you infinite
+      idling, though (same as in gGo/Java). The timer can be disabled in the preferences.
+    * Remember maximized state of the board window (Windows only).
+    * Save and restore the OpenGL rotation, zoom and fovy values. You can always restore
+      the default view with the Backspace key.
+    * Improved Linux automake/autoconf scripts. Most required headers should now be checked.
+    * Added patch contributed by Steffen Dettmer to fix a g++ compile problem.
+    * Added the resource directory to the source distribution which is required for debug
+      builds. Thanks to Steffen Dettmer for bughunting!
+      If the resource files cannot be loaded, glGo will now exit with an error message
+      instead of segfaulting. This only applies to the source distribution, not the binary
+      releases.
+    * Bugfix: Properly handle empty rank limits in the player table
+    * Static link the Linux release binary to SDL_gfx, this dependency caused some problems on
+      Debian and other distros. Now the required dependencies for SDLare pretty standard. SDL
+      and SDL_image can be expected to be already available or installed from a distribution.
+      Thanks to Kivilcim Hindistan for the report.
+      Windows release binary is still dynamically linked to SDL_gfx.
+    * Bugfix: Don't crash when observing, disconnecting, reconnecting and reobserving the
+      same game in the same window. Auto-reobserve like in gGo is not yet implemented, that's
+      on my TODO list. Observing again will for now open a new window, until auto-reobserve is
+      implemented (not nice, but better than crashing).
+    * Changed the update checker dialog a little.
+    * Implemented commandline parser. It can take an optional parameter as sgf file. Try
+      "glGo --help" for other options. This allows to use glGo as SGF viewer from a browser,
+      filemanager or Windows explorer and to associate .sgf files with it.
+    * The commandline option "-s" or "--shared" allows to relocate the shared data directory
+      if you installed glGo in a non-standard location - not very interesting if you use the
+      binary installer and mostly irrelevant on Windows.
+      Another way to relocate the shared directory is to use the "GLGO_SHARED_PATH" environment
+      variable. The "-s" switch has highest priority, then the environment is checked, and if
+      neither is given the defaults are used. Like above, this is mostly irrelevant on Windows.
+    * There are new commandline options to disable global sound (if you have trouble with esd or
+      artsd on Linux) and to select the sound system (if you have trouble doing that in the
+      preferences menu at runtime). Both options will overwrite the saved configuration.
+    * Bugfix: SDL board background color upgrade went wrong (swapped green/blue values)
+    * A couple of updates to the manual.
+    * Removed the .wav soundfiles. Only .ogg format is used.
+
+2003-10-03 - Version 0.0.5
+    * Changed homepage and update URL to http://ggo.sourceforge.net/
+      Changed licence to GPL.
+    * Implemented different sidebars for the editor, observed and GNU Go games.
+      The observed sidebar got an "Observers" and "Edit" button, both working.
+      The observers list needs some formatting.
+      The observed sidebar also got a textfield to enter kibitz texts.
+    * Changed the IGS disconnect code, do a clean disconnect by sending "exit" and
+      waiting for the server to disconnect instead of simply cutting the connection.
+    * Fixed a stupid bug in the "space-detection" code of GNU Go resume. It reported
+      a space in the filename in all cases... Doh!
+    * Bugfix: When sound could not be properly loaded, the About dialog would crash
+      the application (trying to get info from the non-existant sound dll). Doh!
+    * Used a new font for the SDL board SGF textmarkers
+    * Added the other 7 white stone images from gGo to the SDL board, to have the
+      same random white stone usage as known from gGo. SDL board only at the moment,
+      the white OpenGL texture quality doesn't convince me yet and needs some work first.
+    * The Windows SDL_Mixer.dll had a bug, the .ogg soundfiles were not properly read.
+      This was a bug in the SDL_Mixer code as confirmed from the SDL developers. The
+      new DLL should fix this issue.
+    * Added a background color selection in the display options dialogs. The colors are
+      saved independant for each of the board types.
+    * Updated some manual chapters.
+    * Don't save settings in the registry, instead write to a config file on Windows, too.
+      The config file is C:\Documents and Settings\<username>\glGo\glGo.rc
+      Now the only stuff which still is written into the registry is installer-based and
+      has nothing to do with glGo itself. (Note: Manual is outdated on this topic now.)
+
+2003-09-30 - Version 0.0.4.8
+    * Implemented coordinates and fonts for the OpenGL board based on the PLIB font renderer.
+    * Implemented text markers in the SGF editor.
+    * Implemented SGF loading and saving of textmark properties ("LB" and the old "L" tags)
+    * Put the various image files into one data file to save some space and make updates
+      easier. You can still use your own images, see the manual and Readme how to do that.
+
+2003-09-25 - Version 0.0.4.7
+    * Fixed a nasty bug in the SGF parser which went into an endless loop on certain
+      occasions.
+    * Fixed SGF writer which did not escape special chars properly.
+    * Fixed IGS tell window. It now shows what you type there instead of the terminal.
+    * Implemented GNU Go score estimation, you find it in the "GTP" menu of a board.
+    * Added coordinates for the 2D boards (Not yet in OpenGL, that's a bit tricky)
+    * Implemented navigation in observed games. Use cursor keys or the toolbar buttons
+      to move around in the game. Variations in teaching games might work, but I would
+      not bet on it.
+    * Added a "Select board type" entry to the tray icon popup menu.
+    * Teaching games are now properly displayed in the games list and can be observed.
+      It crashed formerly on that.
+    * Handicap games are now properly observed.
+    * Bugfix: When starting to observe a game in late state, sometimes glGo did not
+      notice we are reading a batch of moves and played 200 times the stone sound.
+      That was pretty annoying. :)
+    * Implemented parsing and displaying of kibitz in observed games.
+    * Parse, display and save the game title in observed games (Tournament broadcasts).
+    * To sum it up, observing should be fully functional with this release except for the
+      fact that the sidebar of the different boards is not completely implemented (like
+      different buttons or a kibitz-enter textline for observed games), but the interface
+      stuff is secondary now.
+    * Note: The "sdltest" program won't close if you hit the windows 'X' icon (this is
+      intentional and part of the "embed SDL in wxWindows" hack. Hit Escape to close the
+      window. The sdltest window is now resizable.
+    * Made a big change to the sound system. There are now two sound systems available:
+      OpenAL (same as before) and SDL Mixer. Sound is now loaded dynamically during
+      runtime, what relieves the Linux build from a lot of dependencies. The sound system
+      can be selected in the preferences, OpenAL is the default. Switching during runtime
+      might or might not work, it is a good idea to restart glGo after changing sound.
+      On Windows OpenAL should be the better choice, on Linux is depends on your hardware.
+      On my system with a vanilla Soundblaster SDL mixer gives better quality on Linux,
+      OpenAL on Windows. You have the choice, try it out with the "soundtest" program. Run
+      "soundtest 0" (OpenAL) or "soundtest 1" (SDL) from a xterm or DOS shell for an easy
+      comparison without the trouble of switching during runtime. If one system does not
+      work for you, don't worry and use the other.
+      SDL_mixer.dll is included in the Windows installer, on Linux you need to install
+      it from your distribution.
+    * Small change to the Linux behaviour of the starter window. When clicking the Close
+      button of the window titlebar, it will behave like using the "Exit" button.
+      Otherwise you could close all windows but glGo would be still running.
+
+2003-09-23 - Version 0.0.4.6
+    * Added a "sdltest" program which will open the SDL board only using the SDL
+      libraries. If this works, it should work within glGo, too. Hit the Space key
+      to toggle through 19x19, 13x13 and 9x9 boards.
+    * Bugfix: Don't crash when the IGS shout window is closed and reopened.
+    * Enabled the simple 2D board again. There can definately only be one SDL 2D
+      board opened at the same time. So if you have "2D" boards enabled in the
+      preferences and already one SDL board open, the next boards will use the
+      simple wxWindows 2D display, which is quite ugly. The OpenGL 3D boards are
+      not affected by this, those can be opened without limitation.
+    * All of the three board types got an own display options dialog. In the
+      simple 2D board you can enable/disable images. The SDL board currently has
+      no options.
+    * SDL board can now handle non-19x19 boards.
+    * When sorting the player table by rank, a second-level sort by name is done
+      (like in gGo). Added sort-by-country.
+    * When opening player and games tables the first time, it is automatically
+      refreshed. Currently the tables don't refresh any further, so you need to
+      do it manually if you want an update (parsing the "toggle quiet" automessages
+      is not yet implemented).
+    * Bugfix: Captures algorithm had an error when loading from SGF
+    * Added "soundtest" program which will play three sounds to test OpenAL.
+      Hint for Linux: You can tell OpenAL to use esd or alsa, see the documentation
+      of OpenAL about ~/.openalrc
+
+2003-09-22 - Version 0.0.4.5
+    * Added a new 2D board display based on the SDL graphics system. The Windows
+      installer contains the required libraries, you don't require anything
+      additional. On Linux you need libsdl, libsdl_image and libsdl_gfx. They are
+      all available in the common Linux distributions. In doubt try "ldd glGo" to
+      check the dependencies. The libpng dependency is back, but this time it is
+      the new and standard libpng12.
+      The 2D SDL board looks pretty good, very similar to gGo/Java, and should
+      be an interesting alternative if the 3D board is too slow for you or you
+      have no use for a 3D display. You can select which board type to use in
+      the preferences dialog. All newly opened boards will use this set type
+      (the current board won't change if you access the dialog from a board).
+      The 2D display speed has much room for improvement, it is currently not
+      yet optimized - I'm glad it works, though. :*)
+      There is one limitation with the SDL board: You can only have one at the
+      same time open. I need to figure out how to change that, it is a bit tricky.
+      It is possible to have the one SDL plus multiple OpenGL boards open at the
+      same time, though.
+    * Bugfix: glGo crashed when an observed game window was closed after
+      disconnecting from IGS.
+    * Bugfix: Sorting by rank did not work properly.
+    * Implemented player table. Added new options "Skip guests" in the
+      preferences dialog.
+
+2003-09-14 - Version 0.0.4.4
+    * Fixed a bug in the captures algorithm.
+    * Game info is now parsed and passed to the Board when observing an IGS game.
+    * Properly parse the captures sent from IGS instead of calculating them
+      in the application.
+    * Disable New/Open in menus and toolbar in IGS/GTP games.
+    * Implemented the "Load game" button of the starterframe.
+    * Added "Show shouts in terminal" to preferences dialog (this is in a menu
+      in gGo, but same functionality).
+    * A couple of GUI updates to the IGS interface. I am trying to keep it similar
+      to gGo.
+    * Added games table. Double-left click on a row starts observing. Clicking
+      on the column headers will sort the table. Left click sorts ascending, right
+      click descending.
+    * Save/restore size/position of the IGS windows
+    * Create the GTP console when GTP games start but keep it hidden, so it gets
+      the GTP command output. A bit silly to get the output only after opening
+      it manually.
+    * Won't crash anymore when starting a GNU Go game with not 19x19 size from
+      the starter window.
+    * Save and restore GTP settings (not komi, there is a locale problem to solve)
+    * Added an option "Minimize starter to tray", so one can switch this off.
+    * Still trying to figure how to get a good update (with _small_ downloads!)
+      mechnism going. I have been an idiot, compressing the executable with UPX
+      and then wondering why the "patch" replaces the whole file.... So now the
+      exe file is larger but can be patched properly - the size doesn't matter
+      so much, the downloaded files are still compressed. And I doubt 1 MB more
+      or less on the user harddisk makes any difference.
+      So this release will install a uncompressed binary and the further updates
+      will be really small downloads.
+    * Changed the initialization of OpenGL multitextures, it should now better
+      detected if that extension is unavailable in the driver.
+    * Changed the Linux installer. It now has a GUI setup and installs into
+      /opt/glGo/ following the conventions for binary-only releases. A symlink
+      /usr/local/bin/glGo is created. Uninstall scripts are created as
+      /opt/glGo/uninstall. The rpm/deb packages are gone for now, there were
+      too many Linux versions on the webpage. They will be back once the
+      update frequency drops to a reasonable rate.
+      Run the installer with "sh glGo-0.0.4.4.sh" as root, try "-help" to see
+      available commandline parameters.
+    * Switched from Borland C++ Compiler to MinGW on Windows. GCC is a very
+      good compiler which is actively developed. There is a new DLL in the
+      glGo installation directory which is the MinGW runtime library.
+    * Major plans for next version:
+      - With the code for the games table in place, the similar player table
+        should be available in the next release.
+      - Start with support for own games.
+
+2003-09-11 - Version 0.0.4.3
+    * This is a big update, but probably quite unstable. It contains a lot of new
+      code which I did not text extensively yet. However, if you look for stable
+      programs, you should not download prototype software anyways. :)
+    * Implemented first draft of the IGS client code. This is very much work in
+      progress and cannot do much useful. Currently working is observing games
+      (start manually with "observe 123" command) and forwarding of shouts to the
+      shouter frame and tells to a tell frame. This is not much, but most of the
+      work went into writing the framework to parse and handle the IGS commands.
+      I am trying to avoid some mistakes I did with this code in gGo/Java. :)
+    * Added the start frame with the well-known images. The board window is not
+      any longer the main application window, so you can now open multiple boards,
+      which already works properly for observing games.
+      The start frame can be minimized to the system try. Just hit the Close icon
+      of the window. When in tray, you can right-click on it to get a popup menu.
+      This was a feature request I got for gGo once and liked it very much, but it
+      was not possible with Java. However, now it is. :)
+      Minimizing the frame will still minimize it. Clicking the "Exit" button will
+      definately exit glGo. You can enable "Autohide" in the preferences, then the
+      frame goes to the tray automatically and is out of the way.
+      On Linux the system tray is not available. Autohide will simply minimize it.
+    * Bundled GNU Go into the windows installer to avoid trouble for the inexperienced
+      users who did not understand they had to download GNU Go seperately and tell
+      gGo where it is ("Your program does not work!") ...
+    * The Windows installer size is getting big, close to 3 MB now. To offer a
+      smaller download I will publish smaller updates from each version to the
+      next, so you can avoid downloading the full installer (which will rather
+      grow further than shrink and stuff that won't change much) over and over.
+    * For Linux there are now rpm and deb packages as addition to the selfextracting
+      script, all created by the EPM packaging system - quite nifty tool.
+
+2003-09-04 - Version 0.0.4.2
+    * Implemented SGF saving. Text marks and some game headers are not yet supported.
+    * Added a toolbar
+    * Added menuitems to toggle toolbar and statusbar (On Linux, toggling the toolbar
+      creates some artifacts; resize the window manually a little. Don't know why
+      this happens, it's ok on Windows.)
+    * Added "fullscreen" mode. It is not a real fullscreen display like known from
+      games, but it's sufficient to get a maximized board. And it wont switch the
+      monitor display.
+    * By default the multitexture OpenGL options is disabled. If the graphiccard
+      does not support it, glGo would fail to start (bad!). So we start without this
+      feature, and if the user tries to enable it but it is not supported, it will
+      notify and abort enabling.
+    * Save and restore sidebar width
+    * On Windows there is a directory C:\Documents and Settings\<username>\glGo which
+      is unused. You can manually delete this folder, the installer won't remove it.
+    * Added a preferences dialog. It is really empty for now. :*) I am sure it will
+      be filled by time. The language selection menu is gone and in this dialog now.
+      The OpenGL options are intentionally in a seperate dialog.
+    * Last language setting is reloaded on startup.
+    * Some debugging output is sent into $HOME/glGo/glGo.log (Windows) or
+      $HOME/.glGo/glGo.log (Linux) - quite similar to the known .ggo.log output.
+      Unlike gGo the file is _appended_, not overwritten. So in theory this could
+      become very large. Delete it manually occasionally. I should probably add some
+      filesize check and then delete it.
+
+2003-09-02 - Version 0.0.4.1
+    * Improved SGF loading performance by omitting some checks while loading. Those
+      checks like captures calculations are done later "on demand" when navigating
+      through the game. Fixed a couple of bugs in the SGF parser.
+    * Properly handle SGF comment linebreaks.
+    * Implemented parsing and displaying of these SGF marks: CR, SQ, TR, MA
+    * Save last directory on Linux when loading SGF files. Windows already does that
+      automatically.
+    * Implemented variation display via transparent ghost stones. They look cool :*)
+      Variations of empty or passed moves are displayed on the bottom right outside
+      the board, if you wonder where that stone comes from.
+      Thanks to Lisa for bringing up this idea 2 years ago :*)
+    * Improved the layout of the sidebar, the upper part does not resize vertical
+      anymore. Added a third tab with the edit tools.
+    * Implemented basic SGF editing. Add/Remove stones and edit marks
+    * Implemented resuming GTP games from a SGF file, like gGo does it
+    * Fixed the shadow projection. It worked by accident but stopped working when
+      using another boardsize than 19x19
+    * Added pass sound
+
+2003-08-30 - Version 0.0.4
+    * Implemented OpenAL sound system. For Windows the OpenAL installer is included
+      into the glGo installer and should work without problem. For Linux the OpenAL
+      runtime libraries must be installed, even for the static glGo build.
+    * Fixed a stupid bug with the saved window position (saved x/y position but
+      loaded x/x).
+    * Added a prettier About dialog, which also shows some info about OpenAL status.
+    * Implemented variation support. Navigation is done with Cursor Up/Down. There is
+      no "ghost" stone yet to show where variations are (will come), also the extented
+      gGo key support with PageUp/Down/Insert is still missing.
+    * Added support for edited stones. Editing is not yet done, but SGF file parsing
+      can add additional stones via the AW/AB/AE tags.
+    * Implemented SGF parser. Reading only at the moment (fortunately reading is the
+      much tougher part compared to writing). It can read moves, variations, comments
+      and edited stones, no marks yet. Also most of the SGF header is ignored.
+      The parser is not yet very stable. It worked on a couple of GTL files, what
+      looks good. It does not work well on Kogos joseki dictionary. Some files
+      might crash it, so don't be surprised (but mail me the sgf!).
+      Unlike to the other "logic code" the parser code was not copy&pasted from gGo
+      but rewritten from scratch, as the gGo sgf parsing code is not very good.
+    * Added another OpenGL option: Stone quality. This defines from how many triangle
+      fragments the stone sphere wireframe is built. More obviously looks better and
+      is slower. High means 512 triangles, low 128. Any values above 512 don't improve
+      the look anymore but get very slow (maybe add a medium value of 256? But it doesn't
+      make much difference to 128).
+    * Handicap is properly supported now, sizes from 2 to 9 on 9x9, 13x13 and 19x19.
+
+2003-08-26 - Version 0.0.3.2
+    * Updated the last-move marker. The animation is (for now) disabled, instead a
+      nifty red cross shows. On startup the OpenGL multitexture extension is checked,
+      if found the new marker is enabled and the simple markers disabled, else vice
+      versa. You can still change it in the OpenGL options.
+      Hint: If you want to change the image files, hit 'r' to reload the textures
+            instead of restarting glGo.
+    * Added menuitem for shadows. Keeping light but disabling shadows on software mode
+      is a good idea, so seperating shadows and light option makes some sense.
+    * Updated manual.
+    * Moved most items of the View menu into an OpenGL configuration dialog.
+    * Added a first configuration implementation. The OpenGL settings, window position
+      and size and a couple of other settings are now saved and restored on startup.
+      On Linux the config file is written in $HOME/.glGo/glGo.rc
+      On Windows the configuration is written into the registry - for now, I don't know
+      yet if I prefer registry or a simple file. See Readme.txt for some thoughts.
+    * Added a setup wizard if GNU Go was not found, to guide the user through the
+      process of finding the gnugo.exe executable (experience from gGo, this is a major
+      problem for novice users).
+      Note: This does not work on Linux. If gnugo is not found, glGo will crash. See
+      Readme for details. This only happens on Linux.
+
+2003-08-23 - Version 0.0.3.1
+    * Added two sort of last move markers:
+      - The old known circle mark. Looks ok with antialiasing, ugly without.
+      - A fancy multitexture effect. The effect itself is *stupid*, but I was trying
+        what's possible with overlaying multiple textures. This seems the way to get
+        a good effect. This is only available in hardware mode and a card which
+        supports the GL_ARB_multitexture extension (most cards should, even my
+        ancient TNT1 does).
+        If in doubt, get the glview tool: http://www.realtech-vr.com/glview/
+    * Enable GL_ARB_multisample extension if supported, this gives a good antialias
+      effect. Only available in hardware mode with a recent graphiccard. It will be
+      enabled automatically if available. There is no menu switch.
+    * Couple of small fixes to GTP support.
+    * Fixed Windows installer (hopefully) to show the license page.
+    * Changed Windows textfiles from UNIX to DOS linebreaks.
+    * Added the stone play sound known from gGo.
+
+2003-08-19 - Version 0.0.3
+    * Added GTP support. Playing with GNU Go basically works. No undo and resume yet.
+      GNU Go is not included in the installation, get it from the gGo webpage, see
+      GNU Go link on the left. Drop gnugo into the glGo installation directory, there
+      is no possibility yet to tell glGo where the GNU Go binary is located.
+    * Implemented handicap in the setup. Only internal fixed values, dynamic handicap
+      not yet done.
+    * Added translation support, I'm doing a german version while writing the program.
+      Contributions for other languages will be welcome, but it is too early to start
+      yet, there are too many changes at the moment.
+    * A couple of OpenGL adjustments. If you toggle most 3D enhancements off (see View
+      menu), it should run properly in software mode. However, better install a proper
+      driver.
+    * The manual is not yet updated with the new features. Next time. :)
+
+2003-08-11 - Version 0.0.2
+    * Improved the OpenGL display. Added antialias support, blurring, render to texture.
+    * Implemented a simple 2D board. This is very simple and ugly. Start with "glGo simple".
+    * Implemented HTML Help system, using the standard HTML Help system on Windows and a
+      wxWindows provided HTML Help display on Linux.
+    * Lots more I forgot. :)
+
+2003-07-24 - Version 0.0.1
+    * Initial release

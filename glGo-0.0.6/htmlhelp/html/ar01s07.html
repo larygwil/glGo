@@ -1,0 +1,148 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>OpenGL Information</title><meta name="generator" content="DocBook XSL Stylesheets V1.60.1"><link rel="home" href="index.html" title="glGo manual"><link rel="up" href="index.html" title="glGo manual"><link rel="previous" href="ar01s06.html" title="Options"><link rel="next" href="ar01s08.html" title="SDL Information"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">OpenGL Information</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ar01s06.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ar01s08.html">Next</a></td></tr></table><hr></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="openglinfo"></a>OpenGL Information</h2></div></div><div></div></div><p><span class="inlinemediaobject"><img src="images/opengl_logo.jpg" align="right" height="88"></span></p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2873280"></a>Textures</h3></div></div><div></div></div><p>Textures are used for the stones and the goban. The white stones are
+overlayed with an image for a slight grain effect. The goban will always have a
+wooden texture, switching this off getting an orange board makes little sense.
+The stone textures can be disabled, resulting in plain black and white stones.
+This will improve performance, but the overall quality drops significantly.
+Probably in future versions disabled textures might be removed. Textures don't
+hurt the performance much, and they add quite a lot to the overall scene.</p><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="id2873297"></a>Textures quality</h4></div></div><div></div></div><p>The texture quality can be set to low and high. When zooming in,
+the difference should be obvious. Low quality textures will appear blocky. When
+running in hardware mode, high quality textures do not drop performance much, so
+it is a good idea to use them. However, when running in software mode high
+quality textures are a speed killer, so for software mode it is highly
+recommended to switch to low quality. When the board is not zoomed in closely,
+the difference is not too noticeable.</p></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2873318"></a>Light</h3></div></div><div></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="id2873324"></a>Reflections</h4></div></div><div></div></div><p>Light causes the reflection effect on the black stones, which look
+quite similar to the stones in the Java version of gGo. When rotating the board,
+the reflection will slider over the stone surface relatively to the light
+source, which is placed slightly to the upper left. Think about a lamp shining
+just over your head.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="id2873341"></a>Shadows</h4></div></div><div></div></div><p>Shadows significantly add to the overall 3D scene. The shadows are
+drawn relative to the light source. Basically they are just another light
+effect, but can be toggled off independent from light to improve performance in
+software mode while keeping the reflection effect. Shadows require light to be
+enabled.</p></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2873359"></a>Blending</h3></div></div><div></div></div><p>Blending is an important effect. All antialias effects (see below)
+depend on blending enabled. Blending means that the alpha value of each pixel
+will be calculated when drawing the scene. When you take the border of a stone
+or a grid line, the pixels close to the wooden board will have a lower alpha
+value, so the borderline will not appear blocky, instead the edge of the black
+grid lines or the stones will be smooth. When blending is disabled, all
+antialias effects will not work. Blending is a recommended feature, however it
+can be quite performance costly on software mode. You need to find out if
+trading the performance for quality is worth it. When running in hardware mode,
+blending is very fast and should be enabled.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2873398"></a>Antialiasing</h3></div></div><div></div></div><p>You might notice the grid lines and stone edges can get blocky,
+which is called aliasing. The effect which prevents this is called antialiasing.
+glGo supports two antialias modes, a third is accessible via the configuration
+of your 3D driver.</p><p>Two simple but quite effective antialias settings affect the drawing
+of lines and stones only. This are the line and stone antialias settings in
+glGo. You find them in the <span class="guimenu">View</span> menu. Blending must be
+enabled, else this will show little effect.</p><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="id2873428"></a>Line antialiasing</h4></div></div><div></div></div><p>This will affect the grid on the goban and smooth the lines when
+rotating the board. If turned off, the lines will appear blocky. The quality of
+this effect depends on the capability of your graphic card.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="id2873443"></a>Stone antialiasing</h4></div></div><div></div></div><p>This will affect the board of stones to appear smooth. The effect
+should be obvious when toggling this on and off. This is a recommended feature
+which does not affect performance much and even is fast in software mode, so
+there is little reason to turn this off.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="id2873459"></a>Scene antialiasing</h4></div></div><div></div></div><p>Scene antialiasing will improve not only the lines and stones but
+the complete display. To enable this feature, turn on the
+<span class="guimenuitem">Antialiasing scene</span> menu item in glGo. You can
+configure if low or high quality should be used. This scene antialiasing effect
+can be very slow on older hardware. It only runs in hardware mode on very new
+cards (hardware supported accumulation buffer, to be specific), so this is quite
+slow when it is not supported by the card, as the CPU has to do the work. If you
+have a fast computer, on low quality setting it might still be performant
+enough. But with lots of stones on the board and on high quality settings this
+eats CPU power for breakfast unless your card has the above mentioned hardware
+accumulation buffer. I think Geforce4 has it, but not sure.</p><p>Modern graphic cards have a feature called Multisampling, which
+will also smooth the overall scene. glGo will automatically turn multisampling
+on if it is supported by the hardware.</p><div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Tip"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Tip]" src="images/tip.jpg"></td><th align="left">Tip</th></tr><tr><td colspan="2" align="left" valign="top"><p>You need to enable full screen antialiasing (FSAA) in your 3D
+driver. You can access this in the 3D driver configuration dialog, for NVidia
+cards (sorry, no idea about the ATI and Matrox drivers) there is a slider which
+allows the FSAA detail setting. On Linux you can control this feature by setting
+an environment variable, see the documentation of your driver. Unfortunately
+this configuration is not accessible from the application itself. FSAA is
+supported by most recent graphic cards.</p></td></tr></table></div><p>You might need to play a little with the settings and your 3D
+driver configuration to find good settings which meet your needs for quality and
+performance.</p><div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Tip"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Tip]" src="images/tip.jpg"></td><th align="left">Tip</th></tr><tr><td colspan="2" align="left" valign="top"><p>On a medium to low-end computer you should be Ok if you have
+a recent 3D driver installed (see section requirements) and enable Blending,
+Line and Stone antialias, Textures and Light. Keep the Scene antialias in glGo
+disabled. If your card supports it, enable FSAA in the driver configuration. On
+a high-end computer give the glGo Scene antialiasing a try and see how much it
+drops the performance.</p></td></tr></table></div></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2873537"></a>Render to texture</h3></div></div><div></div></div><p>Render to texture means the full display is not instantly drawn on
+the window but instead first drawn into an image (a "texture") and then this
+texture is drawn on the window. The advantage of this feature is the display is
+buffered in the texture, and when you for example minimize and restore the
+window, redrawing the whole scene will be much faster as only the already
+existing texture is drawn again, not the whole scene again. Also when opening a
+menu or a dialog the cached texture will be used to redraw the window. Only when
+the board changes, like when a stone is played, the scene will be redrawn. This
+feature also prevents some display artifacts when other windows overlap the glGo
+board.</p><p>The disadvantage is a minimal performance drop as drawing the
+texture to the screen takes an extra step in the whole process, but this effect
+is minimal when running with hardware acceleration. Actually this feature will
+rather improve the overall performance as the scene does not need to be redrawn
+constantly when something happens to the window, like another window or dialog
+is laid over it. However, if you are running in software mode, disabling Render
+to texture will speed up glGo significantly.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2873588"></a>Blurring</h3></div></div><div></div></div><p>When blurring is enabled, the whole scene will be slightly smeared.
+You maybe know this effect from common paint software, most offer a feature when
+you can smear the existing image with a brush.</p><p>Blurring only works if Render to texture is enabled. When the
+texture is drawn to the screen and blurring is enabled, it will be drawn several
+times having a small offset in each turn - this is called jittering. Each image
+will be blended into each other, and as each image has a faint offset to each
+other the whole scene will be slightly worn away. When Render to texture is
+disabled, this feature cannot work, as then the whole scene is only drawn once
+directly into the window. So enabling Blur while having Render to texture
+disabled makes no sense (yes, the software should check this, but it does not
+yet.)</p><p>I am currently not sure if blurring makes much sense. I personally
+don't like the effect much.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2873625"></a>Fast rendering</h3></div></div><div></div></div><p>While rotating the board using the cursor keys, to be exact while
+one of the cursor keys is pressed down, some of the above mentioned display
+improvements are temporary disabled to speed up the rotating. While rotating the
+whole scene has to be redrawn quite often, so every unnecessary feature will
+slow this down. And while the picture is moving, not the best quality is
+required.</p><p>Once you release the key, the final scene will be drawn with all
+settings enabled again. This should make rotating more efficient while the
+quality drop should not be very noticeable during the movement. If you have a
+fast computer, you can probably keep this disabled. Try and see if this makes a
+significant performance difference.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2873654"></a>Scissor test</h3></div></div><div></div></div><p>The OpenGL scissor test allows to only draw a part of the whole
+scene instead of the complete view. The basic idea is: When adding just a single
+stone, usually done by playing it or navigating forward in a game review, and
+when there are no captures, then it is not really necassary to redraw the
+complete board with all stones just to add this one additional stone. This is
+especially true if there are quite a lot of stones, like more than 200, on the
+board, when rendering all stones is getting slow. In such a case the scissor
+test will prevent redrawing everything and only add the single new stone into
+the otherwise unchanged scene.</p><p>Obviously there are some problems with this concept. When there are
+captures, not only one stone has to be added but also other stones being
+removed. If there are SGF marks on the board they must be removed. When going
+through variations the ghost stones indicating branches need to be drawn or
+removed. In all these cases too much changes on the board so the scissor test
+makes no sense anymore. glGo will then automatically disable scissoring for such
+a move and redraw the full scene. When playing or moving through a normal game
+this is not much of a problem, as captures don't occur at every move, and when
+they occur scissoring is automatically disabled. However, when looking at a game
+with a lot of SGF markers, Kogos Joseki Dictionary being an extreme example, the
+scissor test makes no sense and should be completely disabled.</p><p>Besides being not trivial, scissoring will produce some display
+artifacts when the board is rotated. To sum it up, if you really need some speed
+improvement, try this feature for normal games and switch it off for SGF editing
+(or use the 2D board for this task). If your computer can handle the 3D board
+without scissoring properly, then keep it disabled. But on my old P2 with 333
+MHz scissoring is a significant performance boost with more than 200 stones on
+the board.</p><p>Scissor test and render-to-texture both enabbled will create display
+distortion. Enable only one of these features at the same time.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2873733"></a>Stone quality</h3></div></div><div></div></div><p>Stone quality defines from how many triangles the wireframe of a
+stone is built. Using more triangles obviously looks better and is slower. High
+means a stone is created from 512 triangles, low means from 128 triangles. Why
+triangles instead of quads? Because most graphiccards can draw triangles much
+faster.</p><p>Any values above 512 don't improve the look anymore but get very
+slow, so "High" definately means good enough.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2873756"></a>Marks</h3></div></div><div></div></div><p>glGo supports a mark for the last move and a couple of common SGF
+marks like square, triangles, letters etc.</p><p>There are two markers available for the last move mark:</p><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="id2873773"></a>Simple marks</h4></div></div><div></div></div><p>Simple marks appear very similar to the Java version. A plain
+circle is drawn on the stone - actually it is drawn inside the stone to avoid
+odd effects when rotating the board.</p><p>The SGF marks like square, triangle, circle and cross marks are
+always drawn as simple marks.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="id2873794"></a>Multitexture marks</h4></div></div><div></div></div><p>Multitextures are an extension to OpenGL and is only available
+when running in hardware mode. Most graphic cards should support multitextures.
+Multitextures means, a second texture can be laid over the stone. The white
+stones already have the grain texture, multitexture allows to add a second
+texture with a mark. This makes the marks look realistic, as if painted over the
+stone, and not floating above or inside the stone as the simple marks do. I
+intentionally made a mark texture which looks "as if painted", instead of the
+usual plain circle or cross. I think this looks pretty realistic. There is
+currently one problem with these marks, when zooming in closely and rotating,
+the marks slide over the stone. This has to be improved.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.jpg"></td><th align="left">Note</th></tr><tr><td colspan="2" align="left" valign="top"><p>glGo will detect if your graphic card supports multitextures
+and enable this feature. If it is not supported, simple marks are automatically
+disabled.</p></td></tr></table></div></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2873828"></a>Background</h3></div></div><div></div></div><p>You can select the background color if you dislike the default red
+background. In future versions you will also be able to use an image as
+background, like the green table in the Java gGo.</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ar01s06.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ar01s08.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Options </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> SDL Information</td></tr></table></div></body></html>

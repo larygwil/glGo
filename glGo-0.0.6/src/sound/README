@@ -1,0 +1,42 @@
+glGo soundlibs
+--------------
+
+What the hell is this?
+
+To relief glGo from some dependencies on Linux, the glGo binary is not linked
+against the SDL_mixer and OpenAL libraries. Instead, it uses dlopen to load
+libalsound.so and libsdlsound.so at runtime. As result, if OpenAL or SDL_mixer
+are not installed on the users system, glGo will still run, just without sound,
+instead of failing to start because dependencies are not met.
+
+The only file linked with glGo is sound.cpp, which serves as interface to the
+shared libraries. sound.cpp will then try to dlopen libalsound.so and
+libsdlsound.so, which are linked against OpenAL respectively SDL_mixer. The
+dlopen mechanism is wrapped into PLIB utilities functions, which makes porting
+to Windows much easier. libplibul is required anyways by libplibfnt, so this
+does not add any overhead.
+
+To disable the shared library mechanism, compile with -DNO_DYNAMIC_LOADING. The
+build script won't work then, but you can easily fix the Makefile.am for this.
+
+I am aware this makes the building process more complicated, but it makes it
+more convinient for the enduser, which I value higher.
+
+The OpenAL sound can be tweaked in the al_sound.c file, see the #defines at the
+beginning of the file. By default ogg files are loaded using a selfmade ogg
+loader, which requires libvorbisfile. Basically OpenAL could decode the oggfiles,
+too (you can set that via #define), but there are some small frequency problems
+with the soundfiles I use. With other files it should work, though. On Win32
+the OpenAL lib must be linked against libvorbisfile. For my Win32 release build
+I do a static link. Otherwise ogg.dll, vorbis.dll and vorbisfile.dll need to
+be installed - something I try to avoid.
+If you want to get rid of all these ogg problems, switch the ogg support off
+and use wav files, which has a simple loader with ALut.
+
+This library is probably only usable for glGo. However, if anyone feels like
+copying, using or modifying this code, you can do so under the terms of the
+GNU General Public License. But I really doubt anyone has use for this. :*)
+If you do, drop me a note.
+
+
+Peter Strempel

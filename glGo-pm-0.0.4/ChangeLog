@@ -1,0 +1,43 @@
+glGo Changelog
+--------------
+
+2003-11-30 - Version 0.0.4
+    * Added Graph panel to the player dialog. The data is extracted from the SGF index.
+      You can also open a single frame with the Graph using either the popup menu on
+      a player or the menu item "Show graph of" which lets you input any playername.
+    * Added Status-Friend/Neutral/Bozo radiogroup to the popupmenu on a player.
+      Note: These radiobuttons appear to work only on Windows, not GTK. I have no idea
+      why. Looks like a wxPython bug? No big deal, you get the same functionality by
+      opening the dialog with "Edit" and selecting Friend/Neutral/Bozo there.
+
+2003-11-22 - Version 0.0.3
+    * Added ability to scan directories for SGF files. The SGF headers are read and stored
+      in an index file. For each player you can see the existing games from the scanned
+      directories. If new games are saved into the directories, you need to manually run
+      the scan again, as the playermanager won't automatically detect new files.
+      The feature is meant as addition to the glGo autosave feature.
+      The "Cleanup games" menuitem will look for entries without SGF file and remove the
+      entry. This is useful if you manually deleted some SGF files from previously scanned
+      directories.
+      The games tables can be sorted, left/right click on the column labels.
+    * Added a choice box to filter the player list by your customized flags.
+    * Implemented a workaround for Windows 9x which does not know about home directories.
+      It should work automatically and find the glGo install folder from the registry
+      entry the glGo installer wrote. Hope it works, I don't have Win98 installed. :)
+
+2003-11-16 - Version 0.0.2
+    * Added support for custom flags. You can define up to 5 flags yourself, for example
+      "Escaper", "Cool dude", "Sucky play"... and then assign each flag for each player
+      in your database. To activate a flag, go to menu "Edit", "Edit flags", give it some
+      text and enable the checkbox. The flags can then be set in the player dialogs within
+      the playermanager and glGo.
+    * Database can now store neutral players, too, not only friends/bozos.
+    * Added a "Cleanup". This removes all neutral players without comments and custom
+      flags. Use with care.
+    * Improved the standalone GUI. Win32 version now also shows an icon in the player
+      list (in 0.0.1 the icon only appeared on Linux). Added icon for bozo.
+    * Some fixes to the commandline version. Added --flags option to display the new flags.
+    * This version requires glGo 0.0.5.5a or newer.
+
+2003-11-12 - Version 0.0.1
+    * Initial release

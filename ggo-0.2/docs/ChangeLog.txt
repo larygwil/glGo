@@ -1,0 +1,364 @@
+gGo Changelog
+-------------
+
+02-10-27 - Version 0.2
+    * Implemented support for teaching games.
+    * Added a new menuitem "Change komi" in own game windows. Also, when the
+      opponent requests a komi change, a confirmation dialog is displayed.
+    * Added a new menuitem "Change handicap".
+    * Added handicap support for boardsizes 9x9 and 13x13.
+    * Bugfix: Finished observed games were not removed from the observe hash.
+    * Friends/Ignore list are now alphabetically sorted.
+    * Bugfix: Jumping several moves with the slider occasionally displayed stones
+      in the wrong color, if the stone on the board was exchanged within the
+      jumped moves.
+    * Bugfix: Save sgf exited with a NullPointerException if a stone got removed
+      in move 0.
+    * Implemented customizable textmarks. Shift-leftclick lets the user input a
+      text for the mark.
+    * Bugfix: When loading a game or initializing a new game, the edit tools did not
+      reset to stone mark.
+    * Added some extensive logging for IGS moves, hunting for the move-doesn't-occur
+      bug. Found and fixed a possible reason for this. (Logging is disabled in the
+      official release, only used in the previews.)
+    * Implemented tables in the PlayerInfo dialog for Stored and SGF games. The user
+      can right-click on a game line to get a popup menu for "look", "load" etc.
+    * When opening a game with "look", the Date and disconnection notes are displayed
+      in the board window.
+    * In score mode of own games, display stone removing and typed-done message in
+      the board window say textfield.
+    * Double-clicking (left button) on observed IGS boards adds the coordinate to the
+      kibitz inputfield (user request).
+    * Bugfix: If both players have the same defs, automatch board did not open. Argh!
+    * Bugfix: When reloading an own game, don't repaint all previous moves.
+    * Improved reloading own games on own disconnection. Game window will be resued,
+      and the "Adjourn" button toggles to "Load" (this only worked when the opponent
+      disconnected before).
+    * Bugfix: When resuming to observe a game after disconnect/reconnect, game title
+      was not set properly.
+    * Bugfix: Game title was not set properly in trailed games.
+    * Added refresh, notify and message buttons to the playerinfo dialog.
+    * Added two new dialogs to read and compose messages.
+    * Added three menuitems to the IGS terminal window: Start teaching game, read messages and
+      User stats. You can type all of those in the terminal as well, same result.
+    * Bugfix: When loading an adjourned game without moves, the board was not opened.
+    * Bugfix: When opening a new game while hen already observing, occasionally the new
+      game was not initialized properly. However, this still can happen with "automatch",
+      this is a problem in the IGS protocol. No problem with "match".
+    * Replaced the Home icon.
+    * Bugfix: In the playerinfo dialog the Shouts checkbox sent "toggle shouts". Must
+      be "toggle shout".
+
+02-11-10 - Version 0.1.5
+    * Changed to Java 1.4.1 compiler.
+    * Implemented Parser for Jago XML game files - read-only
+    * Implemented Parser for UGF files - read-only
+    * Added a gGo-own game format. This is basically a serialized game tree. It loads
+      and saves very fast. It is currently pretty useless, but I have some furthers ideas
+      for later improvements, like game collections.
+    * Removed the ggo.sgf package and replaced with ggo.parser.
+    * When scoring own IGS games, score, territory and captures are displayed in the sidebar.
+      The counting does not recognize false eyes yet and scores them as a point. This has to
+      be fixed.
+    * Added quick-access to the player table: Double-click left on a player sends stats,
+      double-click middle OR double-click left + shift sends match.
+    * Playertable now sorts the names alphabetically, when the primary search is by rank.
+    * Observed games open significantly faster now, not displaying all moves. However, the
+      old behaviour can be turned on in the IGS tab of the preferences dialog.
+    * In own games, after the first move a full board update is forced. Windows seems to
+      have problems with that.
+    * Bugfix: Loading adjourned games did not draw the stones. Updated forced now.
+    * Replaced the Shouts and Quiet checkbox menuitems in the Control menu with a menuitem
+      My Stats, which shows an extented playerinfo dialog including toggles and defaults.
+    * When an own game has finished, send 'tell' instead 'say' when the player types in
+      the say commandline.
+    * Added a gGo-internal command: showgame <playername> - Displays current game of this
+      player. Terminal commandline usage only. This is a workaround for some IGS bug not
+      displaying games while scoring in "stats" and "user".
+    * Bugfix: Autoupdater players and games database must be cleared after disconnect.
+    * Added a '#' prompt to the IGS terminal.
+
+02-09-22 - Version 0.1.4
+    * Added french translation. Thanks to Elvire Scheibling.
+    * Made modified Java-thin the Unix default look and feel.
+    * Bugfix: Results and stored games were not shown in the playerinfo dialog anymore.
+      Stored label was changed to be initially empty when the dialog opens.
+    * Added friend/neutral/ignore control to playerinfo dialog.
+    * Added trail button to playerinfo dialog.
+    * When calling stats and a playerinfo dialog of a certain player is already open, reuse
+      this dialog.
+    * Client now beeps on being beeped
+    * Bugfix: Autoupdater is not reinstantiated on a new connection. The data which adjourned
+      games should be reloaded was lost in that process when reconnected.
+    * After a disconnect/reconnect formerly observed games with still open board windows are
+      resumed.
+    * User gets notified with a messagebox when a disconnected opponent is online again.
+    * "Adjourn" button changes to "Reload" when an own game was adjourned.
+    * Bugfix: The last name from the friends/ignore list was not removed.
+    * Bugfix: Block sending move coordinates when clicking on a board with a finished game.
+    * Bugfix: When kibitzes are added while the user browses through earlier moves in an observed
+      game, the kibitzes were not saved in the last move, but in the move the user currently was.
+    * Added a timestamp feature to observed games. If enabled, it will print the move number and
+      time into the kibitz field. Might be usefor for tournament games.
+    * Added a "gGo on the Web" menuitem in the Help menu, opening the gGo webpage in an external
+      browser.
+    * Changed the Match Dialog to a subclass of JFrame, so it gets an icon in the Windows taskbar.
+    * Incoming match requests play a sound, this is controlled by the chat-sound toggle.
+    * Added a dialog to import SGF files from the clipboard.
+    * Bugfix: When more than one match requests are incoming, gGo messed up the time settings.
+    * Bugfix: Some accounts have an IP adress instead of email, the stats parser failed on this.
+    * Bugfix: When observing and starting a new game, distribute the old observed moves to the proper
+      board. When playing, block starting a new observation (IGS will block that anyways).
+    * Fixed missing and wrong translations in the preferences dialog.
+
+02-09-15 - Version 0.1.3
+    * Added spanish translation. Thanks to Jorge Canovas Zaragoza.
+    * Implemented support for "trail" command.
+    * Implemented support for automatic reloading of adjourned observed games. If possible,
+      the existing board is reused. If it was already closed, a new board is opened. This only
+      happens if a game was observed while the adjourn occured.
+    * Implemented support for automatic reloading of own played games. If the board window of the
+      before adjourned game is still open, the reloaded game will continue in this window.
+    * Added the player popup to the White/Black name labels of IGS boards. Right click on the
+      label opens the popup. This offers convinient access to stats or other info.
+    * Changed the text for the friends/ignore dialog. "Bozo" was not understood by
+      every non-native english speaker.
+    * Bugfix: Refresh did not parse the game status properly in special cases.
+    * Bugfix: When observing IGS game, occasionally moves were skipped. (Hopefully fixed, this
+      one is tricky!)
+    * When the player list is set available only, and a new game starts, the players are
+      removed from the list.
+    * Board draws and resizes faster (significant on my old PII box).
+    * Don't play a stone sound when hitting Refresh in IGS games.
+    * When the player info dialog is called, it opens instantly and updates the results of "stored"
+      and "results" later. Closes feature request 609557.
+
+02-09-05 - Version 0.1.2
+    * Added new icons from tweet for the startup frame and the taskbar icons.
+    * Added a menu item "Show updates" in the IGS terminal window, to display the autoupdate
+      messages. Request by tweet, I guess noone else really needs this.
+    * Resuming games with GnuGo is now possible.
+    * Bugfix: List of stored games in the player dialog was occasionally not showing all games.
+    * Player dialog sends "stored -xxx" and "results -xxx" now.
+    * Bugfix: SGF files from IGS displayed a wrong number of captured stones in scoring
+    * Added "Edit game" button to the sidebar of IGS/GTP games. Added "Sychronize" button to the
+      sidebar of a mirror frame. A edit mirror board is reused if another one was already opened.
+    * Added an option "Display info" in the IGS tab of the preferences dialog. If disabled, the
+      info messageboxes for IGS observed games don't show up anymore. Occasionally they are annoying.
+    * Bugfix: When the themepack file was not found, fall back to system default instead crashing.
+    * "look" command now displays the captures.
+    * Bugfix: Linefeeds in the IGS terminal window got munched.
+    * Implemented a friends and bozos list. Bozo results in blocking tell and match requests.
+      A filter to display friends only can be applied to the player table.
+    * Bozos appear red in the player table, friends blue.
+    * Added Type column to the games table.
+    * Game/players table column widths are now fixed.
+
+02-08-18 - Version 0.1.1
+    * Implemented Internationalization support. German translation is available.
+    * Bugfix: Undo in own games did not work properly.
+    * Bugfix: On Java 1.3 sometimes the editor did not open from an observed game.
+    * Bugfix: NullPointerException in score mode of own IGS games.
+    * When entering score mode of own IGS games, territory marks are drawn. Instead of
+      waiting until the first dead stone was removed.
+    * Bugfix: Exit timer needs to be stopped when a new connection is established.
+    * Those game setup tells from cgoban are now filtered out. Maybe implemented later, but
+      for now the opening chat window is just annoying. Only displayed in the terminal.
+    * Redirected stderr output to a file, default ~/.ggo.log. You can customize this with
+      commandline parameters, run "ggo -help" for details. If gGo crashes for you, please
+      mail me this file. Careful, if you restart gGo the old logfile is overwritten.
+    * When typing "game 123" or so in the terminal, the game window is not opened. Annoying.
+
+02-08-07 - Version 0.1
+    * Renamed project to gGo and switched to beta.
+    * Implemented a dialog for player info.
+    * Fixed white-stone-overlap bug.
+    * Replaced "ayt" with alternating "who" and "games" commands in the 10 minute timer, to keep
+      the player and games database up to date.
+    * Added a 5 pixel margin to the comment/kibitz textarea.
+    * Implemented tiling for boards and match dialogs.
+    * Implemented location save and restore for the IGS client frames.
+    * Fixed a bug when in observed games suddenly a wrong variation appeared.
+    * Added an option to display the sidebar on the right or left.
+    * Bugfix: When requesting a board refresh, block the request if the game is neither played or observed.
+    * IGS main window now shows the title depending on the login name.
+    * Bugfix: In an incoming match, gGo adjusted white-black, but should not do that in this case.
+    * Replaced old qGo application icons with a new gGo icon. Thanks to tweet for drawing them.
+    * Bugfix: When typed in the terminal, automatch games sometimes did not open.
+    * Added observe/match/automatch buttons to the chatter toolbar.
+    * Disconnect button now sends "exit" and then waits for the connection to close, instead of a brute
+      force connection termination.
+
+***************************************************
+* End of qGo for Java development. Switch to gGo. *
+***************************************************
+
+02-07-28 - Version 0.0.9
+    * Implemented "look" command.
+    * Implemented "automatch" command.
+    * Implemented multiple account management, replaced the server configuration dialog.
+    * Fixed focus problem with match dialog
+    * Fixed removing marks, that partly overlapped with a neighbour stone by 1 pixel.
+    * Fixed pass bug in observed games.
+    * No stone click sound when passing, both sounds played for a pass.
+    * Implemented new cgoban2 sound engine kindly made available by William Shubert.
+    * Tooltips of previous/first move buttons were wrong. Fixed some menu tooltips.
+    * Added a bypass of shouts/yells to a kibitz textfield by user request.
+    * Added configuration for time warning sound: Time period when warning is display, and type of sound.
+    * Added coordinate display label to sidebar.
+    * Adjourn messages are no longer displayed twice with the toggle-quiet-off updates.
+    * toggle-quiet-off game updates now add/remove game IDs in the player database.
+    * Fixed autoupdate messages for loading adjourned games.
+    * Added a focus-mainwindow button to the chatter and observing frame.
+    * Fixed the sound settings in the chatter, added sound checkbox menuitem. Chatter toolbar toggle is
+      now saved.
+    * Changed the output for tells in the multi-frame chat system. "Setting your '.'" message is hidden.
+    * Split off the player popup class and implemented it into the games table, too.
+    * Added customizable settings for antislip delay.
+    * Fixed clocks. The transition from absolute time to byoyomi time did not work properly. It's still
+      messed when adjourned games are loaded.
+    * Implemented autoaway message.
+    * When the server connection was terminated, a messagebox is displayed.
+    * Fixed menu-overlays-board bug on game observer window.
+    * Added - prefix/suffix to stored/sgf/results command from the player popup.
+
+02-07-18 - Version 0.0.8
+    * Implemented parsing of the "toggle quiet off" autoupdate messages from IGS. The data is stored in an
+      internal table and used whenever needed: match dialog now suggests white-black by ranks, shouts and
+      chats show ranks.
+    * Improved painting by using only Graphics2D methods and enabling antialias. Thanks to Bill for the hints.
+    * Implemented JavaHelp to view the manual.
+    * Added two more white stones by tweet, showing with the stones back side upwards.
+    * Fixed yell: Typed in the terminal commandline it did not display in the channel frame.
+    * When opening a board, the boardsize is limited to available screen resolution and a square
+      board is forced.
+    * Added "Command" to the Chatter/Kibitz comboboxes in IGS board frames.
+    * Fixed a bug when the saved serif font size where not properly restored in the IGS windows.
+    * After changing the font size, all IGS frames are updated. Added settings for sans serif and monospaced fonts.
+    * Added show statusbar configuration option.
+    * When editing a game, the temporary filename is not remembered anymore. People thought this was a bug.
+    * Added a menuitem show toolbar in the IGS mainwindow.
+    * Fixed a couple of resource loading problems for Webstart.
+    * In observed or played games, the statusbar displays captures instead of navigation data.
+    * When an undo is done in an observed game, and the current position is earlier in the game,
+      then the undo will be done silently without forcing the game to the last move.
+    * Added singleclick/doubleclick setting for own games.
+    * Antislip only occurs in played games, not in the editor anymore.
+    * IGS terminal window size gets adjusted according to font size for 80 characters.
+    * Fixed a bug in thread control of the board window.
+    * Changed the starter for the Windows installer.
+    * Fixed IGS ranks after their changes. 12d were calculated as 2p.
+    * Added an Observers button to observe and playing windows.
+
+02-07-13 - Version 0.0.7
+    * Added anti-slip system. The cursor has to be 600 ms on the current spot, else
+      a warning is given and the move not done.
+    * Fixed the overlay effect of text and number marks.
+    * Added a sound for the timewarning.
+    * Only the own clock gives a timewarning now.
+    * Added Skin look and feel. qGo can now be skinned.
+    * Added another chatter system for IGS. The old is still available, too.
+    * Added a combobox to select kibitz or chatter in observed games.
+    * Updated stone images.
+    * Added a menuitem to check for the latest qGo version by reading a text file.
+      from sourceforge server.
+    * Added menuitem to save the current frame size.
+    * Redesigned the preferences dialog.
+    * Fixed entering and leaving channels if done as telnet command.
+    * Fixed bugged "unobserve" command to close all frames.
+    * When an undo is sent, an observed game skips to the last move.
+
+02-07-05 - Version 0.0.6
+    * Added an "Available" button in the players list, to show only players who are
+      open for a game request.
+    * When scoring own games, the territory gets marked.
+    * Fixed undo in observed games.
+    * Added a window for channels.
+    * Added metounia look and feel. Very pretty looking.
+    * Added a refresh menuitem for IGS games to synchronize the last move position.
+    * Sorting the games and player tables by name now ignores capital letters.
+    * Last sorting is remembered during a session, so not needed to resort tables again.
+    * Redesigned the sidebar.
+    * The clock color now blinks when below 30 seconds in the byo-yomi period.
+    * Fixed look and feel setting in Java Web Start application.
+    * Client id is sent with a small delay, IGS does not buffer commands.
+    * Fixed a bug when "toggle quiet false" crashed the telnet stream.
+    * Resign and timeout in own games were not caught properly.
+    * Match window is non-modal now. Several matches cause confusion.
+    * Added byoyomi column to the games table.
+    * Added a sound for Pass.
+    * Fixed the bug that two variation ghosts could be drawn on the same spot.
+
+02-06-27 - Version 0.0.5
+    * Added configuration for telnet encoding to have qGo support asian letters.
+    * Implemented an interface for match requests.
+    * At the end of a game territory is displayed on the board.
+    * Fixed a bug when the third pass in a row was not displayed.
+    * Replaced the board image. Thank you very much, tweet!
+    * Implemented usage of client thinking time.
+    * Added some messageboxes and a confirm dialog for adjourn and resign.
+    * Typing "who" or "games" in the IGS telnet console opens the players and games table frame.
+    * Added window for shout broadcasts. All shout input is forwarded there.
+    * Recieved tells are no longer displayed in the telnet console.
+    * Player and games tables display total number now.
+    * When an own game has ended, the frame closes without confirmation.
+    * Fixed display errors: After a game was loaded, occasionally random stones were on the board.
+    * Observed handicap games now display the handicap properly.
+    * IGS game titles are now transfered to the game data dialog and displayed in the window caption.
+    * Client identifies itself to IGS using the "id" command.
+    * Added a menuitem "Userinfo" in the playertable, showing a messagebox with the result from "user".
+    * Fixed starpoints on strange board sizes like 10x10
+    * Ported the existing C++ code to convert old long SGF format. qGo can now load the FMGT files.
+
+02-06-21 - Version 0.0.4
+    * Match and load was bugged, if your opponent accepted or loaded the game, your board
+      did not open. It worked only the other way.
+    * Implemented handicap setup for IGS games. Only on 19x19 now. Other size won't work
+      for now. On TODO list.
+    * Fixed undo in IGS games.
+    * Added a startup window. TODO: Some pictures here.
+    * I got new stone images. Thank you very much, tweet!
+    * Fixed say, the comment field is not cleared after a move. Says are now saved in the
+      move they were done.
+    * Fixed a bug where invalid user data (login) crashed the games/players table sorting.
+    * Closing the games table unselected the Chat button instead of the Games button. Duh.
+    * Loading sgf games now runs in an own thread, using SwingWorker. When loading Kogo, it
+      seemed qGo had crashed, but it did not, just the progressbar locked. This does not
+      occur anymore. After the game is loaded, the board gets an explicit repaint call.
+    * Added -noserver commandline option, adjusted -edit commandline option.
+    * The IGS debug output does not show the password anymore.
+    * "Cannot find recipient." in tells is now sent to the chat window.
+
+02-06-16 - Version 0.0.3
+    * Implemented the possibilty to play own games on IGS
+    * Implemented clocks used for playing IGS/GTP games and observing IGS games
+    * Bugfix: While observing a game not the complete kibitz buffer is redundantly saved as
+      SGF comment in every move.
+    * Added Swap variations feature
+    * Added stats button in the IGS chat dialog
+    * Removed the 3D Look and Feel. It's ugly and costs unnecassary bandwidth.
+    * Fixed some menu icons and keyboard shortcuts
+    * Implemented time settings in GTP setup dialog
+    * Fixed a bug when old config files caused Saving to crash
+    * Fixed a bug when old config files caused a crash when listing IGS players
+    * Passing now removes the last move mark
+    * Fixed letter and number mark obserlay over variation ghosts
+
+02-06-03 - Version 0.0.2
+    * qGo now runs with Java 1.3. But some features will be missing, like mousewheel navigation.
+    * Implemented a working boardonly applet
+    * Implemented a couple of parameters for the applet to control it via the
+      <param> HTML tag
+    * Implemented JavaScript interface to control the applet during runtime
+    * Implemented font scaling and background overlay for letter and number marks
+    * Added autoplay with customizable delay
+    * Fixed scrollpane of IGS kibitz input textfield
+    * Added draft of HTML manual using xml DocBook
+    * GTP/GnuGo now supports handicap games
+    * Added option to customize gnugo commandline parameters
+    * Added option to disable the localhost server and set its port number
+    * Invalid SGF charsets are now ignored, using default charset
+    * Added access exception handling if the config file could not be read
+
+02-05-21 - Version 0.0.1
+    * Initial release

@@ -1,0 +1,204 @@
+<?xml version="1.0" ?>
+<resource version="2.3.0.1" xmlns="http://www.wxwindows.org/wxxrc">
+  <object class="wxFrame" name="starter_frame">
+    <title>glGo</title>
+    <centered>1</centered>
+    <style>wxCAPTION|wxSYSTEM_MENU|wxMINIMIZE_BOX</style>
+    <bg>#EFE78D</bg>
+    <object class="wxBoxSizer">
+      <orient>wxVERTICAL</orient>
+      <object class="sizeritem">
+        <object class="wxPanel">
+          <object class="wxGridSizer">
+            <cols>1</cols>
+            <object class="sizeritem">
+              <object class="wxPanel">
+                <bg>#EFE78D</bg>
+                <object class="wxBoxSizer">
+                  <orient>wxVERTICAL</orient>
+                  <object class="sizeritem">
+                    <object class="wxPanel">
+                      <object class="wxFlexGridSizer">
+                        <cols>3</cols>
+                        <object class="spacer">
+                          <size>0,0</size>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxStaticBitmap" name="ggo_image">
+                            <bitmap stock_id="wxART_MISSING_IMAGE"></bitmap>
+                            <size>89,100</size>
+                          </object>
+                          <flag>wxALIGN_CENTRE</flag>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxStaticText" name="">
+                            <label>glGo</label>
+                            <font>
+                              <size>18</size>
+                              <style>default</style>
+                              <weight>bold</weight>
+                              <family>normal</family>
+                              <underlined>0</underlined>
+                            </font>
+                          </object>
+                          <flag>wxALIGN_CENTRE_VERTICAL</flag>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxStaticBitmap" name="image1">
+                            <bitmap stock_id="wxART_MISSING_IMAGE"></bitmap>
+                            <size>100,100</size>
+                          </object>
+                          <flag>wxALIGN_CENTRE</flag>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxStaticBitmap" name="image2">
+                            <bitmap stock_id="wxART_MISSING_IMAGE"></bitmap>
+                            <size>100,100</size>
+                          </object>
+                          <flag>wxALIGN_CENTRE</flag>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxStaticBitmap" name="image3">
+                            <bitmap stock_id="wxART_MISSING_IMAGE"></bitmap>
+                            <size>100,100</size>
+                          </object>
+                          <flag>wxALIGN_CENTRE</flag>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxButton" name="igs">
+                            <label>Play on IGS</label>
+                            <bg>#E0D584</bg>
+                            <tooltip>Play on IGS-PandaNet</tooltip>
+                          </object>
+                          <flag>wxEXPAND</flag>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxButton" name="board">
+                            <label>Open a board</label>
+                            <bg>#E0D584</bg>
+                            <tooltip>Open a local board</tooltip>
+                          </object>
+                          <flag>wxEXPAND</flag>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxButton" name="load">
+                            <label>Load a game</label>
+                            <bg>#E0D584</bg>
+                            <tooltip>Load a SGF file</tooltip>
+                          </object>
+                          <flag>wxEXPAND</flag>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxStaticBitmap" name="image4">
+                            <bitmap stock_id="wxART_MISSING_IMAGE"></bitmap>
+                            <size>100,100</size>
+                          </object>
+                          <flag>wxTOP|wxALIGN_CENTRE</flag>
+                          <border>6</border>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxStaticBitmap" name="image5">
+                            <bitmap stock_id="wxART_MISSING_IMAGE"></bitmap>
+                            <size>100,100</size>
+                          </object>
+                          <flag>wxTOP|wxALIGN_CENTRE</flag>
+                          <border>6</border>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxStaticBitmap" name="image6">
+                            <bitmap stock_id="wxART_MISSING_IMAGE"></bitmap>
+                            <size>100,100</size>
+                          </object>
+                          <flag>wxTOP|wxALIGN_CENTRE</flag>
+                          <border>6</border>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxButton" name="gtp">
+                            <label>Play GNU Go</label>
+                            <bg>#E0D584</bg>
+                            <tooltip>Play against a computer program like GNU Go</tooltip>
+                          </object>
+                          <flag>wxEXPAND</flag>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxButton" name="preferences">
+                            <label>Preferences</label>
+                            <bg>#E0D584</bg>
+                            <tooltip>Configure global application settings</tooltip>
+                          </object>
+                          <flag>wxEXPAND</flag>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxButton" name="exit">
+                            <label>Exit</label>
+                            <bg>#E0D584</bg>
+                            <tooltip>Exit glGo</tooltip>
+                          </object>
+                          <flag>wxEXPAND</flag>
+                        </object>
+                        <vgap>4</vgap>
+                        <hgap>16</hgap>
+                      </object>
+                      <bg>#EFE78D</bg>
+                    </object>
+                    <flag>wxLEFT|wxRIGHT|wxALIGN_CENTRE</flag>
+                    <border>8</border>
+                  </object>
+                  <object class="sizeritem">
+                    <object class="wxPanel">
+                      <bg>#EFE78D</bg>
+                      <object class="wxFlexGridSizer">
+                        <cols>2</cols>
+                        <object class="sizeritem">
+                          <object class="wxStaticText" name="app_version">
+                            <label>X.X.X.X</label>
+                          </object>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxStaticText">
+                            <label>Copyright (c) 2003, Peter Strempel</label>
+                            <style>wxST_NO_AUTORESIZE</style>
+                          </object>
+                          <flag>wxALIGN_RIGHT</flag>
+                        </object>
+                        <growablecols>1</growablecols>
+                      </object>
+                    </object>
+                    <flag>wxTOP|wxLEFT|wxRIGHT|wxEXPAND</flag>
+                    <border>6</border>
+                  </object>
+                </object>
+              </object>
+              <flag>wxALL|wxEXPAND|wxALIGN_CENTRE</flag>
+              <border>8</border>
+            </object>
+          </object>
+          <bg>#EFE78D</bg>
+        </object>
+        <flag>wxEXPAND</flag>
+      </object>
+    </object>
+  </object>
+  <object class="wxMenu" name="starter_icon_popup">
+    <object class="wxMenuItem" name="popup_restore"/>
+    <object class="separator"/>
+    <object class="wxMenuItem" name="popup_board">
+      <label>  Open a board</label>
+    </object>
+    <object class="wxMenu" name="">
+      <label>  Select board type</label>
+      <object class="wxMenuItem" name="board_3d">
+        <label>3D Board</label>
+        <radio>1</radio>
+      </object>
+      <object class="wxMenuItem" name="board_2d">
+        <label>2D Board</label>
+        <radio>1</radio>
+      </object>
+    </object>
+    <object class="separator"/>
+    <object class="wxMenuItem" name="popup_exit">
+      <label>  Exit</label>
+    </object>
+  </object>
+</resource>

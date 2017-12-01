@@ -1,0 +1,1245 @@
+<?xml version="1.0"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.1//EN"
+                         "/usr/share/sgml/docbook/dtd/xml/4.2/docbookx.dtd">
+
+<article>
+
+  <title>glGo manual</title>
+
+  <articleinfo>
+    <author><firstname>Peter</firstname><surname>Strempel</surname></author>
+    <subtitle>A prototype for a 3D Goban display, SGF editor, client for
+IGS-PandaNet and interface for GNU Go written in C++ and based on wxWindows,
+OpenGL and SDL.</subtitle>
+    <copyright>
+      <year>2003</year>
+      <holder>Peter Strempel</holder>
+    </copyright>
+
+  </articleinfo>
+
+  <section id="introduction"><title>Introduction</title>
+    <para>glGo is a prototype for a 3D Goban and client for <ulink
+url="http://igs.joyjoy.net/English/contenth.html">IGS-PandaNet</ulink> as a
+native Win32 and Linux program written in C++. The goal is to provide a
+successor for the well-known Java gGo client written by me. <quote>glGo</quote>
+is sort of a codename for the prototype, it might be released as
+<quote>gGo</quote> or <quote>gGo2</quote> when it is usable.</para>
+    <para>glGo supports playing with a GTP engine like <link linkend="gnugo">GNU
+Go</link>.</para>
+    <para>The current version provides SGF loading and saving and a slowly
+improving IGS client which supports observing and playing games. However, not
+all IGS features are yet supported. This is work in progress.</para>
+    <para>Utilizing the <ulink url="http://www.wxwindows.org">wxWindows</ulink>
+library allows native compilation under Windows, Linux and possibly Mac OS X.
+This addresses the common resistance of many people against Java applications I
+have noticed.</para>
+    <para>The usage of <ulink url="http://www.opengl.org">OpenGL</ulink> allows
+a high quality goban display in 3D, which greatly enhanced the plain 2D display
+in gGo. It is possible to rotate and move the goban in three dimensions, which
+is an unique feature within current Go clients.</para>
+    <para>The <ulink url="http://www.libsdl.org">SDL</ulink> library offers a
+way to render a fast and pretty 2D goban as alternative to the OpenGL 3D
+display.</para>
+    <para>I am aware that releasing a client for IGS-PandaNet as open-source is
+a risky business and have made bad experience with the once open-sourced gGo
+Java client. However, I believe that open-source is the better way of developing
+software. People have complained to me about the modifications
+<emphasis>others</emphasis> have done to the software. I will send these sort of
+complains, insults and blames instantly to /dev/null as I only feel responsible
+for what <emphasis>I</emphasis> do.</para>
+    <para>For further informations and updates please visit the <ulink
+url="http://ggo.sourceforge.net/">glGo homepage</ulink>.</para>
+    <para>This program is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE.</para>
+  </section>
+
+  <section id="requirements"><title>Requirements</title>
+    <caution><para>If you use the OpenGL board you will not have much fun
+without a proper 3D hardware driver !</para></caution>
+    <para>The goban display is available in two modes: 3D based on OpenGL and 2D
+based on SDL. The SDL 2D board is pretty much looking the same as the gGo/Java
+board. Some users might not have a graphic card with OpenGL support (but those
+must be very old, any consumer card sold after 1998 supports OpenGL) or prefer
+the classic 2D view, so the 2D mode might be an alternative.</para>
+    <para>The default is the 2D board (since version 0.0.5.4) as obviously a lot
+of people have trouble with their OpenGL drivers and are unable to find the
+documentation explaining the existance of an additional 2D board.</para>
+    <tip><para>You can switch between 3D and 2D board display in the preferences
+dialog.</para></tip>
+    <para>If you have a proper 3D graphic card, make sure you have some recent
+driver from your hardware manufacturer installed. The default drivers that come
+with Windows do <emphasis>NOT</emphasis> work well.</para>
+    <para>The most common consumer cards should be from NVidia or ATI, all of
+them will work properly with glGo if you have a NVidia or ATI driver installed.
+Be careful with NVidia, there will be two drivers available for "NVidia Riva
+TNT" card in the Windows driver selection: One from Microsoft and one from
+NVidia. Use the NVidia one, the Microsoft driver is useless.</para>
+    <para>If you run Linux and don't have a hardware driver installed, the Mesa
+libraries might work, but will be inferior to a real driver. There are both
+NVidia and ATI drivers for Linux available (my old NVidia TNT 1 card works fine
+with the latest NVidia/Linux driver).</para>
+    <para>The OpenGL mode won't work well without a hardware driver installed.
+It will be slow and ugly. I am aware this is a serious limitation to the
+program. Most gamers have those drivers up to date, but the average IGS user is
+no computer gamer and certainly will have the default Microsoft Windows drivers
+installed, which won't work with glGo.</para>
+    <para>The glGo sound system is based on the OpenAL or SDL mixer libraries.
+Both are available and can be selected from the preferences dialog. OpenAL is
+the default system and basically superior. Both OpenAL and SDL_mixer runtime
+support are provided with the glGo Windows installer. On Linux you need to
+install OpenAL and/or SDL mixer from your distribution, it is not included in
+the glGo installer.</para>
+    <para>The SDL board requires the SDL, SDL_image, SDL_ttf and SDL_gfx
+libraries. They are all included in the Windows installer, on Windows you don't
+need anything additional. On Linux you require libsdl, libsdl_ttf and
+libsdl_image, which skip with all major Linux distributions. It does not make
+sense to include the SDL runtime libraries on Linux as they are all available
+with your distribution already. There is "sdltest" program which will open the
+SDL board only using the SDL libraries. If this works, it should work within
+glGo, too. Hit the Space key to toggle through 19x19, 13x13 and 9x9 boards, 'c'
+to toggle coordinates, 'f' to toggle fixed and scaled fonts.</para>
+    <para>glGo requires the Python 2.3 runtime library which is included in the
+Windows installer. Linux users please install Python from their
+distribution.</para>
+
+  </section>
+
+  <section id="installation"><title>Installation</title>
+
+    <section><title>Windows</title>
+      <para>This should be simple. For Windows there is a common installer.
+Double-click on the downloaded <filename>glGo-xxx.exe</filename> file and follow
+the instructions.</para>
+      <para>The Windows build is statically linked to wxWindows, so you don't
+need to bother about this.</para>
+      <para>You need OpenGL libraries installed, they are included in the
+standard installation of Windows 98 and newer (not recommended) or come with
+your hardware driver. See section <link
+linkend="requirements">Requirements</link> for details.</para>
+      <para>The glGo installer includes the redistributable OpenAL library
+published by <ulink
+url="http://developer.creative.com/">Creative</ulink>.</para>
+      <para>The installer includes the required <ulink
+url="http://www.libsdl.org">SDL</ulink> and <ulink
+url="http://www.python.org">Python</ulink> runtime libaries.</para>
+      <para>If you chose to install GNU Go together with glGo, you find the
+gnugo.exe file in the installation folder, and some GNU Go related documentation
+in the docs folder.</para>
+      <para>To avoid large downloads when updating, there are patches from each
+version to the next. These patches will update the last version (and only the
+last) to the latest. This should save you some download size and getting OpenAL
+and GNU Go over and over if you have a slow connection.</para>
+    </section>
+
+    <section><title>Linux</title>
+      <para>The selfextracting installer is used with "sh glGo-xxx.sh". You need
+to be root or use the sudo utility to run it. (I am investigating if this is
+possible to change as it is not really required to install glGo with root
+permissions.)</para>
+      <para>The installer takes the following commandline parameters:
+      <itemizedlist>
+          <listitem><para>sh glGo-xxx.sh -gui        -  Install glGo via GUI
+(default)</para></listitem>
+          <listitem><para>sh glGo-xxx.sh -remove     -  Remove glGo via
+GUI</para></listitem>
+          <listitem><para>sh glGo-xxx.sh -install    -  Install glGo via
+commandline interface</para></listitem>
+          <listitem><para>sh glGo-xxx.sh -uninstall  -  Uninstall glGo via
+commandline interface</para></listitem>
+        </itemizedlist></para>
+      <para>It does not matter if you use the GUI or the commandline interface,
+just a matter of taste. But I like the idea of Linux GUI installers.</para>
+      <para>The target directory is <filename
+class="directory">/opt/glGo</filename> and it will create a symlink to
+<filename>/usr/local/bin/glGo</filename>. Uninstall scripts are located in the
+target directory. The user configuration is found in <filename
+class="directory">$HOME/.glGo/</filename>. Please remove this directory manually
+after uninstalling.</para>
+      <para>In any case you require OpenGL libraries installed, they are
+installed together with your hardware driver. In worst case, install the Mesa
+libraries for software-only rendering, but this is not recommended</para>
+      <para>You need the following SDL libraries: libsdl, libsdl_ttf and
+libsdl_image.  They are all available with all major Linux distributions. If you
+don't have them already installed, get them from your distribution. In case try
+<userinput>ldd glGo</userinput> to check the dependencies.</para>
+      <para>You need the Python 2.3 runtime library installed.</para>
+      <para>For the sound system you need either the OpenAL or the SDL_mixer
+runtime libraries installed. They should be included in every Linux
+distribution. Unlike Windows, OpenAL is not included in the Linux glGo
+installer, as it is to be preferred to use your Linux distribution version. If
+neither libopenal nor libSDL_mixer are available, glGo should still run, but
+without sound output.</para>
+      <para>Here are the most importantant dependencies. Nothing special, but
+you might need to install some library from your distribution.
+      <itemizedlist>
+          <listitem><para>libgtk 1.2</para></listitem>
+          <listitem><para>libjpeg</para></listitem>
+          <listitem><para>libpng 1.2</para></listitem>
+          <listitem><para>libz</para></listitem>
+          <listitem><para>libGL</para></listitem>
+          <listitem><para>libGLU</para></listitem>
+          <listitem><para>libSDL 1.2</para></listitem>
+          <listitem><para>libSDL_image 1.2</para></listitem>
+          <listitem><para>libSDL_ttf 2.0</para></listitem>
+          <listitem><para>libfreetype</para></listitem>
+          <listitem><para>libpython 2.3</para></listitem>
+        </itemizedlist></para>
+      <para>Optional for sound output:
+      <itemizedlist>
+          <listitem><para>libopenal</para></listitem>
+          <listitem><para>libSDL_mixer</para></listitem>
+        </itemizedlist></para>
+      <para>GNU Go is not included in the Linux installer. Please install it
+from your distribution, it is included in almost any, or compile it yourself.
+Make sure the gnugo binary is found in your PATH environment, so glGo will find
+it. Common locations are <filename class="directory">/usr/local/bin</filename>,
+<filename class="directory">/usr/bin</filename> or <filename
+class="directory">/usr/games/bin</filename>.</para>
+      <para>If you installed glGo in an unusual directory, you can use the
+<quote>-s</quote> commandline option to point to the shared data directory.
+Example: <userinput>glGo -s
+/home/foobar/myprogs/coolapps/glGo/share</userinput>. Another possibility is to
+set the environment variable <quote>GLGO_SHARED_PATH</quote>, for example in
+bash: <userinput>export
+GLGO_SHARED_PATH=/home/foobar/myprogs/coolapps/glGo/share</userinput>. The
+<quote>-s</quote> option has higher priority than the environment variable. If
+neither is given glGo will search for the shared directory in the folder the
+binary is located, <filename class="directory">/usr</filename>, <filename
+class="directory">/usr/local</filename>, <filename
+class="directory">/opt</filename>, <filename class="directory">$HOME</filename>
+and <filename class="directory">$HOME/glGo</filename>. If no shared directory is
+found, glGo will fail to start. If you keep the default directories in the
+installation and don't move files around later, you do not need to worry about
+this.</para>
+      <para>The sound libraries (libalsound.so and libsdlsound.so) are located
+in <filename class="directory">/opt/glGo/lib</filename>. If you really need to
+move this directory around, you need to tell glGo the location of these
+libraries, else sound won't work. You can do this by setting the environment
+LD_LIBRARY_PATH to the new directory.</para>
+
+    </section>
+
+    <section><title>What is installed where</title>
+      <section><title>Windows</title>
+        <para>This assumes you are using an English Windows. On my German
+Windows 2000 the folder names are slightly different, but generally the
+locations are the same.</para>
+        <para>With release 0.0.5 the configuration is not anymore saved into the
+registry but into a plain textfile.</para>
+        <itemizedlist>
+          <listitem><para><filename class="directory">C:\Program
+Files\glGo</filename> contains the complete installation. There are subfolders
+containing the documentation, shared data like images, resources and
+translations, and the HTML help files.</para></listitem>
+          <listitem><para><filename class="directory">C:\Documents and
+Settings\username\glGo</filename> contains the configuration file
+<filename>glGo.rc</filename> and the logfile <filename>glGo.log</filename>. If
+you uninstall glGo, please delete this folder manually. As Windows 9x does not
+know about a Home directory and writes these files into the Windows system
+directory, uninstalling this sounds a little dangerous to me.</para></listitem>
+          <listitem><para>Some registry entries are automatically generated by
+the installer for the Windows software installation support. These registry
+entries are not required by glGo during runtime and are only useful for the
+installer and uninstaller. They will be completely removed in the uninstall
+process.</para></listitem>
+        </itemizedlist>
+        <note><para>To uninstall glGo, please use the provided uninstaller to
+clean up the registry entry properly.</para></note>
+      </section>
+
+      <section><title>Linux</title>
+        <itemizedlist>
+          <listitem><para>The default target directory is <filename
+class="directory">/opt/glGo</filename> and contains the complete
+installation.</para></listitem>
+          <listitem><para><filename>/usr/local/bin/glGo</filename> is a symbolic
+link to /opt/glGo/bin/glGo to make sure the command is found in your PATH
+environment.</para></listitem>
+          <listitem><para><filename class="directory">$HOME/.glGo/</filename>
+contains the user configuration and temporary cached files.</para></listitem>
+        </itemizedlist>
+        <note><para>Uninstall scripts are provided and can be found in <filename
+class="directory">/opt/glGo/</filename>. The user configuration directory
+<filename class="directory">$HOME/.glGo/</filename> will be not uninstalled,
+please manually delete it.</para></note>
+      </section>
+
+    </section>
+
+  </section>
+
+  <section id="usage"><title>Usage</title>
+
+    <section><title>Mouse control</title>
+      <para>This is straight-forward. If you are in the SGF editor, things work
+like in gGo or any other SGF editor. Left-click will play stones in alternating
+colors. You can switch into <quote>Edit mode</quote> by selecting one of the SGF
+marker icons in the Sidebar. Depending on which mark you have selected, a
+left-click will place a mark and a right-click remove an existing mark. If you
+select stone editing mode, left-click will add a black and right-click a white
+stone. To remove a stone, simple click on a placed stone and it will be gone. To
+return to <quote>Play mode</quote> again select either the white or black stone
+icon. You can also switch the turn with this icon, if you need to add for
+example two white moves.</para>
+
+      <note><para>Mousewheel support is currently not yet available but
+planned.</para></note>
+    </section>
+
+    <section><title>Keyboard control</title>
+      <para>The keyboard is used to rotate, shift and zoom the 3D board and to
+navigate through the game. Navigation currently only supports moving forward and
+backward, variations are not yet supported.</para>
+      <para>The following table explains all supported key combinations.</para>
+      <informaltable>
+        <tgroup cols="2">
+          <tbody>
+            <row>
+              <entry><keycap>Cursor right</keycap></entry>
+              <entry>Next move</entry>
+            </row>
+            <row>
+              <entry><keycap>Cursor left</keycap></entry>
+              <entry>Previous move</entry>
+            </row>
+            <row>
+              <entry><keycap>Cursor up</keycap></entry>
+              <entry>Next variation</entry>
+            </row>
+            <row>
+              <entry><keycap>Cursor down</keycap></entry>
+              <entry>Previous variation</entry>
+            </row>
+            <row>
+              <entry><keycap>Home</keycap></entry>
+              <entry>First move</entry>
+            </row>
+            <row>
+              <entry><keycap>End</keycap></entry>
+              <entry>Last move</entry>
+            </row>
+            <row>
+              <entry><keycombo
+                  action="simul"><keycap>Control</keycap><keycap>cursor
+right/left</keycap>
+                </keycombo></entry>
+              <entry>Rotate the board on x axis</entry>
+            </row>
+            <row>
+              <entry><keycombo
+                  action="simul"><keycap>Control</keycap><keycap>cursor
+up/down</keycap>
+                </keycombo></entry>
+              <entry>Rotate the board on z axis</entry>
+            </row>
+            <row>
+              <entry><keycombo
+                  action="simul"><keycap>Alt</keycap><keycap>cursor
+right/left</keycap>
+                </keycombo></entry>
+              <entry>Rotate board on y axis</entry>
+            </row>
+            <row>
+              <entry><keycombo
+                  action="simul"><keycap>Shift</keycap><keycap>cursor
+right/left/up/down</keycap>
+                </keycombo></entry>
+              <entry>Move board right/left/up/down </entry>
+            </row>
+            <row>
+              <entry><keycap>Numpad plus/minus</keycap></entry>
+              <entry>Zoom board in/out</entry>
+            </row>
+            <row>
+              <entry><keycap>Plus/Minus</keycap></entry>
+              <entry>Change fovy angle</entry>
+            </row>
+            <row>
+              <entry><keycap>Backspace</keycap></entry>
+              <entry>Reset view</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+      <note><para>This table contains all keys for the OpenGL 3D board. The 2D
+boards have the same keys for navigation, but of course lack the rotating and
+zooming functions.</para></note>
+    </section>
+
+    <section><title>How to use own images and sounds</title>
+      <para>You find the sounds in the share directory within the glGo
+installation. On Linux this is <filename
+class="directory">/opt/glGo/share</filename>, on Windows <filename
+class="directory">C:\Program Files\glGo\share</filename> (or whereever you
+installed glGo).</para>
+      <para>In this directory you find the sound files and a file data.dat which
+contains the default images to get rid of the cluttered share directory.</para>
+      <para>Using own sound files is pretty easy, just replace the existing
+sound files with your own. You need to use exactly the filenames. To replace the
+stone sound, you need to replace "stone.ogg", etc. The current sounds were taken
+from CGoban2 with the permission of the author. If you have a cool sound, please
+send it to me if you want to share it!</para>
+      <para>To use own images, you need to create a directory <filename
+class="directory">data/</filename> within the share directory and drop the
+images there. glGo will first search real existing files, and if they are not
+found use the defaults in data.dat. The images must have a certain name, format
+and size:</para>
+      <informaltable>
+        <tgroup cols="2">
+          <tbody>
+            <row><entry>The goban kaya
+background</entry><entry>kaya.jpg</entry><entry>512x512</entry></row>
+            <row><entry>The 3D white stone
+texture</entry><entry>white_tex.jpg</entry><entry>64x64</entry></row>
+            <row><entry>The white last-move
+marker</entry><entry>mark_white.jpg</entry><entry>64x64</entry></row>
+            <row><entry>The black last-move
+marker</entry><entry>mark_black.jpg</entry><entry>64x64</entry></row>
+            <row><entry>The SDL white stone</entry><entry>hyuga1.png -
+hyuga8.png</entry><entry>49x49</entry></row>
+            <row><entry>The SDL black
+stone</entry><entry>blk.png</entry><entry>49x49</entry></row>
+            <row><entry>The SDL table
+background</entry><entry>table.jpg</entry><entry>100x100</entry></row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+      <para>Example: To replace the kaya goban background, copy an image file
+kaya.jpg of size 512x512 pixels into the following location:
+<itemizedlist>
+          <listitem><para>Windows: <filename>C:\Program
+Files\glGo\share\data\kaya.jpg</filename></para></listitem>
+          <listitem><para>Linux:
+<filename>/opt/glGo/share/data/kaya.jpg</filename></para></listitem>
+        </itemizedlist></para>
+      <para>If you use another image format or another size, it might work or
+not. Probably not. The OpenGL images *must* have a size of a power of two (SDL
+doesn't care).</para>
+      <para>You can also use an own font file for OpenGL board coordinates and
+text markers by replacing the coords_font.txf file in the <filename
+class="directory">share</filename> directory. If you want to create those font
+files yourself, have a look at the gentexfont program within the GLUT
+distribution which allows to convert a X-server font to a .txf file. I have no
+idea if there is a way to create these font files on Windows. You can find them
+on the net, the PLIB example code has a couple of those font files.</para>
+    </section>
+
+  </section>
+
+  <section id="gnugo"><title>Playing with GNU Go</title>
+    <para><inlinemediaobject>
+        <imageobject>
+          <imagedata srccredit="GNU Go logo"
+            width="200"
+            depth="175" format="JPG" align="right"
+            fileref="images/gnugo_logo.jpg"/></imageobject></inlinemediaobject></para>
+    <para>glGo supports connecting to any GTP engine and to play with a computer
+program. Currently the only Go playing computer program which supports GTP is
+<ulink url="http://www.gnu.org/software/gnugo/gnugo.html">GNU Go</ulink>. As of
+glGo version 0.0.4.3 GNU Go is bundled into the Windows installer. If you are on
+Linux, you need to download it seperately from the <ulink
+url="http://www.gnu.org/software/gnugo/gnugo.html">GNU Go homepage</ulink> or
+install it from your distribution.</para>
+    <para>As the gnugo.exe file is in the same folder as the glGo executable,
+glGo won't have trouble finding the file. If it does, it will complain and offer
+the user a way to find the right file.</para>
+    <caution><para>There is a problem on Linux: If gnugo is not found, glGo
+crashes. The problem is, when wxWindows tries to execute a command which does
+not exist, it will start a real process and return a PID. The process will quit
+again after few seconds, but meanwhile glGo bailed out. I need to fix this. If
+gnugo is found, things work fine.
+</para></caution>
+
+    <section><title>Connect to a GTP engine</title>
+      <para>If you have the GNU Go binary in place as described above, you can
+select <guimenuitem>Connect GTP</guimenuitem> from the <guimenu>GTP</guimenu>
+menu. If GNU Go is not found, glGo will notify you. You can setup the game
+parameters and select which color to play. Once you hit Ok in this dialog, the
+game will start. Resuming games is supported. Usage is quite the same as in
+gGo/Java. The board will switch into "GTP mode", so all moves you make will be
+sent to GNU Go instead of displaying them instantly as in the normal operating
+mode. The sidebar will change when in GTP mode show the required buttons.</para>
+      <para>If you select the <guilabel>Play GNU Go</guilabel> button in the
+start screen, the new board window will automatically connect to GNU Go.</para>
+      <para>Playing seems to work properly. Clocks and scoring are not yet
+supported.</para>
+      <tip><para>When the game is finished, type
+<userinput>estimate_score</userinput> in the GTP console to see the final
+result.</para></tip>
+    </section>
+
+    <section><title>GTP console</title>
+      <para>As known from gGo, you can open a GTP console and examine or
+overwrite the GNU Go commands manually.</para>
+      <tip><para>The <guimenuitem>About</guimenuitem> dialog in the
+<guimenu>Help</guimenu> menu of the GTP console will show you which GNU Go
+version you are connected to.</para></tip>
+    </section>
+
+    <section><title>Closing the GTP connection</title>
+      <para>To quit a GNU Go session, select <guimenuitem>Close
+GTP</guimenuitem> from the <guimenu>GTP</guimenu> menu. The connection to GNU Go
+will be closed, the GNU Go process terminated and the board will return to
+normal mode again.</para>
+      <para>Another way to quit a current GNU Go session is to close the board
+window in which you played the game.</para>
+    </section>
+
+    <section><title>Using the GNU Go score estimation</title>
+      <para>You can use GNU Go to estimate the score of a game. To do this,
+select <guimenuitem>Guess score</guimenuitem> in the <guimenu>GTP</guimenu> menu
+of a board window. This will first save the game to a temporary file. The file
+location depends on your operating system. Then it will start a GNU Go process
+with something like this: <quote>gnugo --score estimate --quiet -L 254 -l
+/tmp/glGoxfCodg</quote>. This estimates the score at move 254 in the given
+temporary SGF file.</para>
+      <para>The result will be displayed in a dialog once GNU Go has estimated
+the score. GNU Go might need some time for this, especially if the game is still
+in the middle game.</para>
+    </section>
+
+  </section>
+
+  <section id="options"><title>Options</title>
+
+    <para>Global application settings can be customized in the preferences
+dialog, found in the <guimenu>Settings</guimenu> menu. The following options are
+currently available:</para>
+
+    <section><title>Global settings</title>
+
+      <itemizedlist>
+        <listitem><para>Language</para>
+          <para>Change the language glGo will use. Currently there are English
+and German available. I hope there will be more translations in the
+future.</para>
+          <note><para>When set to german there are some problems with the Komi
+value, as glGo will write and read something like "6,5" instead of "6.5". As
+result Komi values can be assumed invalid. I am trying to fix this
+problem.</para></note></listitem>
+        <listitem><para>Board type</para>
+          <para>Here you can select which Board type to use. Available are a 3D
+board using OpenGL or a 2D board using SDL. All new opened boards will use this
+type. If you accessed the dialog from a board window, this current board will
+not change it's type.</para>
+          <para>Since version 0.0.5.4 the 2D SDL board is the default, as some
+people had problems getting their 3D drivers working and did not find this
+switch to select the 2D board instead. (Why do I write documentation?)</para>
+          <tip><para>On Windows you can also select the board type using the
+popup menu of the tray icon.</para></tip></listitem>
+        <listitem><para>Autohide startscreen</para>
+          <para>The startscreen will be minimized once you open a board or the
+IGS terminal, so it gets out of the way. How exactly it is minimized, is defined
+by the following option on Windows. On Windows it will be iconified if
+<guilabel>Autohide startscreen</guilabel> is disabled, and minimized to the tray
+if <guilabel>Autohide startscreen</guilabel> is enabled. On Linux, it will
+simply be iconified.</para></listitem>
+        <listitem><para>Minimize to system tray (Windows only)</para>
+          <para>When <guilabel>Autohide startscreen</guilabel> is enabled, the
+startscreen will minimize into the system tray. This was a feature request I got
+for gGo/Java once and liked the idea very much, but it was not possible with
+Java. Now it is. This will get the start window out of the way. When
+<guilabel>Autohide startscreen</guilabel> is disabled, the start window will
+still minimize to the tray when you click on its <guibutton>Close</guibutton>
+button. When you click the <guibutton>Exit</guibutton> Button in the screen,
+glGo will definately shutdown.</para>
+          <para>Maybe I will figure out how to use the KDE/Gnome taskbar for
+this, but I suppose this is not too important now.</para></listitem>
+        <listitem><para>Enable tooltips</para>
+          <para>If you dislike tooltips, uncheck this to disable them
+globally.</para></listitem>
+        <listitem><para>Reuse instance to open SGF files</para>
+          <para>If enabled, an already running glGo process will be reused to
+open new SGF files to avoid starting a new glGo process for each SGF file you
+open from a webbrowser or filemanager. The mechanism is similar to the one in
+gGo. glGo will open a socket on localhost which is listening for incoming
+connections. There is a small python script (standalone exe is available for
+Windows) <filename>open_sgf.py/exe</filename> which will simply send its
+argument to the glGo localhost socket if it finds such a socket. If no socket is
+found, it will start a new glGo process to open the SGF file. This means, you
+should not associate <filename>glGo</filename> with SGF files in your webbrowser
+or filemanager, but <filename>open_sgf</filename> instead to avoid having a new
+glGo opened for each file you open (assuming you want to use glGo as default SGF
+viewer at all) and enable this option.</para>
+          <para>Additionally the Playermanager uses this feature to open its
+games in glGo.</para>
+          <para>The <filename>glGo</filename> executable still accepts a SGF
+file as argument, but this way you cannot reuse an already running glGo
+instance. Of course, if you have lots of RAM available, you don't need to care
+too much.</para>
+          <para>A note on security: On Linux the localserver uses Unix domain
+sockets which is a secure mechanism unless you messed up your umask (but then
+you got more serious problems anyways). The target file is
+<filename>/tmp/glGo_socket</filename>. As the name suggest, Unix domain sockets
+are not available on Windows, so on Windows an Internet domain socket is used,
+which is naturally insecure. The socket is running on port 9998 (most likely
+unused, gGo uses 9999). If you have a firewall, you should be secure against
+malicious attacks. If you run Windows without a firewall, then glGo can indeed
+be a security risk (as is gGo), but then you have much more serious threats to
+worry about than someone hacking your Go client, I suppose.</para></listitem>
+      </itemizedlist>
+
+    </section>
+
+    <section><title>Sound settings</title>
+
+      <itemizedlist>
+        <listitem><para>Global sound</para>
+          <para>If unchecked, all sounds are turned off. If you see this
+checkbox disabled, for some reason the sound libraries failed to load. Please
+check the glGo logfile.</para>
+        </listitem>
+        <listitem><para>Sound type</para>
+          <para>You can select the <link linkend="openalinfo">OpenAL</link> or
+<link linkend="sdlinfo">SDL Mixer</link> sound system here. On Windows both give
+about equal sound quality. On Linux I found the SDL Mixer better than OpenAL.
+However, this might depend very much on your sound hardware and driver, so you
+should just try yourself which system gives you a better result.</para>
+          <note><para>Switching from one sound system to the other might or
+might not work. If it does not work (glGo will tell you), exit and restart glGo,
+then return to the preferences dialog and enable sound again - it is disabled if
+the sound system change failed. Most probably the new sound system should be
+available now. If things still fail, start glGo from the command line and
+configure the sound system via the <userinput>--openal</userinput> or
+<userinput>--sdl</userinput> parameters.</para></note>
+        </listitem>
+      </itemizedlist>
+
+    </section>
+
+    <section><title>IGS settings</title>
+
+      <itemizedlist>
+        <listitem><para>Show shouts in terminal</para>
+          <para>When enabled, shouts will be displayed both in the shouts frame
+and in the main IGS terminal. When disabled, they will only be shown in the
+shouts frame.</para>
+        </listitem>
+        <listitem><para>Skip guests in player list</para>
+          <para>When enabled, guest accounts will not be shown in the player
+list.</para>
+        </listitem>
+        <listitem><para>Display info dialogs</para>
+          <para>When disabled, informations about observed games like results,
+adjourning etc. will not be shown in a dialog. These dialogs might be
+occasionally a bit annoying when observing multiple games, so this option offers
+you to turn these messageboxes off. For own games (well, once they are
+implemented...) this option has no effect.</para>
+        </listitem>
+        <listitem><para>Ayt timer</para>
+          <para>If enabled, glGo will send the <quote>ayt</quote> command (Are
+you there?) every five minutes to IGS to prevent the server logging you out due
+to idle time early. However, this feature won't keep you online for an infinite
+time, when you are you idle too long, the timer will stop. But you should be
+online long enough to observe complete games without worrying about a
+disconnection.</para>
+          <para>This feature has one disadvantage: Your idle time in the player
+list will never go above 5 minutes, so to other users you appear to be present
+while you might be not. Keep that in mind when using this feature.</para>
+          <para>Enabling or disabling the ayt timer takes effect on the next
+connection to IGS.</para>
+        </listitem>
+        <listitem><para>Ignore rank limit for friends</para>
+          <para>If this option is enabled, the current rank limit in the player
+table (for example 1d-3k or something) is ignored when you use the "Friends"
+filter. The idea is, you probably want to see all your friends, from 9p-NR, if
+you use the Friends button. However, this requires some additional work as the
+player list needs to be reread. This is the behaviour known from gGo.</para>
+          <para>If disabled, the rank limit will also be applied when you turn
+on the Friends filter. This is the old behaviour of glGo. It is faster as the
+player list does not need to be reloaded from IGS.</para>
+        </listitem>
+        <listitem><para>Sound for chats</para>
+          <para>If enabled, you will be notified about incoming tells with a
+sound. Every chat window has an own button to enable or disable sound for this
+chat session individually. So if you enabled sound for chats, you can still
+disable it for individual chats, or vice versa.</para></listitem>
+        <listitem><para>Sound for match requests</para>
+          <para>When enabled you will be notified with a sound when you receive
+a match request.</para></listitem>
+        <listitem><para>Time warning</para>
+          <para>Here you can configure time warning for your own games. If your
+byoyomi time runs below the warning threshold, the clock will blink to notify
+you. Additionally you can configure if you want to get a warning
+sound.</para><para>To disable time warning set the threshold to
+zero.</para></listitem>
+        <listitem><para>Autosave</para>
+          <para>You can let glGo automatically save all finished own and/or
+observed games by enabling the autosave options. You should define a target
+directory where the SGF files are saved to. For example, I have a directory
+<filename class="directory">IGS/own</filename> and <filename
+class="directory">IGS/observed</filename> to keep own and observed games
+seperated. You can save both into the same directory if you want. </para>
+          <para>This feature is meant for interaction with the SGF indexing of
+the Playermanager to collect games associated with certain players you might be
+interested in.</para></listitem>
+      </itemizedlist>
+
+    </section>
+
+  </section>
+
+  <section id="openglinfo"><title>OpenGL Information</title>
+
+    <para><inlinemediaobject>
+        <imageobject>
+          <imagedata srccredit="OpenGL logo"
+            width="200"
+            depth="88" format="JPG" align="right"
+            fileref="images/opengl_logo.jpg"/></imageobject></inlinemediaobject></para>
+
+    <section><title>Textures</title>
+      <para>Textures are used for the stones and the goban. The white stones are
+overlayed with an image for a slight grain effect. The goban will always have a
+wooden texture, switching this off getting an orange board makes little sense.
+The stone textures can be disabled, resulting in plain black and white stones.
+This will improve performance, but the overall quality drops significantly.
+Probably in future versions disabled textures might be removed. Textures don't
+hurt the performance much, and they add quite a lot to the overall scene.</para>
+
+      <section><title>Textures quality</title>
+        <para>The texture quality can be set to low and high. When zooming in,
+the difference should be obvious. Low quality textures will appear blocky. When
+running in hardware mode, high quality textures do not drop performance much, so
+it is a good idea to use them. However, when running in software mode high
+quality textures are a speed killer, so for software mode it is highly
+recommended to switch to low quality. When the board is not zoomed in closely,
+the difference is not too noticeable.</para>
+      </section>
+
+    </section>
+
+    <section><title>Light</title>
+
+      <section><title>Reflections</title>
+        <para>Light causes the reflection effect on the black stones, which look
+quite similar to the stones in the Java version of gGo. When rotating the board,
+the reflection will slider over the stone surface relatively to the light
+source, which is placed slightly to the upper left. Think about a lamp shining
+just over your head.</para>
+      </section>
+
+      <section><title>Shadows</title>
+        <para>Shadows significantly add to the overall 3D scene. The shadows are
+drawn relative to the light source. Basically they are just another light
+effect, but can be toggled off independent from light to improve performance in
+software mode while keeping the reflection effect. Shadows require light to be
+enabled.</para>
+      </section>
+
+    </section>
+
+    <section><title>Blending</title>
+      <para>Blending is an important effect. All antialias effects (see below)
+depend on blending enabled. Blending means that the alpha value of each pixel
+will be calculated when drawing the scene. When you take the border of a stone
+or a grid line, the pixels close to the wooden board will have a lower alpha
+value, so the borderline will not appear blocky, instead the edge of the black
+grid lines or the stones will be smooth. When blending is disabled, all
+antialias effects will not work. Blending is a recommended feature, however it
+can be quite performance costly on software mode. You need to find out if
+trading the performance for quality is worth it. When running in hardware mode,
+blending is very fast and should be enabled.</para>
+    </section>
+
+    <section><title>Antialiasing</title>
+      <para>You might notice the grid lines and stone edges can get blocky,
+which is called aliasing. The effect which prevents this is called antialiasing.
+glGo supports two antialias modes, a third is accessible via the configuration
+of your 3D driver.</para>
+      <para>Two simple but quite effective antialias settings affect the drawing
+of lines and stones only. This are the line and stone antialias settings in
+glGo. You find them in the <guimenu>View</guimenu> menu. Blending must be
+enabled, else this will show little effect.</para>
+
+      <section><title>Line antialiasing</title>
+        <para>This will affect the grid on the goban and smooth the lines when
+rotating the board. If turned off, the lines will appear blocky. The quality of
+this effect depends on the capability of your graphic card.</para>
+      </section>
+
+      <section><title>Stone antialiasing</title>
+        <para>This will affect the board of stones to appear smooth. The effect
+should be obvious when toggling this on and off. This is a recommended feature
+which does not affect performance much and even is fast in software mode, so
+there is little reason to turn this off.</para>
+      </section>
+
+      <section><title>Scene antialiasing</title>
+        <para>Scene antialiasing will improve not only the lines and stones but
+the complete display. To enable this feature, turn on the
+<guimenuitem>Antialiasing scene</guimenuitem> menu item in glGo. You can
+configure if low or high quality should be used. This scene antialiasing effect
+can be very slow on older hardware. It only runs in hardware mode on very new
+cards (hardware supported accumulation buffer, to be specific), so this is quite
+slow when it is not supported by the card, as the CPU has to do the work. If you
+have a fast computer, on low quality setting it might still be performant
+enough. But with lots of stones on the board and on high quality settings this
+eats CPU power for breakfast unless your card has the above mentioned hardware
+accumulation buffer. I think Geforce4 has it, but not sure.</para>
+        <para>Modern graphic cards have a feature called Multisampling, which
+will also smooth the overall scene. glGo will automatically turn multisampling
+on if it is supported by the hardware.</para>
+        <tip><para>You need to enable full screen antialiasing (FSAA) in your 3D
+driver. You can access this in the 3D driver configuration dialog, for NVidia
+cards (sorry, no idea about the ATI and Matrox drivers) there is a slider which
+allows the FSAA detail setting. On Linux you can control this feature by setting
+an environment variable, see the documentation of your driver. Unfortunately
+this configuration is not accessible from the application itself. FSAA is
+supported by most recent graphic cards.</para></tip>
+        <para>You might need to play a little with the settings and your 3D
+driver configuration to find good settings which meet your needs for quality and
+performance.</para>
+        <tip><para>On a medium to low-end computer you should be Ok if you have
+a recent 3D driver installed (see section requirements) and enable Blending,
+Line and Stone antialias, Textures and Light. Keep the Scene antialias in glGo
+disabled. If your card supports it, enable FSAA in the driver configuration. On
+a high-end computer give the glGo Scene antialiasing a try and see how much it
+drops the performance.</para>
+        </tip>
+      </section>
+
+    </section>
+
+    <section><title>Render to texture</title>
+      <para>Render to texture means the full display is not instantly drawn on
+the window but instead first drawn into an image (a "texture") and then this
+texture is drawn on the window. The advantage of this feature is the display is
+buffered in the texture, and when you for example minimize and restore the
+window, redrawing the whole scene will be much faster as only the already
+existing texture is drawn again, not the whole scene again. Also when opening a
+menu or a dialog the cached texture will be used to redraw the window. Only when
+the board changes, like when a stone is played, the scene will be redrawn. This
+feature also prevents some display artifacts when other windows overlap the glGo
+board.</para>
+      <para>The disadvantage is a minimal performance drop as drawing the
+texture to the screen takes an extra step in the whole process, but this effect
+is minimal when running with hardware acceleration. Actually this feature will
+rather improve the overall performance as the scene does not need to be redrawn
+constantly when something happens to the window, like another window or dialog
+is laid over it. However, if you are running in software mode, disabling Render
+to texture will speed up glGo significantly.</para>
+    </section>
+
+    <section><title>Blurring</title>
+      <para>When blurring is enabled, the whole scene will be slightly smeared.
+You maybe know this effect from common paint software, most offer a feature when
+you can smear the existing image with a brush.</para>
+      <para>Blurring only works if Render to texture is enabled. When the
+texture is drawn to the screen and blurring is enabled, it will be drawn several
+times having a small offset in each turn - this is called jittering. Each image
+will be blended into each other, and as each image has a faint offset to each
+other the whole scene will be slightly worn away. When Render to texture is
+disabled, this feature cannot work, as then the whole scene is only drawn once
+directly into the window. So enabling Blur while having Render to texture
+disabled makes no sense (yes, the software should check this, but it does not
+yet.)</para>
+      <para>I am currently not sure if blurring makes much sense. I personally
+don't like the effect much.</para>
+    </section>
+
+    <section><title>Fast rendering</title>
+      <para>While rotating the board using the cursor keys, to be exact while
+one of the cursor keys is pressed down, some of the above mentioned display
+improvements are temporary disabled to speed up the rotating. While rotating the
+whole scene has to be redrawn quite often, so every unnecessary feature will
+slow this down. And while the picture is moving, not the best quality is
+required.</para>
+      <para>Once you release the key, the final scene will be drawn with all
+settings enabled again. This should make rotating more efficient while the
+quality drop should not be very noticeable during the movement. If you have a
+fast computer, you can probably keep this disabled. Try and see if this makes a
+significant performance difference.</para>
+    </section>
+
+    <section><title>Scissor test</title>
+      <para>The OpenGL scissor test allows to only draw a part of the whole
+scene instead of the complete view. The basic idea is: When adding just a single
+stone, usually done by playing it or navigating forward in a game review, and
+when there are no captures, then it is not really necassary to redraw the
+complete board with all stones just to add this one additional stone. This is
+especially true if there are quite a lot of stones, like more than 200, on the
+board, when rendering all stones is getting slow. In such a case the scissor
+test will prevent redrawing everything and only add the single new stone into
+the otherwise unchanged scene.</para>
+      <para>Obviously there are some problems with this concept. When there are
+captures, not only one stone has to be added but also other stones being
+removed. If there are SGF marks on the board they must be removed. When going
+through variations the ghost stones indicating branches need to be drawn or
+removed. In all these cases too much changes on the board so the scissor test
+makes no sense anymore. glGo will then automatically disable scissoring for such
+a move and redraw the full scene. When playing or moving through a normal game
+this is not much of a problem, as captures don't occur at every move, and when
+they occur scissoring is automatically disabled. However, when looking at a game
+with a lot of SGF markers, Kogos Joseki Dictionary being an extreme example, the
+scissor test makes no sense and should be completely disabled.</para>
+      <para>Besides being not trivial, scissoring will produce some display
+artifacts when the board is rotated. To sum it up, if you really need some speed
+improvement, try this feature for normal games and switch it off for SGF editing
+(or use the 2D board for this task). If your computer can handle the 3D board
+without scissoring properly, then keep it disabled. But on my old P2 with 333
+MHz scissoring is a significant performance boost with more than 200 stones on
+the board.</para>
+      <para>Scissor test and render-to-texture both enabbled will create display
+distortion. Enable only one of these features at the same time.</para>
+    </section>
+
+    <section><title>Stone quality</title>
+      <para>Stone quality defines from how many triangles the wireframe of a
+stone is built. Using more triangles obviously looks better and is slower. High
+means a stone is created from 512 triangles, low means from 128 triangles. Why
+triangles instead of quads? Because most graphiccards can draw triangles much
+faster.</para>
+      <para>Any values above 512 don't improve the look anymore but get very
+slow, so "High" definately means good enough.</para>
+    </section>
+
+    <section><title>Marks</title>
+      <para>glGo supports a mark for the last move and a couple of common SGF
+marks like square, triangles, letters etc.</para>
+
+      <para>There are two markers available for the last move mark:</para>
+
+      <section><title>Simple marks</title>
+        <para>Simple marks appear very similar to the Java version. A plain
+circle is drawn on the stone - actually it is drawn inside the stone to avoid
+odd effects when rotating the board.</para>
+        <para>The SGF marks like square, triangle, circle and cross marks are
+always drawn as simple marks.</para>
+      </section>
+
+      <section><title>Multitexture marks</title>
+        <para>Multitextures are an extension to OpenGL and is only available
+when running in hardware mode. Most graphic cards should support multitextures.
+Multitextures means, a second texture can be laid over the stone. The white
+stones already have the grain texture, multitexture allows to add a second
+texture with a mark. This makes the marks look realistic, as if painted over the
+stone, and not floating above or inside the stone as the simple marks do. I
+intentionally made a mark texture which looks "as if painted", instead of the
+usual plain circle or cross. I think this looks pretty realistic. There is
+currently one problem with these marks, when zooming in closely and rotating,
+the marks slide over the stone. This has to be improved.</para>
+
+        <note><para>glGo will detect if your graphic card supports multitextures
+and enable this feature. If it is not supported, simple marks are automatically
+disabled.</para></note>
+      </section>
+
+    </section>
+
+    <section><title>Background</title>
+      <para>You can select the background color if you dislike the default red
+background. In future versions you will also be able to use an image as
+background, like the green table in the Java gGo.</para>
+    </section>
+
+  </section>
+
+  <section id="sdlinfo"><title>SDL Information</title>
+    <para><inlinemediaobject>
+        <imageobject>
+          <imagedata srccredit="SDL logo"
+            width="88"
+            depth="50" format="JPG" align="right"
+            fileref="images/sdl_logo.jpg"/></imageobject></inlinemediaobject></para>
+    <para>SDL is a library for writing 2D and 3D crossplatform games and
+applications. glGo uses SDL for the 2D board display, the SDL Mixer sound system
+as alternative to OpenAL and a couple of supportive tasks like loading and
+rescaling images. The SDL 3D functions are not directly used.</para>
+    <para>The 2D SDL board offers and alternative display for users who prefer
+the classic top-down 2D view like known from other clients or have trouble
+getting the 3D display working. The 2D boards looks very similar to the gGo Java
+board, which is intentional, and is very fast even on old computers.</para>
+    <para>There are two types of fonts available for the SDL board: A fixed 8x8
+font and scaled true-type fonts. The true-type fonts look much better but render
+slightly slower than the fixed font. The fixed font is displayed very fast and
+has a good quality, but 8x8 can get too small if the board window is large. The
+scaled font will always have an adjusted size so the letters of SGF marks or the
+coordinates will fit to the stone and board size.</para>
+    <para>The SDL Mixer sound system can be used instead of <link
+linkend="openalinfo">OpenAL</link>. On Windows OpenAL should produce a better
+sound quality, on Linux it very much depends on your sound hardware. Give it a
+try with the <quote>soundtest</quote> program which is bundled in the glGo
+installation and decide for yourself. You find more informations about sound in
+the next chapter.</para>
+
+  </section>
+
+  <section id="openalinfo"><title>OpenAL Sound System</title>
+    <para><inlinemediaobject>
+        <imageobject>
+          <imagedata srccredit="OpenAL logo"
+            width="199"
+            depth="107" format="JPG" align="right"
+            fileref="images/openal_logo.jpg"/></imageobject></inlinemediaobject></para>
+    <para>glGo uses the <ulink url="http://www.openal.org">OpenAL</ulink> sound
+library published by Creative and NVidia. I admit it appears somewhat wired to
+include a full fledged sound library just to play some simple sound files. But
+there are some good reasons to do so.</para>
+    <para>The standard sound playing mechanism on Windows is pretty bad. It is
+impossible to ensure a good sound quality if the computer is busy with something
+else, like a running GNU Go calculating the next move in the background. So
+using plain Win32 API functions to play a sound is not a solution.</para>
+    <para>The situation on Linux is similar. Without the usage of an additional
+library it is not possible to easily access the various Linux sound devices like
+Alsa, Esd, Artsd, OSS etc.</para>
+    <para>High quality sound is available on Windows via the DirectSound layer,
+which is a part of DirectX. However, directly accessing DirectSound would mean a
+Windows-only solution. High quality sound on Linux is available via the native
+OSS kernel modules or Alsa. OpenAL serves as platform independant intermediate
+layer to access the native sound devices. OpenAL will use DirectSound on Windows
+and whatever sound device can be found or configured on Linux. This is a good
+solution as the application itself does not need to bother about the platform
+dependant low level tasks, OpenAL will take care of that.</para>
+    <para>So the usage of OpenAL for playing some simple sound is certainly
+overkill but justified concerning the aim of crossplatform availability of
+glGo.</para>
+    <para>There is a small "soundtest" program which will play three sounds to
+test if OpenAL works on your system. Start it from a commandline (DOS console or
+xterm) and try <userinput>soundtest 0</userinput> to start the OpenAL test and
+<userinput>soundtest 1</userinput> for the SDL mixer test.</para>
+    <para>OpenAL is already included in the Windows glGo installer. On Linux you
+need to install OpenAL from your distribution, it is not included in the glGo
+Linux version installer. Please also see the chapters <link
+linkend="requirements">Requirements</link> and <link
+linkend="installation">Installation</link> of this manual.</para>
+    <para>There are commandline options to disable global sound (if you have
+trouble with esd or artsd on Linux) and to select the sound system (if you have
+trouble doing that in the preferences menu at runtime). Use <userinput>glGo
+-n</userinput> to disable sound, <userinput>glGo --openal</userinput> to select
+the OpenAL sound system and <userinput>glGo --sdl</userinput> to select the SDL
+Mixer sound system. These options will overwrite the saved configuration.</para>
+    <tip><para>On Linux OpenAL will by default use the OSS kernel sound device.
+As alternative you can tell it to try alsa, artsd or esd by creating a file
+<filename>~/.openalrc</filename> with a line like for example: <quote>(define
+devices '(alsa esd native))</quote>. This will try alsa first, esd next and OSS
+last. Unlike gGo/Java I managed to get xmms and glGo sound at the same time
+using OpenAL on esd.</para></tip>
+  </section>
+
+  <section id="playerdatabase"><title>The player database</title>
+    <para>With glGo 0.0.5.5 comes a new player database which is implemented in
+Python and used as a sort of "plugin" (embedded python, to be exact) within
+glGo. Right now it offers the friends/bozo list known from the Java gGo, the
+possibility to edit and assign custom flags and write a comments about a player.
+Additionally directories can be scanned for SGF files and all games of a certain
+player be looked up in the playermanager.</para>
+    <para>Why as Python plugin, you ask? Such stuff like database access is much
+easier to do in Python than in C++, and the possibility to access Python code
+from within a C/C++ program makes integration into glGo painless. The idea of a
+player database has been around and suggested for the gGo Java development since
+a year ago, but I never implemented it because it seemed a quite complex task.
+With Python such things are easier and faster to write. The only disadvantage I
+can see is, on Linux you need Python 2.3 runtime installed. But Python ships
+with all Linux distributions, so it should not be a big deal. Type "apt-get
+install python" or whatever your distribution offers and you are set. Windows
+users don't need to bother, the glGo Windows installer comes with all required
+libraries.</para>
+    <para>There are several ways to access and edit the player database. From
+within glGo you can assign friend or bozo status to a player from a dialog, the
+playertable popup or the playerinfo dialog - just like in the Java gGo client. I
+do not plan to add much more to glGo itself. Instead there is a seperate
+application which will allow to edit and access the database in more detail,
+which is written in Python. Both glGo and the standalone GUI access the same
+database, you can edit it with the GUI while running glGo without problem as
+glGo will automatically detect if the database has been changed. There is also a
+simple Python commandline interface for the database, which might be useful for
+the terminal fans out there.</para>
+    <para>The GUI allows you to define customized flags, like "Escaper" or "Cool
+dude", and then assign these flags to a player both in glGo and the
+playermanager. Go to <guimenuitem>"Edit flags"</guimenuitem> in the
+playermanager to define up to 5 flags. You will then see checkboxes for each
+custom flag in the playerinfo dialogs of glGo and Playermanager. Please note a
+flag is stored as its number (1-5) in a player, so if you for example assign
+flag #1 as "Escaper" and set flag #1 in a player, then change flag #1 to "Cool
+dude", all players formerly flagged as "Escaper" are now "Cool dudes". You can
+use the filter choicebox in the first playermanager tab to get all players with
+certain flags set listed if you want to do some cleanups.</para>
+    <para>You can write a short comment about each player, this feature can be
+accessed from both glGo and Playermanager.</para>
+    <para>You can cleanup the player database, which will remove all players
+which are not friend or bozo, have no flags and no comment set.</para>
+    <para>If you use the autosave feature in glGo (or have a game collection on
+your disk from whatever source), you can create an index of SGF games within a
+directory with the <guimenuitem>"Scan directory"</guimenuitem> menuitem in the
+playermanager. The SGF game headers are parsed and the information written in to
+an index file. When you open the player info dialog in playermanager, you get a
+list of games with this player. Double-clicking on a table row opens the SGF in
+glGo if the glGo localserver mechanism is enabled.</para>
+    <para>The <guimenuitem>Cleanup games</guimenuitem> menuitem will remove all
+game entries from the index where no SGF file was found. This is useful if you
+manually deleted SGF files from a previously scanned directory.</para>
+    <para>The SGF index is in no way as sophisticated as Kombilo. The idea is
+simply to find all games a certain player has played. For more extensive
+studying I strongly recommand the usage of <ulink
+url="http://www.u-go.net/kombilo/">Kombilo</ulink>, excellent program.</para>
+    <para>Both the Python GUI and commandline applications are bundled in the
+glGo installation, see the "pm" directory in the glGo installation directory,
+but (!) these require Python and wxPython installed (wxPython for the GUI,
+commandline runs without wxPython). I am aware most users won't have wxPython
+available. Most Linux users will have Python (you need it anyways to run glGo),
+but probably not wxPython. Windows users will in most cases have neither. There
+are standalone installers for both Windows and Linux available for download with
+the GUI and commandline tools which bundle Python and wxPython. See it as an
+add-on for glGo. I made it an extra download because it is quite large and I
+don't want to bloat your system if you might already have the require Python
+installed, and this way I can release glGo or the database GUI seperately when I
+change things. The Python scripts which are already included in glGo are small
+files and exactly the same as the standalone installer, so if you have wxPython
+installed, use those and you don't need the extra installer.</para>
+
+  </section>
+
+  <section id="translations"><title>Translations</title>
+    <para>For me it is an important feature to allow glGo to be translated into
+several languages like gGo/Java. Translating is pretty easy and straightforward
+and uses the GNU gettext mechanism which is a powerful way to implement
+international support in an application. Right now I maintain a German
+translation while developing the program as German is my native language. This
+way I can make sure that glGo can be properly translated. It won't make yet
+sense to ask other people to translate glGo into their language as too many
+things change quickly. Once the application gets more stable and the texts won't
+change rapidly anymore, I will ask for assistance to add other languages.</para>
+    <para>If you are interested and want to offer your help to translate glGo
+into your language somewhen in the future, please drop me a mail.</para>
+    <para>It will be possible to support Japanese, Chinese and Korean characters
+in the future. Right now it is not yet implemented, but wxWindows allows Unicode
+support.</para>
+  </section>
+
+  <section id="problems"><title>Known problems</title>
+    <para>Generally expect this application to be unstable. This is not a
+finished application and in no way stable software. If it crashes, don't panic.
+Please try to reproduce the problem and report the bug to me either by email or
+post it in the forums at the sourceforge project page.</para>
+    <para>On IGS only 19x19 games are supported. Any other size currently simply
+won't work. This is on my TODO list for one of the next releases.</para>
+    <para>When opening a board on Windows, sometimes there are display
+artifacts. Once the window got a bit resized or moved, the artifacts are gone.
+Another good idea is to enable "Autohide starter" in the preferences, this seems
+to solve the issue as well. This does not happen on Linux. I don't know the
+reason for this yet.</para>
+    <para>If you run a GNU Go score estimation and kill the gnugo process via
+task manager or killall, glGo will crash.</para>
+    <para>The SGF parser has trouble with Kogos Joseki dictionary. I remember
+this problem from gGo/Java, Kogo has some wired variations and is not SGF
+conform. This is on my TODO list.</para>
+    <para>When reading an english komi value (like 6.5) with a german locale,
+the komi will be detected as invalid (it wants 6,5). I did not find a solution
+for this yet. Switch to english if you are german and this bothers you,
+otherwise just ignore it.</para>
+    <para>The captures algorithm has trouble with Kos. When loading SGF files
+this could produce some wired results. With observed IGS games it should be ok
+as then glGo won't calculate captures itself but instead use the provided list
+sent from IGS.</para>
+    <para>On Linux, toggling the toolbar creates some artifacts; resize the
+window manually a little to fix this. I don't know why this happens, it's ok on
+Windows.</para>
+    <para>The fonts are not yet optimal, the underlaying grid disturbs the
+display. This is on my TODO list.</para>
+    <para>The new OpenGL scissor test causes problems with the cursor ghost
+stone in own games.</para>
+    <para>Automatch does not display a dialog yet. On TODO list.</para>
+    <para>The localhost server mechanism on Windows is a potential security risk
+if you run Windows without firewall. However, if you do such, you have much more
+serious things to worry about than someone hacking your Go client.</para>
+
+    <note><para>If you encounter trouble, please don't hesitate to tell me about
+it. What I don't know I cannot solve.</para></note>
+  </section>
+
+  <section id="copyright"><title>Copyright</title>
+
+    <section><title>Authors</title>
+      <para>glGo is written by Peter Strempel. The artwork was created by
+Tweet.</para>
+    </section>
+
+    <section><title>Copyright and licence</title>
+      <para>glGo, a prototype for a 3D Goban based on wxWindows, OpenGL and SDL.
+Copyright &copy; 2003, Peter Strempel.</para>
+      <para>This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by the Free
+Software Foundation; either version 2 of the License, or (at your option) any
+later version.</para>
+      <para>This program is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+details.</para>
+      <para>You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software Foundation, Inc., 59
+Temple Place, Suite 330, Boston, MA  02111-1307  USA</para>
+      <para>Please see the file COPYING in this distribution for details about
+the <ulink url="http://www.gnu.org/copyleft/gpl.html">GPL</ulink>.</para>
+      <para>The artwork and images are copyrighted work and must not be
+redistributed. Copyright &copy; 2002, 2003, Tweet. All rights reserved.</para>
+
+    </section>
+
+    <section><title>Third-party software</title>
+
+      <para>glGo uses several libraries which are either Free Software or
+released under a royality-free licence. My respect and credits go to the authors
+of these packages which are overall of excellent quality.</para>
+
+      <itemizedlist>
+
+        <listitem><para>This software is based on the <ulink
+url="http://www.opengl.org">OpenGL</ulink> library.</para></listitem>
+
+        <listitem><para>This software is based on the <ulink
+url="http://www.wxwindows.org">wxWindows</ulink> library.</para></listitem>
+
+        <listitem><para>This software uses the <ulink
+url="http://www.libsdl.org">SDL</ulink>, <ulink
+url="http://www.libsdl.org/projects/SDL_image/">SDL_image</ulink>, <ulink
+url="http://www.libsdl.org/projects/SDL_ttf/">SDL_ttf</ulink>, <ulink
+url="http://www.libsdl.org/projects/SDL_mixer/">SDL_mixer</ulink> and <ulink
+url="http://www.ferzkopp.net/Software/SDL_gfx-2.0/">SDL_gfx</ulink> libraries,
+which are licenced under the LGPL.</para></listitem>
+
+        <listitem><para>This software is based in part on the work of the <ulink
+url="http://www.ijg.org/"> Independent JPEG Group</ulink>.</para></listitem>
+
+        <listitem><para>The sound system is based on the <ulink
+url="http://www.openal.org">OpenAL</ulink> library. OpenAL is licenced under the
+LGPL.</para></listitem>
+
+        <listitem><para>The Linux version is based on the <ulink
+url="http://www.gtk.org/">GTK+</ulink> library which is licenced under the
+LGPL.</para></listitem>
+
+        <listitem><para>This software is based on the <ulink
+url="http://plib.sourceforge.net">PLIB</ulink> library. PLIB is licenced under
+the LGPL.</para></listitem>
+
+        <listitem><para>This software uses the <ulink
+url="http://zziplib.sourceforge.net/">zziplib</ulink> library. zziplib is
+licenced under the LGPL.</para>
+          <para>For details about the LGPL license see the file LGPL.txt in this
+distribution.</para></listitem>
+
+        <listitem><para>glGo uses <ulink
+url="http://www.python.org">Python</ulink>.</para></listitem>
+
+        <listitem><para>The Windows installer includes a binary of <ulink
+url="http://www.gnu.org/software/gnugo/gnugo.html">GNU Go</ulink>. GNU Go is
+licenced under the GPL. Please see the file Readme-GNU-Go.txt in this
+distribution for details.</para></listitem>
+
+        <listitem><para>The Windows installation package is created with the
+<ulink url="http://nsis.sourceforge.net/">Nullsoft Scriptable Install
+System</ulink>.</para></listitem>
+
+        <listitem><para>The Linux installer is created using <ulink
+url="http://www.easysw.com/epm/">EPM</ulink>.</para></listitem>
+
+      </itemizedlist>
+
+    </section>
+
+  </section>
+
+</article>

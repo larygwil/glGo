@@ -1,0 +1,148 @@
+<?xml version="1.0" ?>
+<resource version="2.3.0.1" xmlns="http://www.wxwindows.org/wxxrc">
+  <object class="wxPanel" name="igs_mainframe_panel">
+    <object class="wxFlexGridSizer">
+      <cols>1</cols>
+      <rows>2</rows>
+      <object class="sizeritem">
+        <object class="wxPanel">
+          <object class="wxGridSizer">
+            <cols>1</cols>
+            <object class="sizeritem">
+              <object class="wxTextCtrl" name="output">
+                <style>wxTE_MULTILINE|wxTE_READONLY|wxTE_RICH</style>
+              </object>
+              <flag>wxEXPAND</flag>
+            </object>
+          </object>
+        </object>
+        <flag>wxALL|wxEXPAND</flag>
+        <border>5</border>
+        <minsize>300,300</minsize>
+      </object>
+      <object class="sizeritem">
+        <object class="wxPanel">
+          <object class="wxBoxSizer">
+            <orient>wxVERTICAL</orient>
+            <object class="sizeritem">
+              <object class="unknown" name="input"/>
+              <flag>wxEXPAND</flag>
+              <minsize>0,22</minsize>
+            </object>
+          </object>
+        </object>
+        <option>1</option>
+        <flag>wxBOTTOM|wxLEFT|wxRIGHT|wxEXPAND</flag>
+        <border>5</border>
+      </object>
+      <growablerows>0</growablerows>
+      <growablecols>0</growablecols>
+    </object>
+  </object>
+  <object class="wxMenuBar" name="igs_mainframe_menu">
+    <object class="wxMenu">
+      <label>Connection</label>
+      <object class="wxMenuItem" name="connect">
+        <label>Connect</label>
+        <accel>Alt-C</accel>
+        <help>Connect to IGS</help>
+      </object>
+      <object class="wxMenuItem" name="disconnect">
+        <label>Disconnect</label>
+        <accel>Alt-D</accel>
+        <help>Disconnect from IGS</help>
+      </object>
+      <object class="separator"/>
+      <object class="wxMenuItem" name="wxID_CLOSE">
+        <label>Close</label>
+        <accel>Ctrl-W</accel>
+        <help>Close this window</help>
+      </object>
+    </object>
+    <object class="wxMenu">
+      <label>_Settings</label>
+      <object class="wxMenuItem" name="account_config">
+        <label>Setup _account</label>
+        <help>Setup your IGS account</help>
+      </object>
+      <object class="wxMenuItem" name="preferences">
+        <label>_Preferences</label>
+        <accel>Alt-P</accel>
+        <help>Configure global application settings</help>
+      </object>
+      <object class="wxMenuItem" name="player_management">
+        <label>Player mana_gement</label>
+        <accel>Ctrl-M</accel>
+        <help>Configure your friends and ignored list</help>
+      </object>
+      <object class="separator"/>
+      <object class="wxMenuItem" name="my_stats">
+        <label>_My stats</label>
+        <accel>Ctrl-S</accel>
+        <help>View your own information and statistics</help>
+      </object>
+      <object class="wxMenuItem" name="user_stats">
+        <label>_User stats</label>
+        <accel>Ctrl-U</accel>
+        <help>View information and statistics of another player</help>
+      </object>
+    </object>
+    <object class="wxMenu">
+      <label>_View</label>
+      <object class="wxMenuItem" name="clear_output">
+        <label>_Clear output</label>
+        <help>Clear output text area</help>
+      </object>
+      <object class="wxMenuItem" name="output_font">
+        <label>Terminal _font</label>
+        <help>Change font of the output terminal</help>
+      </object>
+    </object>
+    <object class="wxMenu">
+      <label>_Tools</label>
+      <object class="wxMenuItem" name="toggle_players">
+        <label>Players</label>
+        <accel>F2</accel>
+        <help>Show or hide the player table</help>
+        <checkable>1</checkable>
+      </object>
+      <object class="wxMenuItem" name="toggle_games">
+        <label>_Games</label>
+        <accel>F3</accel>
+        <help>Show or hide the games table</help>
+        <checkable>1</checkable>
+      </object>
+      <object class="wxMenuItem" name="new_tell">
+        <label>_Chat</label>
+        <accel>F4</accel>
+        <help>Open a new chat window</help>
+      </object>
+      <object class="wxMenuItem" name="toggle_shouts">
+        <label>_Shouts</label>
+        <accel>F5</accel>
+        <help>Show or hide the shouts frame</help>
+        <checkable>1</checkable>
+      </object>
+    </object>
+    <object class="wxMenu">
+      <label>_Help</label>
+      <object class="wxMenuItem" name="wxID_HELP">
+        <label>_Manual</label>
+        <accel>F1</accel>
+        <help>Read the manual</help>
+      </object>
+      <object class="wxMenuItem" name="wxID_ABOUT">
+        <label>_About</label>
+        <help>Show information about this application</help>
+      </object>
+      <object class="wxMenuItem" name="open_webpage">
+        <label>glGo on the _Web</label>
+        <help>Open the glGo webpage in your browser</help>
+      </object>
+      <object class="wxMenuItem" name="check_update">
+        <label>Check for _update</label>
+        <help>Connect to the glGo webpage and check if there is a new version available</help>
+      </object>
+    </object>
+  </object>
+</resource>

@@ -1,0 +1,203 @@
+<?xml version="1.0" ?>
+<resource version="2.3.0.1" xmlns="http://www.wxwindows.org/wxxrc">
+  <object class="wxDialog" name="about_dialog">
+    <title>About glGo</title>
+    <centered>1</centered>
+    <object class="wxBoxSizer">
+      <orient>wxVERTICAL</orient>
+      <object class="sizeritem">
+        <object class="wxNotebook" name="notebook">
+          <object class="notebookpage">
+            <label>About glGo</label>
+            <object class="wxPanel">
+              <object class="wxBoxSizer">
+                <orient>wxHORIZONTAL</orient>
+                <object class="sizeritem">
+                  <object class="wxStaticBitmap" name="ggo_image">
+                    <bitmap stock_id="wxART_MISSING_IMAGE"></bitmap>
+                  </object>
+                  <flag>wxALL</flag>
+                  <border>10</border>
+                  <minsize>32,32</minsize>
+                </object>
+                <object class="sizeritem">
+                  <object class="wxStaticText" name="about_glgo_text">
+                    <label></label>
+                    <style>wxST_NO_AUTORESIZE</style>
+                  </object>
+                  <option>1</option>
+                  <flag>wxALL|wxEXPAND</flag>
+                  <border>10</border>
+                </object>
+              </object>
+            </object>
+            <selected>1</selected>
+          </object>
+          <object class="notebookpage">
+            <label>Graphics</label>
+            <object class="wxPanel" name="">
+              <object class="wxBoxSizer">
+                <orient>wxVERTICAL</orient>
+                <object class="sizeritem">
+                  <object class="wxTextCtrl" name="about_opengl_text">
+                    <style>wxTE_MULTILINE|wxTE_READONLY</style>
+                  </object>
+                  <option>1</option>
+                  <flag>wxALL|wxEXPAND</flag>
+                  <border>10</border>
+                </object>
+              </object>
+              <tooltip>Informations about the OpenGL graphics system</tooltip>
+            </object>
+          </object>
+          <object class="notebookpage">
+            <label>Sound</label>
+            <object class="wxPanel">
+              <object class="wxBoxSizer">
+                <orient>wxVERTICAL</orient>
+                <object class="sizeritem">
+                  <object class="wxTextCtrl" name="about_openal_text">
+                    <style>wxTE_MULTILINE|wxTE_READONLY</style>
+                  </object>
+                  <option>1</option>
+                  <flag>wxALL|wxEXPAND</flag>
+                  <border>10</border>
+                </object>
+              </object>
+              <tooltip>Informations about the OpenAL sound system</tooltip>
+            </object>
+          </object>
+          <object class="notebookpage">
+            <label>Copyright</label>
+            <object class="wxPanel">
+              <object class="wxGridSizer">
+                <object class="sizeritem">
+                  <object class="wxTextCtrl">
+                    <value>Copyright (C) 2003, Peter Strempel
+
+This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+glGo is using the following third-party libraries:
+
+* The OpenGL library, see http://www.opengl.org
+* The wxWindows library, see http://wwww.wxwindows.org
+* The SDL, SDL image, SDL ttf and SDL mixer libraries, see http://www.libsdl.org
+* The SDL gfx library, see http://www.ferzkopp.net/Software/SDL_gfx-2.0/
+* The OpenAL library, see http://www.openal.org
+* The GTK+ library, see http://www.gtk.org/
+* The PLIB library, see http://plib.sourceforge.net/
+* The zziplib library, see http://zziplib.sourceforge.net
+* GNU Go, see http://www.gnu.org/software/gnugo/gnugo.html.
+* The Nullsoft Scriptable Install System, see http://nsis.sourceforge.net/
+* EPM, see http://www.easysw.com/epm/
+* This software is based in part on the work of the Independent JPEG Group.</value>
+                    <style>wxTE_MULTILINE|wxTE_READONLY|wxTE_RICH2</style>
+                  </object>
+                  <flag>wxEXPAND</flag>
+                </object>
+                <cols>1</cols>
+              </object>
+            </object>
+          </object>
+        </object>
+        <flag>wxALL|wxEXPAND</flag>
+        <border>5</border>
+        <minsize>400,260</minsize>
+      </object>
+      <object class="sizeritem">
+        <object class="wxPanel">
+          <object class="wxGridSizer">
+            <cols>2</cols>
+            <object class="sizeritem">
+              <object class="wxBoxSizer">
+                <orient>wxHORIZONTAL</orient>
+                <object class="sizeritem">
+                  <object class="wxButton" name="open_webpage">
+                    <label>_Webpage</label>
+                    <tooltip>Open glGo webpage in your browser</tooltip>
+                  </object>
+                  <flag>wxRIGHT</flag>
+                  <border>5</border>
+                </object>
+                <object class="sizeritem">
+                  <object class="wxButton" name="check_update">
+                    <label>_Update</label>
+                    <tooltip>Connect to the glGo webpage and check if there is a new version available</tooltip>
+                  </object>
+                  <flag>wxLEFT|wxRIGHT</flag>
+                  <border>5</border>
+                </object>
+              </object>
+              <flag>wxTOP|wxBOTTOM|wxRIGHT</flag>
+              <border>3</border>
+            </object>
+            <object class="sizeritem">
+              <object class="wxBoxSizer">
+                <orient>wxHORIZONTAL</orient>
+                <object class="sizeritem">
+                  <object class="wxButton" name="wxID_OK">
+                    <label>_Close</label>
+                    <default>1</default>
+                    <focused>1</focused>
+                  </object>
+                  <flag>wxLEFT|wxRIGHT</flag>
+                  <border>5</border>
+                </object>
+              </object>
+              <flag>wxTOP|wxBOTTOM|wxLEFT|wxALIGN_RIGHT</flag>
+              <border>3</border>
+            </object>
+          </object>
+        </object>
+        <option>1</option>
+        <flag>wxALL|wxEXPAND</flag>
+        <border>5</border>
+      </object>
+    </object>
+  </object>
+  <object class="wxDialog" name="update_checker">
+    <title>Checking for update</title>
+    <object class="wxBoxSizer">
+      <orient>wxVERTICAL</orient>
+      <object class="sizeritem">
+        <object class="wxStaticText">
+          <label>There is a new glGo version available.
+It is recommended to download the new version.</label>
+        </object>
+        <flag>wxALL|wxALIGN_CENTRE</flag>
+        <border>10</border>
+      </object>
+      <object class="sizeritem">
+        <object class="wxBoxSizer">
+          <orient>wxHORIZONTAL</orient>
+          <object class="sizeritem">
+            <object class="wxButton" name="wxID_OK">
+              <label>Great, take me there</label>
+              <tooltip>Visit the glGo download webpage</tooltip>
+            </object>
+            <flag>wxALL</flag>
+            <border>5</border>
+          </object>
+          <object class="spacer">
+            <size>5,0</size>
+          </object>
+          <object class="sizeritem">
+            <object class="wxButton" name="wxID_CANCEL">
+              <label>No thanks, I check later</label>
+              <default>1</default>
+              <focused>1</focused>
+            </object>
+            <flag>wxALL</flag>
+            <border>5</border>
+          </object>
+        </object>
+      </object>
+    </object>
+    <centered>1</centered>
+  </object>
+</resource>

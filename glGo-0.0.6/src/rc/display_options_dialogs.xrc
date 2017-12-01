@@ -1,0 +1,357 @@
+<?xml version="1.0" ?>
+<resource version="2.3.0.1" xmlns="http://www.wxwindows.org/wxxrc">
+  <object class="wxDialog" name="ogl_options_dialog">
+    <title>OpenGL Options</title>
+    <object class="wxBoxSizer">
+      <orient>wxVERTICAL</orient>
+      <object class="sizeritem">
+        <object class="wxPanel">
+          <style>wxRAISED_BORDER</style>
+          <object class="wxFlexGridSizer">
+            <cols>2</cols>
+            <object class="sizeritem">
+              <object class="wxBoxSizer">
+                <orient>wxVERTICAL</orient>
+                <object class="sizeritem">
+                  <object class="wxStaticBoxSizer">
+                    <label>Light effect</label>
+                    <orient>wxVERTICAL</orient>
+                    <object class="sizeritem">
+                      <object class="wxCheckBox" name="reflections">
+                        <label>Reflections</label>
+                        <tooltip>Enable or disable reflexions on the stone surface.</tooltip>
+                      </object>
+                      <flag>wxALL</flag>
+                      <border>3</border>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxCheckBox" name="shadows">
+                        <label>Shadows</label>
+                        <tooltip>Enable or disable stone shadows.</tooltip>
+                      </object>
+                      <flag>wxALL</flag>
+                      <border>3</border>
+                    </object>
+                  </object>
+                  <flag>wxALL|wxEXPAND</flag>
+                  <border>5</border>
+                </object>
+                <object class="sizeritem">
+                  <object class="wxStaticBoxSizer">
+                    <label>Texture mapping</label>
+                    <orient>wxVERTICAL</orient>
+                    <object class="sizeritem">
+                      <object class="wxCheckBox" name="textures">
+                        <label>Use textures</label>
+                        <tooltip>Enable or disable textures for the stones.</tooltip>
+                      </object>
+                      <flag>wxALL</flag>
+                      <border>3</border>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxCheckBox" name="multitextures">
+                        <label>Multitextures</label>
+                        <tooltip>Show a fancy multitexture lastmove marker.\nThis requires textures enabled.\nMultitextures may not be available on all graphiccards.</tooltip>
+                      </object>
+                      <flag>wxALL</flag>
+                      <border>3</border>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxRadioBox" name="textures_quality">
+                        <label>Texture filter quality</label>
+                        <content>
+                          <item>Low</item>
+                          <item>High</item>
+                        </content>
+                        <dimension>2</dimension>
+                        <style>wxRA_SPECIFY_COLS</style>
+                        <tooltip>Quality of texture filtering.\nHigh quality can be slow without hardware acceleration.</tooltip>
+                      </object>
+                      <flag>wxALL</flag>
+                      <border>5</border>
+                    </object>
+                  </object>
+                  <flag>wxALL|wxEXPAND</flag>
+                  <border>5</border>
+                </object>
+                <object class="sizeritem">
+                  <object class="wxStaticBoxSizer">
+                    <label>Board background</label>
+                    <orient>wxVERTICAL</orient>
+                    <object class="sizeritem">
+                      <object class="wxCheckBox" name="background_image">
+                        <label>Background image</label>
+                        <enabled>0</enabled>
+                        <tooltip>Check to use an image as background.\nIf unchecked, you can select a color.</tooltip>
+                      </object>
+                      <flag>wxALL</flag>
+                      <border>5</border>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxButton" name="background_color">
+                        <label>Background color</label>
+                        <tooltip>Select the background color.\nThis only applies if you did not select a background image.</tooltip>
+                      </object>
+                      <flag>wxALL</flag>
+                      <border>5</border>
+                    </object>
+                  </object>
+                  <flag>wxALL|wxEXPAND</flag>
+                  <border>5</border>
+                </object>
+              </object>
+            </object>
+            <object class="sizeritem">
+              <object class="wxBoxSizer">
+                <orient>wxVERTICAL</orient>
+                <object class="sizeritem">
+                  <object class="wxStaticBoxSizer">
+                    <label>Antialias effects</label>
+                    <orient>wxVERTICAL</orient>
+                    <object class="sizeritem">
+                      <object class="wxCheckBox" name="blending">
+                        <label>Blending</label>
+                        <tooltip>Enable or disable blending.\nAll antialias effects require this.</tooltip>
+                      </object>
+                      <flag>wxALL</flag>
+                      <border>3</border>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxCheckBox" name="antialias_lines">
+                        <label>Antialias lines</label>
+                        <tooltip>Antialias the grid lines of the board.\nThis will look ugly without blending.</tooltip>
+                      </object>
+                      <flag>wxALL</flag>
+                      <border>3</border>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxCheckBox" name="antialias_stones">
+                        <label>Antialias stones</label>
+                        <tooltip>Antialias the stones.\nThis will look ugly without blending.</tooltip>
+                      </object>
+                      <flag>wxALL</flag>
+                      <border>3</border>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxCheckBox" name="antialias_scene">
+                        <label>Antialias scene</label>
+                        <tooltip>Antialias the complete scene.\nThis can be slow even with hardware acceleration.</tooltip>
+                      </object>
+                      <flag>wxALL</flag>
+                      <border>3</border>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxRadioBox" name="antialias_scene_quality">
+                        <label>Scene antialias quality</label>
+                        <content>
+                          <item>Low</item>
+                          <item>High</item>
+                        </content>
+                        <dimension>2</dimension>
+                        <style>wxRA_SPECIFY_COLS</style>
+                        <tooltip>Define the quality for scene antialiasing.\nHigh quality can be very slow even with hardware acceleration.</tooltip>
+                      </object>
+                      <flag>wxALL</flag>
+                      <border>5</border>
+                    </object>
+                  </object>
+                  <flag>wxALL|wxEXPAND</flag>
+                  <border>5</border>
+                </object>
+                <object class="sizeritem">
+                  <object class="wxStaticBoxSizer">
+                    <label>Misc effects</label>
+                    <orient>wxVERTICAL</orient>
+                    <object class="sizeritem">
+                      <object class="wxCheckBox" name="render_to_texture">
+                        <label>Render to texture</label>
+                        <tooltip>Cache scene in a texture before displaying.\nMay improve performance on hardware acceleration.</tooltip>
+                      </object>
+                      <flag>wxALL</flag>
+                      <border>3</border>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxCheckBox" name="blur">
+                        <label>Blur</label>
+                        <tooltip>Enable or disable scene blurring, requires Render to texture.</tooltip>
+                      </object>
+                      <flag>wxALL</flag>
+                      <border>3</border>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxCheckBox" name="fast_rendering">
+                        <label>Fast rendering</label>
+                        <tooltip>Draw faster and with less quality while rotating the board or navigating the game.</tooltip>
+                      </object>
+                      <flag>wxALL</flag>
+                      <border>3</border>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxCheckBox" name="scissor">
+                        <label>Use scissor test</label>
+                        <tooltip>Only redraw the last stone when updating the board.\nThis will enhance performance at the cost of display quality.</tooltip>
+                      </object>
+                      <flag>wxALL</flag>
+                      <border>3</border>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxRadioBox" name="stone_quality">
+                        <label>Stone quality</label>
+                        <content>
+                          <item>Low</item>
+                          <item>High</item>
+                        </content>
+                        <dimension>2</dimension>
+                        <style>wxRA_SPECIFY_COLS</style>
+                        <tooltip>Set the quality of the stones.\nLow is faster but when zooming in closely, the stones will appear blocky.</tooltip>
+                      </object>
+                      <flag>wxALL</flag>
+                      <border>5</border>
+                    </object>
+                  </object>
+                  <flag>wxALL|wxEXPAND</flag>
+                  <border>5</border>
+                </object>
+              </object>
+            </object>
+          </object>
+        </object>
+        <flag>wxALL|wxEXPAND</flag>
+        <border>5</border>
+      </object>
+      <object class="sizeritem">
+        <object class="wxPanel">
+          <object class="wxBoxSizer">
+            <orient>wxHORIZONTAL</orient>
+            <object class="sizeritem">
+              <object class="wxBitmapButton" name="wxID_HELP">
+                <bitmap stock_id="wxART_HELP_BOOK"></bitmap>
+                <tooltip>Show help</tooltip>
+              </object>
+              <flag>wxLEFT|wxALIGN_CENTRE_VERTICAL</flag>
+              <border>3</border>
+            </object>
+            <object class="spacer">
+              <size>30,0</size>
+            </object>
+            <object class="sizeritem">
+              <object class="wxButton" name="wxID_APPLY">
+                <label>_Apply</label>
+              </object>
+              <flag>wxALL</flag>
+              <border>3</border>
+            </object>
+            <object class="sizeritem">
+              <object class="wxButton" name="wxID_OK">
+                <label>_Ok</label>
+                <default>1</default>
+                <focused>1</focused>
+              </object>
+              <flag>wxALL</flag>
+              <border>3</border>
+            </object>
+            <object class="sizeritem">
+              <object class="wxButton" name="wxID_CANCEL">
+                <label>_Cancel</label>
+              </object>
+              <flag>wxALL</flag>
+              <border>3</border>
+            </object>
+          </object>
+        </object>
+        <flag>wxALL|wxALIGN_CENTRE|wxALIGN_RIGHT</flag>
+        <border>5</border>
+      </object>
+    </object>
+    <centered>1</centered>
+  </object>
+  <object class="wxDialog" name="sdl_options_dialog">
+    <title>SDL Options</title>
+    <centered>1</centered>
+    <object class="wxFlexGridSizer">
+      <cols>1</cols>
+      <rows>2</rows>
+      <object class="sizeritem">
+        <object class="wxPanel">
+          <style>wxRAISED_BORDER</style>
+          <object class="wxBoxSizer">
+            <orient>wxVERTICAL</orient>
+            <object class="sizeritem">
+              <object class="wxCheckBox" name="scaled_font">
+                <label>Scaled font</label>
+                <tooltip>Use a scaled font for SGF markers and coordinates.</tooltip>
+              </object>
+              <flag>wxALL</flag>
+              <border>3</border>
+            </object>
+            <object class="sizeritem">
+              <object class="wxStaticBoxSizer">
+                <label>Board background</label>
+                <orient>wxVERTICAL</orient>
+                <object class="sizeritem">
+                  <object class="wxCheckBox" name="background_image">
+                    <label>Background image</label>
+                    <tooltip>Check to use an image as background.\nIf unchecked, you can select a color.</tooltip>
+                  </object>
+                  <flag>wxALL</flag>
+                  <border>5</border>
+                </object>
+                <object class="sizeritem">
+                  <object class="wxButton" name="background_color">
+                    <label>Background color</label>
+                    <tooltip>Select the background color.\nThis only applies if you did not select a background image.</tooltip>
+                  </object>
+                  <flag>wxALL</flag>
+                  <border>5</border>
+                </object>
+              </object>
+              <flag>wxALL|wxEXPAND</flag>
+              <border>3</border>
+            </object>
+            <object class="spacer">
+              <size>0,5</size>
+            </object>
+          </object>
+        </object>
+        <flag>wxALL|wxEXPAND|wxALIGN_CENTRE</flag>
+        <border>5</border>
+      </object>
+      <object class="sizeritem">
+        <object class="wxPanel">
+          <object class="wxBoxSizer">
+            <orient>wxHORIZONTAL</orient>
+            <object class="sizeritem">
+              <object class="wxBitmapButton" name="wxID_HELP">
+                <bitmap stock_id="wxART_HELP_BOOK"></bitmap>
+                <tooltip>Show help</tooltip>
+              </object>
+              <flag>wxLEFT|wxALIGN_CENTRE_VERTICAL</flag>
+              <border>3</border>
+            </object>
+            <object class="spacer">
+              <size>10,0</size>
+            </object>
+            <object class="sizeritem">
+              <object class="wxButton" name="wxID_OK">
+                <label>_Ok</label>
+                <default>1</default>
+                <focused>1</focused>
+              </object>
+              <flag>wxALL</flag>
+              <border>3</border>
+            </object>
+            <object class="sizeritem">
+              <object class="wxButton" name="wxID_CANCEL">
+                <label>_Cancel</label>
+              </object>
+              <flag>wxALL</flag>
+              <border>3</border>
+            </object>
+          </object>
+        </object>
+        <flag>wxALL|wxALIGN_RIGHT</flag>
+        <border>3</border>
+      </object>
+    </object>
+  </object>
+</resource>

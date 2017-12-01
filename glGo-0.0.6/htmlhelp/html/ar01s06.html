@@ -1,0 +1,99 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Options</title><meta name="generator" content="DocBook XSL Stylesheets V1.60.1"><link rel="home" href="index.html" title="glGo manual"><link rel="up" href="index.html" title="glGo manual"><link rel="previous" href="ar01s05.html" title="Playing with GNU Go"><link rel="next" href="ar01s07.html" title="OpenGL Information"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Options</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ar01s05.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ar01s07.html">Next</a></td></tr></table><hr></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="options"></a>Options</h2></div></div><div></div></div><p>Global application settings can be customized in the preferences
+dialog, found in the <span class="guimenu">Settings</span> menu. The following options are
+currently available:</p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2814001"></a>Global settings</h3></div></div><div></div></div><div class="itemizedlist"><ul type="disc"><li><p>Language</p><p>Change the language glGo will use. Currently there are English
+and German available. I hope there will be more translations in the
+future.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.jpg"></td><th align="left">Note</th></tr><tr><td colspan="2" align="left" valign="top"><p>When set to german there are some problems with the Komi
+value, as glGo will write and read something like "6,5" instead of "6.5". As
+result Komi values can be assumed invalid. I am trying to fix this
+problem.</p></td></tr></table></div></li><li><p>Board type</p><p>Here you can select which Board type to use. Available are a 3D
+board using OpenGL or a 2D board using SDL. All new opened boards will use this
+type. If you accessed the dialog from a board window, this current board will
+not change it's type.</p><p>Since version 0.0.5.4 the 2D SDL board is the default, as some
+people had problems getting their 3D drivers working and did not find this
+switch to select the 2D board instead. (Why do I write documentation?)</p><div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Tip"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Tip]" src="images/tip.jpg"></td><th align="left">Tip</th></tr><tr><td colspan="2" align="left" valign="top"><p>On Windows you can also select the board type using the
+popup menu of the tray icon.</p></td></tr></table></div></li><li><p>Autohide startscreen</p><p>The startscreen will be minimized once you open a board or the
+IGS terminal, so it gets out of the way. How exactly it is minimized, is defined
+by the following option on Windows. On Windows it will be iconified if
+<span class="guilabel">Autohide startscreen</span> is disabled, and minimized to the tray
+if <span class="guilabel">Autohide startscreen</span> is enabled. On Linux, it will
+simply be iconified.</p></li><li><p>Minimize to system tray (Windows only)</p><p>When <span class="guilabel">Autohide startscreen</span> is enabled, the
+startscreen will minimize into the system tray. This was a feature request I got
+for gGo/Java once and liked the idea very much, but it was not possible with
+Java. Now it is. This will get the start window out of the way. When
+<span class="guilabel">Autohide startscreen</span> is disabled, the start window will
+still minimize to the tray when you click on its <span class="guibutton">Close</span>
+button. When you click the <span class="guibutton">Exit</span> Button in the screen,
+glGo will definately shutdown.</p><p>Maybe I will figure out how to use the KDE/Gnome taskbar for
+this, but I suppose this is not too important now.</p></li><li><p>Enable tooltips</p><p>If you dislike tooltips, uncheck this to disable them
+globally.</p></li><li><p>Reuse instance to open SGF files</p><p>If enabled, an already running glGo process will be reused to
+open new SGF files to avoid starting a new glGo process for each SGF file you
+open from a webbrowser or filemanager. The mechanism is similar to the one in
+gGo. glGo will open a socket on localhost which is listening for incoming
+connections. There is a small python script (standalone exe is available for
+Windows) <tt class="filename">open_sgf.py/exe</tt> which will simply send its
+argument to the glGo localhost socket if it finds such a socket. If no socket is
+found, it will start a new glGo process to open the SGF file. This means, you
+should not associate <tt class="filename">glGo</tt> with SGF files in your webbrowser
+or filemanager, but <tt class="filename">open_sgf</tt> instead to avoid having a new
+glGo opened for each file you open (assuming you want to use glGo as default SGF
+viewer at all) and enable this option.</p><p>Additionally the Playermanager uses this feature to open its
+games in glGo.</p><p>The <tt class="filename">glGo</tt> executable still accepts a SGF
+file as argument, but this way you cannot reuse an already running glGo
+instance. Of course, if you have lots of RAM available, you don't need to care
+too much.</p><p>A note on security: On Linux the localserver uses Unix domain
+sockets which is a secure mechanism unless you messed up your umask (but then
+you got more serious problems anyways). The target file is
+<tt class="filename">/tmp/glGo_socket</tt>. As the name suggest, Unix domain sockets
+are not available on Windows, so on Windows an Internet domain socket is used,
+which is naturally insecure. The socket is running on port 9998 (most likely
+unused, gGo uses 9999). If you have a firewall, you should be secure against
+malicious attacks. If you run Windows without a firewall, then glGo can indeed
+be a security risk (as is gGo), but then you have much more serious threats to
+worry about than someone hacking your Go client, I suppose.</p></li></ul></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2872951"></a>Sound settings</h3></div></div><div></div></div><div class="itemizedlist"><ul type="disc"><li><p>Global sound</p><p>If unchecked, all sounds are turned off. If you see this
+checkbox disabled, for some reason the sound libraries failed to load. Please
+check the glGo logfile.</p></li><li><p>Sound type</p><p>You can select the <a href="ar01s09.html" title="OpenAL Sound System">OpenAL</a> or
+<a href="ar01s08.html" title="SDL Information">SDL Mixer</a> sound system here. On Windows both give
+about equal sound quality. On Linux I found the SDL Mixer better than OpenAL.
+However, this might depend very much on your sound hardware and driver, so you
+should just try yourself which system gives you a better result.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.jpg"></td><th align="left">Note</th></tr><tr><td colspan="2" align="left" valign="top"><p>Switching from one sound system to the other might or
+might not work. If it does not work (glGo will tell you), exit and restart glGo,
+then return to the preferences dialog and enable sound again - it is disabled if
+the sound system change failed. Most probably the new sound system should be
+available now. If things still fail, start glGo from the command line and
+configure the sound system via the <b class="userinput"><tt>--openal</tt></b> or
+<b class="userinput"><tt>--sdl</tt></b> parameters.</p></td></tr></table></div></li></ul></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2873037"></a>IGS settings</h3></div></div><div></div></div><div class="itemizedlist"><ul type="disc"><li><p>Show shouts in terminal</p><p>When enabled, shouts will be displayed both in the shouts frame
+and in the main IGS terminal. When disabled, they will only be shown in the
+shouts frame.</p></li><li><p>Skip guests in player list</p><p>When enabled, guest accounts will not be shown in the player
+list.</p></li><li><p>Display info dialogs</p><p>When disabled, informations about observed games like results,
+adjourning etc. will not be shown in a dialog. These dialogs might be
+occasionally a bit annoying when observing multiple games, so this option offers
+you to turn these messageboxes off. For own games (well, once they are
+implemented...) this option has no effect.</p></li><li><p>Ayt timer</p><p>If enabled, glGo will send the &#8220;<span class="quote">ayt</span>&#8221; command (Are
+you there?) every five minutes to IGS to prevent the server logging you out due
+to idle time early. However, this feature won't keep you online for an infinite
+time, when you are you idle too long, the timer will stop. But you should be
+online long enough to observe complete games without worrying about a
+disconnection.</p><p>This feature has one disadvantage: Your idle time in the player
+list will never go above 5 minutes, so to other users you appear to be present
+while you might be not. Keep that in mind when using this feature.</p><p>Enabling or disabling the ayt timer takes effect on the next
+connection to IGS.</p></li><li><p>Ignore rank limit for friends</p><p>If this option is enabled, the current rank limit in the player
+table (for example 1d-3k or something) is ignored when you use the "Friends"
+filter. The idea is, you probably want to see all your friends, from 9p-NR, if
+you use the Friends button. However, this requires some additional work as the
+player list needs to be reread. This is the behaviour known from gGo.</p><p>If disabled, the rank limit will also be applied when you turn
+on the Friends filter. This is the old behaviour of glGo. It is faster as the
+player list does not need to be reloaded from IGS.</p></li><li><p>Sound for chats</p><p>If enabled, you will be notified about incoming tells with a
+sound. Every chat window has an own button to enable or disable sound for this
+chat session individually. So if you enabled sound for chats, you can still
+disable it for individual chats, or vice versa.</p></li><li><p>Sound for match requests</p><p>When enabled you will be notified with a sound when you receive
+a match request.</p></li><li><p>Time warning</p><p>Here you can configure time warning for your own games. If your
+byoyomi time runs below the warning threshold, the clock will blink to notify
+you. Additionally you can configure if you want to get a warning
+sound.</p><p>To disable time warning set the threshold to
+zero.</p></li><li><p>Autosave</p><p>You can let glGo automatically save all finished own and/or
+observed games by enabling the autosave options. You should define a target
+directory where the SGF files are saved to. For example, I have a directory
+<tt class="filename">IGS/own</tt> and <tt class="filename">IGS/observed</tt> to keep own and observed games
+seperated. You can save both into the same directory if you want. </p><p>This feature is meant for interaction with the SGF indexing of
+the Playermanager to collect games associated with certain players you might be
+interested in.</p></li></ul></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ar01s05.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ar01s07.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Playing with GNU Go </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> OpenGL Information</td></tr></table></div></body></html>

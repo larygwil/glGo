@@ -1,0 +1,196 @@
+<?xml version="1.0" ?>
+<resource version="2.3.0.1" xmlns="http://www.wxwindows.org/wxxrc">
+  <object class="wxDialog" name="gtp_setup_dialog">
+    <title>GNU Go setup</title>
+    <object class="wxBoxSizer">
+      <orient>wxVERTICAL</orient>
+      <object class="sizeritem">
+        <object class="wxPanel">
+          <object class="wxBoxSizer">
+            <orient>wxHORIZONTAL</orient>
+            <object class="sizeritem">
+              <object class="wxStaticText">
+                <label>White</label>
+              </object>
+              <flag>wxALL|wxALIGN_CENTRE_VERTICAL</flag>
+              <border>5</border>
+            </object>
+            <object class="sizeritem">
+              <object class="wxChoice" name="white">
+                <content>
+                  <item>Human</item>
+                  <item>Computer</item>
+                </content>
+                <selection>1</selection>
+              </object>
+              <flag>wxALL|wxALIGN_CENTRE_VERTICAL</flag>
+              <border>5</border>
+            </object>
+            <object class="spacer">
+              <size>10</size>
+            </object>
+            <object class="sizeritem">
+              <object class="wxStaticText">
+                <label>Black</label>
+              </object>
+              <flag>wxALL|wxALIGN_CENTRE_VERTICAL</flag>
+              <border>5</border>
+            </object>
+            <object class="sizeritem">
+              <object class="wxChoice" name="black">
+                <content>
+                  <item>Human</item>
+                  <item>Computer</item>
+                </content>
+                <selection>0</selection>
+              </object>
+              <flag>wxALL|wxALIGN_CENTRE_VERTICAL</flag>
+              <border>5</border>
+            </object>
+          </object>
+          <style>wxRAISED_BORDER</style>
+        </object>
+        <flag>wxALL|wxALIGN_CENTRE_HORIZONTAL</flag>
+        <border>5</border>
+      </object>
+      <object class="sizeritem">
+        <object class="wxPanel">
+          <style>wxRAISED_BORDER</style>
+          <object class="wxFlexGridSizer">
+            <cols>2</cols>
+            <object class="sizeritem">
+              <object class="wxStaticText">
+                <label>Size</label>
+              </object>
+              <flag>wxALL|wxALIGN_RIGHT|wxALIGN_CENTRE_VERTICAL</flag>
+              <border>3</border>
+            </object>
+            <object class="sizeritem">
+              <object class="wxSpinCtrl" name="size">
+                <value>19</value>
+                <min>9</min>
+                <max>19</max>
+                <tooltip>Board size</tooltip>
+              </object>
+              <flag>wxALL</flag>
+              <border>3</border>
+            </object>
+            <object class="sizeritem">
+              <object class="wxStaticText">
+                <label>Handicap</label>
+              </object>
+              <flag>wxALL|wxALIGN_RIGHT|wxALIGN_CENTRE_VERTICAL</flag>
+              <border>3</border>
+            </object>
+            <object class="sizeritem">
+              <object class="wxSpinCtrl" name="handicap">
+                <value>0</value>
+                <min>0</min>
+                <max>9</max>
+                <tooltip>Handicap</tooltip>
+              </object>
+              <flag>wxALL</flag>
+              <border>3</border>
+            </object>
+            <object class="sizeritem">
+              <object class="wxStaticText">
+                <label>Komi</label>
+              </object>
+              <flag>wxALL|wxALIGN_RIGHT|wxALIGN_CENTRE_VERTICAL</flag>
+              <border>3</border>
+            </object>
+            <vgap>5</vgap>
+            <hgap>5</hgap>
+            <object class="sizeritem">
+              <object class="wxTextCtrl" name="komi">
+                <value>6.5</value>
+                <tooltip>Komi</tooltip>
+              </object>
+              <flag>wxALL</flag>
+              <border>3</border>
+            </object>
+            <object class="spacer">
+              <size>10</size>
+            </object>
+          </object>
+        </object>
+        <flag>wxALL|wxALIGN_CENTRE_HORIZONTAL</flag>
+        <border>5</border>
+      </object>
+      <object class="sizeritem">
+        <object class="wxPanel">
+          <object class="wxBoxSizer">
+            <orient>wxHORIZONTAL</orient>
+            <object class="sizeritem">
+              <object class="wxStaticText">
+                <label>GNU Go level</label>
+              </object>
+              <flag>wxALL|wxALIGN_CENTRE_VERTICAL</flag>
+              <border>5</border>
+            </object>
+            <object class="sizeritem">
+              <object class="wxSlider" name="level">
+                <value>5</value>
+                <min></min>
+                <max>10</max>
+                <style>wxSL_AUTOTICKS</style>
+                <tooltip>GNU Go level. Higher means GNU Go plays stronger.</tooltip>
+              </object>
+              <option>1</option>
+              <flag>wxALL|wxEXPAND</flag>
+              <border>5</border>
+            </object>
+          </object>
+          <style>wxRAISED_BORDER</style>
+        </object>
+        <flag>wxALL|wxEXPAND</flag>
+        <border>5</border>
+      </object>
+      <object class="sizeritem">
+        <object class="wxPanel">
+          <object class="wxFlexGridSizer">
+            <cols>4</cols>
+            <rows>1</rows>
+            <object class="sizeritem">
+              <object class="wxBitmapButton" name="help">
+                <bitmap stock_id="wxART_HELP_BOOK"></bitmap>
+                <tooltip>Show help about playing with GNU Go</tooltip>
+              </object>
+              <flag>wxALL|wxALIGN_CENTRE_VERTICAL</flag>
+              <border>3</border>
+            </object>
+            <object class="sizeritem">
+              <object class="wxButton" name="resume_game">
+                <label>Resume game</label>
+                <tooltip>Select SGF file to resume playing</tooltip>
+              </object>
+              <flag>wxALL</flag>
+              <border>3</border>
+            </object>
+            <object class="sizeritem">
+              <object class="wxButton" name="wxID_OK">
+                <label>_Ok</label>
+                <default>1</default>
+                <focused>1</focused>
+              </object>
+              <flag>wxALL</flag>
+              <border>3</border>
+            </object>
+            <object class="sizeritem">
+              <object class="wxButton" name="wxID_CANCEL">
+                <label>_Cancel</label>
+              </object>
+              <flag>wxALL</flag>
+              <border>3</border>
+            </object>
+            <hgap>3</hgap>
+            <growablecols>0</growablecols>
+          </object>
+        </object>
+        <flag>wxALL|wxEXPAND</flag>
+        <border>5</border>
+      </object>
+    </object>
+    <centered>1</centered>
+  </object>
+</resource>

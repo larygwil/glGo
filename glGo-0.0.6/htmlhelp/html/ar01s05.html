@@ -1,0 +1,39 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Playing with GNU Go</title><meta name="generator" content="DocBook XSL Stylesheets V1.60.1"><link rel="home" href="index.html" title="glGo manual"><link rel="up" href="index.html" title="glGo manual"><link rel="previous" href="ar01s04.html" title="Usage"><link rel="next" href="ar01s06.html" title="Options"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Playing with GNU Go</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ar01s04.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ar01s06.html">Next</a></td></tr></table><hr></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="gnugo"></a>Playing with GNU Go</h2></div></div><div></div></div><p><span class="inlinemediaobject"><img src="images/gnugo_logo.jpg" align="right" height="175"></span></p><p>glGo supports connecting to any GTP engine and to play with a computer
+program. Currently the only Go playing computer program which supports GTP is
+<a href="http://www.gnu.org/software/gnugo/gnugo.html" target="_top">GNU Go</a>. As of
+glGo version 0.0.4.3 GNU Go is bundled into the Windows installer. If you are on
+Linux, you need to download it seperately from the <a href="http://www.gnu.org/software/gnugo/gnugo.html" target="_top">GNU Go homepage</a> or
+install it from your distribution.</p><p>As the gnugo.exe file is in the same folder as the glGo executable,
+glGo won't have trouble finding the file. If it does, it will complain and offer
+the user a way to find the right file.</p><div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Caution"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Caution]" src="images/caution.jpg"></td><th align="left">Caution</th></tr><tr><td colspan="2" align="left" valign="top"><p>There is a problem on Linux: If gnugo is not found, glGo
+crashes. The problem is, when wxWindows tries to execute a command which does
+not exist, it will start a real process and return a PID. The process will quit
+again after few seconds, but meanwhile glGo bailed out. I need to fix this. If
+gnugo is found, things work fine.
+</p></td></tr></table></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2813801"></a>Connect to a GTP engine</h3></div></div><div></div></div><p>If you have the GNU Go binary in place as described above, you can
+select <span class="guimenuitem">Connect GTP</span> from the <span class="guimenu">GTP</span>
+menu. If GNU Go is not found, glGo will notify you. You can setup the game
+parameters and select which color to play. Once you hit Ok in this dialog, the
+game will start. Resuming games is supported. Usage is quite the same as in
+gGo/Java. The board will switch into "GTP mode", so all moves you make will be
+sent to GNU Go instead of displaying them instantly as in the normal operating
+mode. The sidebar will change when in GTP mode show the required buttons.</p><p>If you select the <span class="guilabel">Play GNU Go</span> button in the
+start screen, the new board window will automatically connect to GNU Go.</p><p>Playing seems to work properly. Clocks and scoring are not yet
+supported.</p><div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Tip"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Tip]" src="images/tip.jpg"></td><th align="left">Tip</th></tr><tr><td colspan="2" align="left" valign="top"><p>When the game is finished, type
+<b class="userinput"><tt>estimate_score</tt></b> in the GTP console to see the final
+result.</p></td></tr></table></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2813867"></a>GTP console</h3></div></div><div></div></div><p>As known from gGo, you can open a GTP console and examine or
+overwrite the GNU Go commands manually.</p><div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Tip"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Tip]" src="images/tip.jpg"></td><th align="left">Tip</th></tr><tr><td colspan="2" align="left" valign="top"><p>The <span class="guimenuitem">About</span> dialog in the
+<span class="guimenu">Help</span> menu of the GTP console will show you which GNU Go
+version you are connected to.</p></td></tr></table></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2813900"></a>Closing the GTP connection</h3></div></div><div></div></div><p>To quit a GNU Go session, select <span class="guimenuitem">Close
+GTP</span> from the <span class="guimenu">GTP</span> menu. The connection to GNU Go
+will be closed, the GNU Go process terminated and the board will return to
+normal mode again.</p><p>Another way to quit a current GNU Go session is to close the board
+window in which you played the game.</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2813934"></a>Using the GNU Go score estimation</h3></div></div><div></div></div><p>You can use GNU Go to estimate the score of a game. To do this,
+select <span class="guimenuitem">Guess score</span> in the <span class="guimenu">GTP</span> menu
+of a board window. This will first save the game to a temporary file. The file
+location depends on your operating system. Then it will start a GNU Go process
+with something like this: &#8220;<span class="quote">gnugo --score estimate --quiet -L 254 -l
+/tmp/glGoxfCodg</span>&#8221;. This estimates the score at move 254 in the given
+temporary SGF file.</p><p>The result will be displayed in a dialog once GNU Go has estimated
+the score. GNU Go might need some time for this, especially if the game is still
+in the middle game.</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ar01s04.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ar01s06.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Usage </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Options</td></tr></table></div></body></html>

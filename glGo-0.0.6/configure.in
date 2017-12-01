@@ -1,0 +1,61 @@
+dnl Automake support for glGo
+dnl Peter Strempel <pstrempel@users.sourceforge.net>
+
+AC_INIT(src/glGo.cpp)
+AM_CONFIG_HEADER(config.h)
+AC_CANONICAL_TARGET
+AM_INIT_AUTOMAKE(glGo, 0.0.6)
+
+AC_PROG_CXX
+AC_PROG_RANLIB
+
+dnl Check for SDL
+AM_PATH_SDL(1.2.4,
+CFLAGS="$CFLAGS $SDL_CFLAGS",
+AC_MSG_ERROR([
+        SDL 1.2 is not available.
+        Please install the SDL 1.2 development package.
+]))
+
+dnl Check for wxWindows
+AM_OPTIONS_WXCONFIG
+AM_PATH_WXCONFIG(2.3.4, wxWin=1)
+if test "$wxWin" != 1; then
+   AC_MSG_ERROR([
+           wxWindows must be installed on your system
+           but wx-config script couldn't be found.
+
+           Please check that wx-config is in path, the directory
+           where wxWindows libraries are installed (returned by
+           'wx-config --libs' command) is in LD_LIBRARY_PATH or
+           equivalent variable and wxWindows version is 2.3.4 or above.
+   ])
+fi
+CPPFLAGS="$CPPFLAGS $WX_CPPFLAGS"
+CXXFLAGS="$CXXFLAGS $WX_CXXFLAGS_ONLY"
+CFLAGS="$CFLAGS $WX_CFLAGS_ONLY"
+dnl Check if we build dynamic (default) or static (use --enable-static)
+AM_CHECK_STATIC
+LDFLAGS="$LDFLAGS $WX_LIBS_CHECKED"
+
+dnl Check for other headers
+AC_TEST_REQUIRED_HEADERS
+
+dnl Build with OpenAL?
+AM_CHECK_OPENAL
+
+AC_CONFIG_SUBDIRS(src/sound)
+
+AC_OUTPUT([
+        Makefile
+        src/dialogs/Makefile
+        src/utils/Makefile
+        src/sgf/Makefile
+        src/sdl/Makefile
+        src/gtp/Makefile
+        src/igs/Makefile
+        src/ugf/Makefile
+        src/Makefile
+        src/share/Makefile
+        htmlhelp/Makefile
+])
